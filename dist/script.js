@@ -106,7 +106,7 @@ lineChart.style.backgroundImage = `linear-gradient(90deg, rgba(179, 179, 179, 0.
 
 preView.addEventListener('mousedown',onMouseDown);
 function onMouseDown(e) {
-    e.preventDefault()
+    e.preventDefault();
     const preViewCoords = getCoords(preView);
     const shiftX = e.pageX - preViewCoords.left;
 
@@ -143,20 +143,20 @@ function onMouseDown(e) {
 
         moveAt(e);
     };
-    preView.addEventListener('touchmove',onMouseMove)
+    // preView.addEventListener('touchmove',onMouseMove)
 
     function onMouseUp(e) {
-
         e.preventDefault()
+        preView.removeEventListener('mousemove',onMouseMove);
 
-        document.onmousemove = null;
-        preView.onmouseup = null;
+        preView.removeEventListener('mouseup',onMouseUp);
+
     };
 
     preView.addEventListener('mouseup',onMouseUp)
-    preView.addEventListener('touchend',onMouseUp)
+    // preView.addEventListener('touchend',onMouseUp)
 }
-preView.addEventListener('touchstart',onMouseDown);
+// preView.addEventListener('touchstart',onMouseDown);
 
 preView.ondragstart = function() {
     return false;
@@ -196,5 +196,5 @@ function init() {
     document.addEventListener("touchend", touchHandler, true);
     document.addEventListener("touchcancel", touchHandler, true);
 }
-
+//
 init()
