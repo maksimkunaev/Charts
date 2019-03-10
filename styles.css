@@ -33,4 +33,7 @@
     border-left: 19px solid #8a8a8a38;
     border-right: 19px solid #8a8a8a38;
     box-sizing: border-box;
+
+    position: relative;
+    top: -200px;
 }
