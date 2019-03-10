@@ -19,6 +19,7 @@ const stepX = Math.round(width / 9 );
 let startDate = 0;
 
 function drawChart(startDate, endDate, range) {
+    if(!startDate) return;
     clearChart();
 
     ctx.beginPath();
@@ -94,16 +95,18 @@ const preView = document.querySelector('.preview');
 const lineChart = document.querySelector('.lineChart');
 
 const wrapCoor = getCoords(lineChart);
-const dayWidth = wrapCoor.width / data.length;
+const dayWidth = wrapCoor.width / data.length < 15 ? 15 : wrapCoor.width / data.length;
 const previewWidth =  9 * dayWidth;
 preView.style.width = previewWidth + 'px';
 
 const left = 0;
 const right = previewWidth + 'px';
 
-lineChart.style.backgroundImage = `linear-gradient(90deg, #3c3c3c61 ${left}, #ffffff00 ${left}, #ffffff00 ${right},#3c3c3c61 ${right})`;
+lineChart.style.backgroundImage = `linear-gradient(90deg, rgba(179, 179, 179, 0.25) ${left}, #ffffff00 ${left}, #ffffff00 ${right},rgba(179, 179, 179, 0.25) ${right})`;
 
-preView.onmousedown = function(e) {
+preView.addEventListener('mousedown',onMouseDown);
+function onMouseDown(e) {
+    e.preventDefault()
     const preViewCoords = getCoords(preView);
     const shiftX = e.pageX - preViewCoords.left;
 
@@ -126,21 +129,34 @@ preView.onmousedown = function(e) {
         const left = preView.style.left;
         const right = newLeft + preView.offsetWidth + 'px';
 
-        lineChart.style.backgroundImage = `linear-gradient(90deg, #3c3c3c61 ${left}, #ffffff00 ${left}, #ffffff00 ${right},#3c3c3c61 ${right})`;
+        lineChart.style.backgroundImage = `linear-gradient(90deg, rgba(179, 179, 179, 0.25) ${left}, #ffffff00 ${left}, #ffffff00 ${right},rgba(179, 179, 179, 0.25) ${right})`;
 
         const leftPreview = e.pageX - shiftX;
+
         drawChart(leftPreview / dayWidth)
     }
+    preView.addEventListener('mousemove',onMouseMove)
 
-    document.onmousemove = function(e) {
+    function onMouseMove(e) {
+
+        e.preventDefault()
+
         moveAt(e);
     };
+    preView.addEventListener('touchmove',onMouseMove)
 
-    document.onmouseup = function() {
+    function onMouseUp(e) {
+
+        e.preventDefault()
+
         document.onmousemove = null;
         preView.onmouseup = null;
     };
-};
+
+    preView.addEventListener('mouseup',onMouseUp)
+    preView.addEventListener('touchend',onMouseUp)
+}
+preView.addEventListener('touchstart',onMouseDown);
 
 preView.ondragstart = function() {
     return false;
@@ -155,3 +171,30 @@ function getCoords(elem) {   // кроме IE8-
         width: box.width,
     };
 }
+
+
+function touchHandler(event) {
+    var touch = event.changedTouches[0];
+
+    var simulatedEvent = document.createEvent("MouseEvent");
+    simulatedEvent.initMouseEvent({
+            touchstart: "mousedown",
+            touchmove: "mousemove",
+            touchend: "mouseup"
+        }[event.type], true, true, window, 1,
+        touch.screenX, touch.screenY,
+        touch.clientX, touch.clientY, false,
+        false, false, false, 0, null);
+
+    touch.target.dispatchEvent(simulatedEvent);
+    // event.preventDefault();
+}
+
+function init() {
+    document.addEventListener("touchstart", touchHandler, true);
+    document.addEventListener("touchmove", touchHandler, true);
+    document.addEventListener("touchend", touchHandler, true);
+    document.addEventListener("touchcancel", touchHandler, true);
+}
+
+init()
