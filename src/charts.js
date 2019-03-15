@@ -8,8 +8,6 @@ class Chart {
 
     chartConfig = {
         columns: [],
-        maxCountY: 100,
-        maxCountX: 10,
         x0: 30,
         y0: 30,
         stepX: 10,
@@ -43,7 +41,21 @@ class Chart {
             const start = startDate ? startDate : -11;
             const end = endDate ? endDate : column.length;
 
-            const data = view === 'short' ? column.slice(start, end) : column.slice(1);
+            let data = [];
+
+            switch(view) {
+                case 'short':
+                data = column.slice(start, end);
+                    break;
+
+                case 'long':
+                data = column.slice(1);
+                    break;
+
+                default:
+                    data = column.slice(1);
+                    break;
+            }
 
             // set stepY
             maxY = Math.max(...data.slice(1)) > maxY ? Math.max(...data.slice(1)) : maxY;
@@ -62,53 +74,22 @@ class Chart {
             this.chartConfig.columns.push(newColumn);
         });
 
-        this.chartConfig.maxCountY = maxY;
-        const { maxCountY, maxCountX } = this.chartConfig;
-
-console.log(`maxX`,maxX)
         this.chartConfig.stepY =(height / maxY);
         this.chartConfig.stepX =(width / maxX );
         // debugger
     }
 
-    drawChart(data, startDate, endDate) {
+    drawShort(data, startDate, endDate,) {
         this.setConfig(data, startDate, endDate, 'short');
-
-        const { height } = this.canvasConfig;
-        const { y0, stepX, stepY, columns } = this.chartConfig;
-
-        const { ctx } = this;
-
-        // if (!startDate) return;
-        this.clearChart();
-
-
-        columns.forEach((column, idx) => {
-            this.ctx.beginPath();
-
-            const { data, color } = column;
-
-            data.forEach((point, idx) => {
-                const x = idx * stepX;
-                const y = y0 + (height - point * stepY);
-                // console.log(x,y);
-                if (idx === 0)
-                    ctx.moveTo(x, y);
-                else
-                    ctx.lineTo(x, y);
-            });
-
-            ctx.strokeStyle = color;
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            // console.log(`this`, this)
-        });
+        this.drawChart()
     }
 
-    drawTimeLine(data, startDate, endDate) {
+    drawLong(data, startDate, endDate) {
         this.setConfig(data, startDate, endDate, 'long');
+        this.drawChart()
+    }
 
-
+    drawChart() {
         const { height } = this.canvasConfig;
         const { y0, stepX, stepY, columns } = this.chartConfig;
 
@@ -116,7 +97,6 @@ console.log(`maxX`,maxX)
 
         // if (!startDate) return;
         this.clearChart();
-
 
         columns.forEach((column, idx) => {
             this.ctx.beginPath();

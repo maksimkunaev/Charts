@@ -1,10 +1,21 @@
 const Chart = require('./charts');
+const Thumb = require('./thumb');
+
 const chart_data = require('./chart_data');
-const data = chart_data[0];
+const data = chart_data[3];
 
-const chart = new Chart('view', data);
+const shortChart = new Chart('view', data);
+const longChart = new Chart('timeLine', data);
 
-chart.drawChart(data,0);
+const configThumb = {
+    thumb: '.thumb',
+    parent: '.lineChart',
+}
+const thumb = new Thumb(configThumb, data);
 
-const timeLine = new Chart('timeLine', data);
-timeLine.drawTimeLine(data,0);
+function drawCharts(data) {
+    shortChart.drawShort(data,0);
+    longChart.drawLong(data,0);
+}
+
+drawCharts(data);
