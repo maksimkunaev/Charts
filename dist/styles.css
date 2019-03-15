@@ -1,11 +1,8 @@
+
 .viewChart {
     width: 800px;
     height: 500px;
-    margin: 10px;
     border:2px solid #00000042;
-    width: 100%;
-
-
 }
 
 @media screen and (max-width: 512px) {
