@@ -27,7 +27,6 @@ class Chart {
 
     setConfig(data, startDate, endDate, view) {
         const { columns, colors } = data;
-        // console.log(`data `,data);
 
         const { width, height } = this.canvasConfig;
         let maxX = 0;
@@ -42,7 +41,7 @@ class Chart {
             const end = endDate ? endDate : column.length;
 
             let data = [];
-console.log(`start end`, start, end)
+
             switch(view) {
                 case 'short':
                 data = column.slice(start, end);
@@ -76,7 +75,6 @@ console.log(`start end`, start, end)
 
         this.chartConfig.stepY =(height / maxY);
         this.chartConfig.stepX =(width / maxX );
-        // debugger
     }
 
     drawShort(data, startDate, endDate) {
@@ -116,7 +114,6 @@ console.log(`start end`, start, end)
             ctx.strokeStyle = color;
             ctx.lineWidth = 2;
             ctx.stroke();
-            console.log(`this`, this)
         });
     }
 

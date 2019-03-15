@@ -12,7 +12,8 @@ const configThumb = {
     parent: '.lineChart',
     method: shortChart.drawShort.bind(shortChart, data),
     longChart: longChart,
-}
+};
+
 const thumb = new Thumb(configThumb, data);
 
 function drawCharts(data) {

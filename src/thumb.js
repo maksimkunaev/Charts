@@ -11,14 +11,10 @@ class Thumb {
         stepY: 0,
     };
 
-    parentConfig = {
-        width: 1200,
-        height: 500,
-    };
     renderMethod = () => {};
 
     constructor(config, data) {
-        const { thumb, parent, method, longChart } = config;
+        const { thumb, parent, method } = config;
 
         this.thumb = document.querySelector(thumb);
         this.parent = document.querySelector(parent);
@@ -28,8 +24,6 @@ class Thumb {
 
         this.setConfig(config);
         this.setStyle();
-        console.log(this.thumb)
-
         this.makeDraggable();
     }
 
@@ -57,7 +51,6 @@ class Thumb {
             this.setStyle();
 
             const thumbLeft = event.pageX - shiftX;
-console.log(`thums`, this)
             this.renderMethod(thumbLeft / this.thumbConfig.stepY, right / this.thumbConfig.stepY)
         };
         moveAt(event);
@@ -83,7 +76,6 @@ console.log(`thums`, this)
 
     setConfig({ longChart }) {
         const parentCoords = this.getCoords(this.parent);
-        // console.log(this.getCoords)
         const dayWidth = parentCoords.width / this.data.length < 15 ? 15 : parentCoords.width / this.data.length;
         const thumbWidth =  9 * dayWidth;
 
@@ -108,10 +100,8 @@ console.log(`thums`, this)
     setStyle() {
         const { width, left, right } = this.thumbConfig;
         this.thumb.style.width = width + 'px';
-
         this.parent.style.backgroundImage = `linear-gradient(90deg, rgba(179, 179, 179, 0.25) ${left}px, #ffffff00 ${left}px, #ffffff00 ${right}px,rgba(179, 179, 179, 0.25) ${right}px)`;
     }
-
 
     makeDraggable() {
         this.thumb.ondragstart = function() {
