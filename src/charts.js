@@ -42,7 +42,7 @@ class Chart {
             const end = endDate ? endDate : column.length;
 
             let data = [];
-
+console.log(`start end`, start, end)
             switch(view) {
                 case 'short':
                 data = column.slice(start, end);
@@ -79,7 +79,7 @@ class Chart {
         // debugger
     }
 
-    drawShort(data, startDate, endDate,) {
+    drawShort(data, startDate, endDate) {
         this.setConfig(data, startDate, endDate, 'short');
         this.drawChart()
     }
@@ -116,7 +116,7 @@ class Chart {
             ctx.strokeStyle = color;
             ctx.lineWidth = 2;
             ctx.stroke();
-            // console.log(`this`, this)
+            console.log(`this`, this)
         });
     }
 

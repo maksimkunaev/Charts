@@ -8,21 +8,25 @@ class Thumb {
         width: 15,
         left: 0,
         right: 15,
+        stepY: 0,
     };
 
     parentConfig = {
         width: 1200,
         height: 500,
     };
+    renderMethod = () => {};
 
     constructor(config, data) {
-        const { thumb, parent } = config;
+        const { thumb, parent, method, longChart } = config;
 
         this.thumb = document.querySelector(thumb);
         this.parent = document.querySelector(parent);
         this.data = data.columns[0];
 
-        this.setConfig();
+        this.renderMethod = method;
+
+        this.setConfig(config);
         this.setStyle();
         console.log(this.thumb)
 
@@ -52,16 +56,13 @@ class Thumb {
             this.thumbConfig.right = right;
             this.setStyle();
 
-            const leftPreview = event.pageX - shiftX;
-
-            // this.drawChart(leftPreview / dayWidth)
+            const thumbLeft = event.pageX - shiftX;
+console.log(`thums`, this)
+            this.renderMethod(thumbLeft / this.thumbConfig.stepY, right / this.thumbConfig.stepY)
         };
         moveAt(event);
 
         this.thumb.style.zIndex = '1000';
-
-
-
 
         const onMouseMove = event => {
             event.preventDefault();
@@ -80,7 +81,7 @@ class Thumb {
         this.thumb.addEventListener('mouseup',onMouseUp)
     }
 
-    setConfig() {
+    setConfig({ longChart }) {
         const parentCoords = this.getCoords(this.parent);
         // console.log(this.getCoords)
         const dayWidth = parentCoords.width / this.data.length < 15 ? 15 : parentCoords.width / this.data.length;
@@ -90,9 +91,9 @@ class Thumb {
             width: thumbWidth,
             left: 0,
             right: thumbWidth,
+            stepY: longChart.chartConfig.stepY,
         };
     }
-
 
     getCoords(elem) {
         const box = elem.getBoundingClientRect();
