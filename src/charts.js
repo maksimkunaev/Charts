@@ -2,8 +2,8 @@ class Chart {
     canvas = null;
 
     canvasConfig = {
-        width: 1200,
-        height: 500,
+        width: 1800,
+        height: 1000,
     };
 
     chartConfig = {
@@ -125,25 +125,31 @@ class Chart {
         const { ctx } = this;
         const { countY, stepY, y0 } = this.chartConfig;
         const { width, height } = this.canvasConfig;
+        const color = '#9aa6ae';
 
+        const linesCount = 5;
+        const step = Math.ceil( countY / linesCount);
 
-        const step = Math.ceil( countY / 6);
+        //initialize horizontal lines array
+        let lines = new Array(linesCount).fill(step);
 
-        let lines = new Array(6).fill(step);
-
+        //set lines array
         lines.map( (step, idx) => {
             lines[idx] = step
         });
 
-        console.log(lines)
         lines.forEach((step, idx) => {
             ctx.beginPath();
+            ctx.fillStyle = color;
 
-            const yPosition = y0 + (height - stepY * step * (idx + 1));
+            const lineValue = stepY * step * (idx + 1);
+            const yPosition = y0 + (height - lineValue);
             ctx.moveTo(0, yPosition);
             ctx.lineTo(width, yPosition);
 
-            ctx.strokeStyle = '#ccc';
+            ctx.font = "200 19px sans-serif";
+            ctx.fillText(Math.round(lineValue), 15, yPosition - 8);
+            ctx.strokeStyle = color;
             ctx.lineWidth = 1;
             ctx.stroke();
         });

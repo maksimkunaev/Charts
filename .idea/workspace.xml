@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="98dc55a7-eeb9-4ed8-a8bb-c3dc22234538" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/dist/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/dist/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/thumb.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/thumb.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/charts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/charts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/charts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1410">
-              <caret line="141" column="70" selection-start-line="141" selection-start-column="70" selection-end-line="141" selection-end-column="70" />
+            <state relative-caret-position="422">
+              <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
               <folding>
                 <element signature="n#!!block;n#constructor#0;n#Chart#0" />
                 <element signature="e#880#1573#0" />
@@ -41,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/thumb.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="86" column="35" lean-forward="true" selection-start-line="86" selection-start-column="35" selection-end-line="86" selection-end-column="35" />
+            <state relative-caret-position="1260">
+              <caret line="89" selection-start-line="89" selection-end-line="89" />
               <folding>
                 <element signature="e#86#147#0" />
                 <element signature="e#1472#1493#0" />
@@ -66,8 +67,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+            <state relative-caret-position="34">
+              <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -106,10 +107,10 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/dist/index.html" />
         <option value="$PROJECT_DIR$/dist/script.js" />
-        <option value="$PROJECT_DIR$/src/charts.js" />
+        <option value="$PROJECT_DIR$/src/thumb.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/dist/styles.css" />
-        <option value="$PROJECT_DIR$/src/thumb.js" />
+        <option value="$PROJECT_DIR$/src/charts.js" />
       </list>
     </option>
   </component>
@@ -151,7 +152,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552750569521" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552752100437" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -195,12 +196,12 @@
       <workItem from="1552182346524" duration="3686000" />
       <workItem from="1552257451601" duration="6352000" />
       <workItem from="1552653940305" duration="3249000" />
-      <workItem from="1552659684349" duration="30958000" />
+      <workItem from="1552659684349" duration="32312000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63922000" />
+    <option name="totallyTimeSpent" value="65276000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -331,19 +332,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/charts.js">
+    <entry file="file://$PROJECT_DIR$/src/thumb.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1410">
-          <caret line="141" column="70" selection-start-line="141" selection-start-column="70" selection-end-line="141" selection-end-column="70" />
+        <state relative-caret-position="1260">
+          <caret line="89" selection-start-line="89" selection-end-line="89" />
           <folding>
-            <element signature="n#!!block;n#constructor#0;n#Chart#0" />
-            <element signature="e#880#1573#0" />
-            <element signature="e#1110#1463#0" />
-            <element signature="e#1162#1255#0" />
-            <element signature="e#1273#1382#0" />
-            <element signature="e#1400#1479#0" />
-            <element signature="e#1382#1508#0" />
-            <element signature="n#!!block;n#clearChart#0;n#Chart#0" />
+            <element signature="e#86#147#0" />
+            <element signature="e#1472#1493#0" />
           </folding>
         </state>
       </provider>
@@ -357,18 +352,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+        <state relative-caret-position="34">
+          <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/thumb.js">
+    <entry file="file://$PROJECT_DIR$/src/charts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="86" column="35" lean-forward="true" selection-start-line="86" selection-start-column="35" selection-end-line="86" selection-end-column="35" />
+        <state relative-caret-position="422">
+          <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
           <folding>
-            <element signature="e#86#147#0" />
-            <element signature="e#1472#1493#0" />
+            <element signature="n#!!block;n#constructor#0;n#Chart#0" />
+            <element signature="e#880#1573#0" />
+            <element signature="e#1110#1463#0" />
+            <element signature="e#1162#1255#0" />
+            <element signature="e#1273#1382#0" />
+            <element signature="e#1400#1479#0" />
+            <element signature="e#1382#1508#0" />
+            <element signature="n#!!block;n#clearChart#0;n#Chart#0" />
           </folding>
         </state>
       </provider>
