@@ -19,10 +19,11 @@
 .lineChart {
     width: 90%;
     height: 200px;
-    margin-left: 10px;
+    margin-top: 10px;
     box-sizing: border-box;
     border:2px solid #00000042;
     position: relative;
+    overflow: hidden;
 }
 
 @media screen and (max-width: 512px) {
@@ -50,4 +51,30 @@
 
     /*left: 100%;*/
     /*transform: translateX(-100%);*/
+}
+
+.thumb:after {
+    content: '';
+    position: absolute;
+
+    display: block;
+    width: 1000px;
+    height: 107%;
+    background: #c3c1c152;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.thumb:before {
+    content: '';
+    position: absolute;
+
+    display: block;
+    width: 1000px;
+    height: 107%;
+    background: #c3c1c152;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
 }

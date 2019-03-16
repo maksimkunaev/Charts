@@ -34,8 +34,12 @@ class Thumb {
         const shiftX = event.pageX - thumbCoords.left;
 
         let handlerFunction = () => {};
+        let direction = '';
+        let width = thumbCoords.width;
 
         const moveAt = event => {
+            console.log(`moveAt` )
+
             let newLeft = event.pageX - shiftX - parentCoords.left;
             if (newLeft < 0) {
                 newLeft = 0;
@@ -61,20 +65,61 @@ class Thumb {
         };
 
         let resize = event => {
-            if (event.pageX >=thumbCoords.left && event.pageX <= (thumbCoords.left + border)) {
-                console.log(`left`);
-            } else if (event.pageX >=thumbCoords.right - border && event.pageX <=thumbCoords.right) {
-                console.log(`right`);
+            let newLeft = event.pageX - shiftX - parentCoords.left;
+            if (newLeft < 0) {
+                newLeft = 0;
+            }
+
+            const rightEdge = this.parent.offsetWidth - this.thumb.offsetWidth;
+            if (newLeft > rightEdge) {
+                newLeft = rightEdge;
+            }
+
+            const left = this.thumb.style.left.split('px')[0];
+            const right = newLeft + this.thumb.offsetWidth;
+            console.log(`right`, right );
+            console.log(`width`, right - newLeft );
+
+            const diffWidth = newLeft - left;
+            // const width = right - newLeft;
+            console.log(`diffWidth`,diffWidth)
+            console.log(`width`,width)
+            // this.thumb.style.left = left + 'px';
+
+            // this.thumbConfig.left = left;
+            // this.thumbConfig.right = right;
+
+            // direction === 'left' ? console.log(`left`) : console.log(`right`);
+
+
+            if (direction === 'left') {
+
+                this.thumbConfig.left = newLeft;
+                this.setStyle();
+                const newWidth = width + diffWidth >= parentCoords.width ? parentCoords.width : width + diffWidth;
+                this.thumb.style.width = newWidth + 'px';
+
+            } else if (direction === 'right') {
+
+                this.thumbConfig.right = width + diffWidth;
+                this.setStyle();
+                // const newWidth = width + diffWidth >= parentCoords.width ? parentCoords.width : width + diffWidth;
+                this.thumbConfig.width = width + diffWidth;
+
+                // this.thumb.style.width = newWidth + 'px';
+
             } else {
-                console.log(`hmm`);
+                // console.log(`hmm`);
             }
         };
 
         const border =  (this.thumb.offsetWidth - this.thumb.clientWidth) / 2;
         if (event.pageX >=thumbCoords.left && event.pageX <= (thumbCoords.left + border)) {
             handlerFunction = resize;
+            direction = 'left';
         } else if (event.pageX >=thumbCoords.right - border && event.pageX <=thumbCoords.right) {
             handlerFunction = resize;
+            direction = 'right';
         } else {
             handlerFunction = moveAt;
         }
@@ -91,12 +136,12 @@ class Thumb {
         const onMouseUp = event => {
             event.preventDefault();
 
-            this.thumb.removeEventListener('mousemove',onMouseMove);
-            document.removeEventListener('mouseup',onMouseUp);
+            this.parent.removeEventListener('mousemove',onMouseMove);
+            this.parent.removeEventListener('mouseup',onMouseUp);
         };
 
-        this.thumb.addEventListener('mousemove',onMouseMove);
-        this.thumb.addEventListener('mouseup',onMouseUp)
+        this.parent.addEventListener('mousemove',onMouseMove);
+        this.parent.addEventListener('mouseup',onMouseUp)
     }
 
     setConfig({ longChart }) {
@@ -125,7 +170,7 @@ class Thumb {
     setStyle() {
         const { width, left, right } = this.thumbConfig;
         this.thumb.style.width = width + 'px';
-        this.parent.style.backgroundImage = `linear-gradient(90deg, rgba(179, 179, 179, 0.25) ${left}px, #ffffff00 ${left}px, #ffffff00 ${right}px,rgba(179, 179, 179, 0.25) ${right}px)`;
+        // this.parent.style.backgroundImage = `linear-gradient(90deg, rgba(179, 179, 179, 0.25) ${left}px, #ffffff00 ${left}px, #ffffff00 ${right}px,rgba(179, 179, 179, 0.25) ${right}px)`;
     }
 
     makeDraggable() {
