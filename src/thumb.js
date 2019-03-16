@@ -66,50 +66,28 @@ class Thumb {
 
         let resize = event => {
             let newLeft = event.pageX - shiftX - parentCoords.left;
-            if (newLeft < 0) {
-                newLeft = 0;
-            }
-
-            const rightEdge = this.parent.offsetWidth - this.thumb.offsetWidth;
-            if (newLeft > rightEdge) {
-                newLeft = rightEdge;
-            }
+            // if (newLeft < 0) {
+            //     newLeft = 0;
+            // }
+            //
+            // const rightEdge = this.parent.offsetWidth - this.thumb.offsetWidth;
+            // if (newLeft > rightEdge) {
+            //     newLeft = rightEdge;
+            // }
 
             const left = this.thumb.style.left.split('px')[0];
-            const right = newLeft + this.thumb.offsetWidth;
-            console.log(`right`, right );
-            console.log(`width`, right - newLeft );
 
             const diffWidth = newLeft - left;
-            // const width = right - newLeft;
-            console.log(`diffWidth`,diffWidth)
-            console.log(`width`,width)
-            // this.thumb.style.left = left + 'px';
-
-            // this.thumbConfig.left = left;
-            // this.thumbConfig.right = right;
-
-            // direction === 'left' ? console.log(`left`) : console.log(`right`);
-
-
             if (direction === 'left') {
+                const left = this.thumb.style.left.split('px')[0];
+                const width = this.thumb.style.width.split('px')[0];
 
-                this.thumbConfig.left = newLeft;
-                this.setStyle();
-                const newWidth = width + diffWidth >= parentCoords.width ? parentCoords.width : width + diffWidth;
-                this.thumb.style.width = newWidth + 'px';
-
+                this.thumb.style.width = +width - diffWidth + 'px';
+                this.thumb.style.left = +left + diffWidth + 'px';
             } else if (direction === 'right') {
-
-                this.thumbConfig.right = width + diffWidth;
                 this.setStyle();
-                // const newWidth = width + diffWidth >= parentCoords.width ? parentCoords.width : width + diffWidth;
                 this.thumbConfig.width = width + diffWidth;
-
-                // this.thumb.style.width = newWidth + 'px';
-
             } else {
-                // console.log(`hmm`);
             }
         };
 
@@ -136,12 +114,12 @@ class Thumb {
         const onMouseUp = event => {
             event.preventDefault();
 
-            this.parent.removeEventListener('mousemove',onMouseMove);
-            this.parent.removeEventListener('mouseup',onMouseUp);
+            this.thumb.removeEventListener('mousemove',onMouseMove);
+            this.thumb.removeEventListener('mouseup',onMouseUp);
         };
 
-        this.parent.addEventListener('mousemove',onMouseMove);
-        this.parent.addEventListener('mouseup',onMouseUp)
+        this.thumb.addEventListener('mousemove',onMouseMove);
+        this.thumb.addEventListener('mouseup',onMouseUp)
     }
 
     setConfig({ longChart }) {
@@ -170,7 +148,6 @@ class Thumb {
     setStyle() {
         const { width, left, right } = this.thumbConfig;
         this.thumb.style.width = width + 'px';
-        // this.parent.style.backgroundImage = `linear-gradient(90deg, rgba(179, 179, 179, 0.25) ${left}px, #ffffff00 ${left}px, #ffffff00 ${right}px,rgba(179, 179, 179, 0.25) ${right}px)`;
     }
 
     makeDraggable() {
