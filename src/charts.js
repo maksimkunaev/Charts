@@ -12,6 +12,8 @@ class Chart {
         y0: 30,
         stepX: 10,
         stepY: 10,
+        countX: 0,
+        countY: 0,
     };
 
     constructor(ref, data) {
@@ -73,12 +75,17 @@ class Chart {
             this.chartConfig.columns.push(newColumn);
         });
 
+        this.chartConfig.countX = maxX;
+        this.chartConfig.countY = maxY;
+
         this.chartConfig.stepY =(height / maxY);
         this.chartConfig.stepX =(width / maxX );
     }
 
     drawShort(data, startDate, endDate) {
         this.setConfig(data, startDate, endDate, 'short');
+        this.clearChart();
+        this.drawCoords()
         this.drawChart()
     }
 
@@ -93,11 +100,8 @@ class Chart {
 
         const { ctx } = this;
 
-        // if (!startDate) return;
-        this.clearChart();
-
         columns.forEach((column, idx) => {
-            this.ctx.beginPath();
+            ctx.beginPath();
 
             const { data, color } = column;
 
@@ -113,6 +117,34 @@ class Chart {
 
             ctx.strokeStyle = color;
             ctx.lineWidth = 2;
+            ctx.stroke();
+        });
+    }
+
+    drawCoords() {
+        const { ctx } = this;
+        const { countY, stepY, y0 } = this.chartConfig;
+        const { width, height } = this.canvasConfig;
+
+
+        const step = Math.ceil( countY / 6);
+
+        let lines = new Array(6).fill(step);
+
+        lines.map( (step, idx) => {
+            lines[idx] = step
+        });
+
+        console.log(lines)
+        lines.forEach((step, idx) => {
+            ctx.beginPath();
+
+            const yPosition = y0 + (height - stepY * step * (idx + 1));
+            ctx.moveTo(0, yPosition);
+            ctx.lineTo(width, yPosition);
+
+            ctx.strokeStyle = '#ccc';
+            ctx.lineWidth = 1;
             ctx.stroke();
         });
     }

@@ -31,9 +31,12 @@ class Thumb {
     onMouseDown(event) {
         event.preventDefault();
         const thumbCoords = this.getCoords(this.thumb);
+
+        //Click on pseudo elements are not processed
         if (event.pageX < thumbCoords.left || event.pageX >= thumbCoords.right) {
-            return; //Click on pseudo elements are not processed
+            return;
         }
+        
         const parentCoords = this.getCoords(this.parent);
         const shiftX = event.pageX - thumbCoords.left;
 
