@@ -32,7 +32,10 @@ class Thumb {
         const thumbCoords = this.getCoords(this.thumb);
         const parentCoords = this.getCoords(this.parent);
         const shiftX = event.pageX - thumbCoords.left;
-        const moveAt = (event) => {
+
+        let handlerFunction = () => {};
+
+        const moveAt = event => {
             let newLeft = event.pageX - shiftX - parentCoords.left;
             if (newLeft < 0) {
                 newLeft = 0;
@@ -56,14 +59,33 @@ class Thumb {
             const to = Math.ceil(( right / parentCoords.width ) * this.data.length);
             this.renderMethod(from <= 0 ? 1 : from, to) //TODO calc 0
         };
-        moveAt(event);
 
+        let resize = event => {
+            if (event.pageX >=thumbCoords.left && event.pageX <= (thumbCoords.left + border)) {
+                console.log(`left`);
+            } else if (event.pageX >=thumbCoords.right - border && event.pageX <=thumbCoords.right) {
+                console.log(`right`);
+            } else {
+                console.log(`hmm`);
+            }
+        };
+
+        const border =  (this.thumb.offsetWidth - this.thumb.clientWidth) / 2;
+        if (event.pageX >=thumbCoords.left && event.pageX <= (thumbCoords.left + border)) {
+            handlerFunction = resize;
+        } else if (event.pageX >=thumbCoords.right - border && event.pageX <=thumbCoords.right) {
+            handlerFunction = resize;
+        } else {
+            handlerFunction = moveAt;
+        }
+
+        handlerFunction(event);
         this.thumb.style.zIndex = '1000';
 
         const onMouseMove = event => {
             event.preventDefault();
 
-            moveAt(event);
+            handlerFunction(event);
         };
 
         const onMouseUp = event => {

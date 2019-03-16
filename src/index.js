@@ -2,7 +2,7 @@ const Chart = require('./charts');
 const Thumb = require('./thumb');
 
 const chart_data = require('./chart_data');
-const data = chart_data[1];
+const data = chart_data[4];
 
 const shortChart = new Chart('view', data);
 const longChart = new Chart('timeLine', data);
