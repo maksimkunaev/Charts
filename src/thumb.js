@@ -25,10 +25,10 @@ class Thumb {
         this.setConfig(config);
         this.setStyle();
         this.makeDraggable();
+        this.thumb.style.left = this.getCoords(this.parent).right - this.getCoords(this.thumb).width - this.getCoords(this.parent).left + 'px';//move thumb to right side of its parent
     }
 
     onMouseDown(event) {
-        console.log(`down`)
         event.preventDefault();
         const thumbCoords = this.getCoords(this.thumb);
         if (event.pageX < thumbCoords.left || event.pageX >= thumbCoords.right) {
