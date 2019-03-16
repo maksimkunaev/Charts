@@ -51,7 +51,10 @@ class Thumb {
             this.setStyle();
 
             const thumbLeft = event.pageX - shiftX;
-            this.renderMethod(thumbLeft / this.thumbConfig.stepY, right / this.thumbConfig.stepY)
+
+            const from = Math.floor(( thumbLeft / parentCoords.width ) * this.data.length);
+            const to = Math.ceil(( right / parentCoords.width ) * this.data.length);
+            this.renderMethod(from <= 0 ? 1 : from, to) //TODO calc 0
         };
         moveAt(event);
 
@@ -67,7 +70,7 @@ class Thumb {
             event.preventDefault();
 
             this.thumb.removeEventListener('mousemove',onMouseMove);
-            this.thumb.removeEventListener('mouseup',onMouseUp);
+            document.removeEventListener('mouseup',onMouseUp);
         };
 
         this.thumb.addEventListener('mousemove',onMouseMove);
