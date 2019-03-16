@@ -28,8 +28,12 @@ class Thumb {
     }
 
     onMouseDown(event) {
+        console.log(`down`)
         event.preventDefault();
         const thumbCoords = this.getCoords(this.thumb);
+        if (event.pageX < thumbCoords.left || event.pageX >= thumbCoords.right) {
+            return; //Click on pseudo elements are not processed
+        }
         const parentCoords = this.getCoords(this.parent);
         const shiftX = event.pageX - thumbCoords.left;
 
@@ -38,7 +42,6 @@ class Thumb {
         let width = thumbCoords.width;
 
         const moveAt = event => {
-            console.log(`moveAt` )
 
             let newLeft = event.pageX - shiftX - parentCoords.left;
             if (newLeft < 0) {
@@ -66,14 +69,6 @@ class Thumb {
 
         let resize = event => {
             let newLeft = event.pageX - shiftX - parentCoords.left;
-            // if (newLeft < 0) {
-            //     newLeft = 0;
-            // }
-            //
-            // const rightEdge = this.parent.offsetWidth - this.thumb.offsetWidth;
-            // if (newLeft > rightEdge) {
-            //     newLeft = rightEdge;
-            // }
 
             const left = this.thumb.style.left.split('px')[0];
 
@@ -81,7 +76,7 @@ class Thumb {
             if (direction === 'left') {
                 const left = this.thumb.style.left.split('px')[0];
                 const width = this.thumb.style.width.split('px')[0];
-
+                this.thumbConfig.width = +width - diffWidth + 'px';
                 this.thumb.style.width = +width - diffWidth + 'px';
                 this.thumb.style.left = +left + diffWidth + 'px';
             } else if (direction === 'right') {
