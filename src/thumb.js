@@ -36,7 +36,7 @@ class Thumb {
         if (event.pageX < thumbCoords.left || event.pageX >= thumbCoords.right) {
             return;
         }
-        
+
         const parentCoords = this.getCoords(this.parent);
         const shiftX = event.pageX - thumbCoords.left;
 
@@ -85,13 +85,10 @@ class Thumb {
             } else if (direction === 'right') {
                 this.setStyle();
                 this.thumbConfig.width = width + diffWidth;
-            } else {
             }
 
-
-            const thumbLeft = event.pageX - shiftX;
-            const right = newLeft + this.thumb.offsetWidth;
-            const from = Math.floor(( thumbLeft / parentCoords.width ) * this.data.length);
+            const { left: l, right } = this.getCoords(this.thumb);
+            const from = Math.floor(( l / parentCoords.width ) * this.data.length);
             const to = Math.ceil(( right / parentCoords.width ) * this.data.length);
             this.renderMethod(from <= 0 ? 1 : from, to) //TODO calc 0
         };
