@@ -55,7 +55,7 @@ drawChart(startDate);
 
     const maxCount = 20;
     const x0 = 30;
-    const y0 = 30;
+    const y0 = 0;
     const width = timeLine.width;
     const height = timeLine.height - 90;
     const stepY = Math.round(height / maxCount);

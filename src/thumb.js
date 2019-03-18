@@ -25,6 +25,7 @@ class Thumb {
         this.setConfig(config);
         this.setStyle();
         this.makeDraggable();
+        this.initTouchEvents();
         this.thumb.style.left = Thumb.getCoords(this.parent).right - Thumb.getCoords(this.thumb).width - Thumb.getCoords(this.parent).left + 'px';//move thumb to right side of its parent
     }
 
@@ -127,7 +128,7 @@ class Thumb {
     setConfig({ longChart }) {
         const parentCoords = Thumb.getCoords(this.parent);
         const dayWidth = parentCoords.width / this.data.length < 15 ? 15 : parentCoords.width / this.data.length;
-        const thumbWidth =  9 * dayWidth;
+        const thumbWidth =  10 * dayWidth;
 
         this.thumbConfig = {
             width: thumbWidth,
@@ -157,6 +158,30 @@ class Thumb {
             return false;
         };
         this.thumb.addEventListener('mousedown',this.onMouseDown.bind(this));
+    }
+
+    initTouchEvents() {
+        function touchHandler(event) {
+            const touch = event.changedTouches[0];
+
+            const simulatedEvent = document.createEvent("MouseEvent");
+            simulatedEvent.initMouseEvent({
+                    touchstart: "mousedown",
+                    touchmove: "mousemove",
+                    touchend: "mouseup"
+                }[event.type], true, true, window, 1,
+                touch.screenX, touch.screenY,
+                touch.clientX, touch.clientY, false,
+                false, false, false, 0, null);
+
+            touch.target.dispatchEvent(simulatedEvent);
+            // event.preventDefault();
+        }
+
+        document.addEventListener("touchstart", touchHandler, true);
+        document.addEventListener("touchmove", touchHandler, true);
+        document.addEventListener("touchend", touchHandler, true);
+        document.addEventListener("touchcancel", touchHandler, true);
     }
 }
 

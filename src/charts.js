@@ -36,6 +36,7 @@ class Chart {
         const { columns, colors } = data;
 
         const { width, height } = this.canvasConfig;
+        const { y0 } = this.chartConfig;
         let maxX = 0;
         let maxY = 0;
         this.chartConfig.view = view;
@@ -72,6 +73,7 @@ class Chart {
             // set stepY
             maxY = Math.max(...data.slice(1)) > maxY ? Math.max(...data.slice(1)) : maxY;
 
+            // set stepX
             maxX = data.length - 1;
 
             const name = column[0];
@@ -103,7 +105,7 @@ class Chart {
         this.chartConfig.countX = maxX;
         this.chartConfig.countY = maxY;
 
-        this.chartConfig.stepY =(height / maxY);
+        this.chartConfig.stepY = height/ maxY;
         this.chartConfig.stepX = endDate ? (width * 1.1) / maxX : width / maxX ;
     }
 
@@ -131,7 +133,7 @@ class Chart {
             const { data, color } = column;
             data.forEach((point, idx) => {
                 let x = position === 'rightSide' ? idx * stepX : idx * stepX - stepX/2;
-                let y = y0 + (height - point * stepY);
+                let y = y0 + (height - y0 - point * stepY);
 
                 if (idx === 0)
                     ctx.moveTo(x, y);
@@ -157,7 +159,7 @@ class Chart {
 
     drawHorizontalLines() {
         const { ctx } = this;
-        const { countY, stepY, y0 } = this.chartConfig;
+        const { countY, stepY, y0, columns } = this.chartConfig;
         const { width, height } = this.canvasConfig;
         const color = '#9aa6ae';
         const linesCount = 5;
@@ -175,7 +177,7 @@ class Chart {
             ctx.beginPath();
             ctx.fillStyle = color;
 
-            const yPosition = y0 + (height - stepY * step);
+            const yPosition = y0 + (height - stepY * step - y0);
             ctx.moveTo(0, yPosition);
             ctx.lineTo(width, yPosition);
 
@@ -188,7 +190,8 @@ class Chart {
     }
 
     drawDateCoords() {
-        const { xPositions } = this.chartConfig;
+        const { xPositions, y0   } = this.chartConfig;
+        const { height } = this.canvas;
         const { ctx } = this;
 
         let cuttingCount = Math.round(xPositions.length / 8);
@@ -199,13 +202,13 @@ class Chart {
 
         datesPositions.forEach((position, idx) => {
 
-            const color = '#000';
+            const color = '#9da8af';
 
             ctx.beginPath();
             ctx.fillStyle = color;
             ctx.font = "100 20px sans-serif";
 
-            ctx.fillText(position.date, position.xPosition, 500);
+            ctx.fillText(position.date, position.xPosition, height);
 
             ctx.strokeStyle = color;
             ctx.lineWidth = 1;
