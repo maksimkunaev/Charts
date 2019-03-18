@@ -90,14 +90,22 @@ class Chart {
             //set array of dates for X coordinate
             if (idx !== 1) return; //only for one column is enough
             this.chartConfig.dates = this.chartConfig.data.columns[0].slice(start, end).map(ms => {
-                let date = new Date(ms);
 
-                const options = {
-                    month: 'short',
-                    day: 'numeric',
-                };
+                function formatDate(date) {
+                    const monthNames = [
+                        "Jan", "Feb", "Mar",
+                        "Apr", "May", "Jun", "Jul",
+                        "Aug", "Sep", "Oct",
+                        "Nov", "Dec"
+                    ];
 
-                return date.toLocaleString("en-US", options)
+                    const day = date.getDate();
+                    const monthIndex = date.getMonth();
+
+                    return monthNames[monthIndex] + ' ' +  day;
+                }
+
+                return formatDate(new Date(ms))
 
             });
         });
