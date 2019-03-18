@@ -18,6 +18,7 @@ class Chart {
         data: [],
         dates: [],
         view: '',
+        position: '',
     };
 
     constructor(ref, data) {
@@ -45,7 +46,12 @@ class Chart {
             if (idx === 0) return;
 
             const start = startDate ? startDate : -11;
-            const end = endDate ? endDate : column.length;
+            const end = endDate ? endDate + 1: column.length;
+            if (!endDate || end >= column.length) {
+                this.chartConfig.position = 'rightSide';
+            } else {
+                this.chartConfig.position = '??????';
+            }
 
             let data = [];
 
@@ -98,7 +104,7 @@ class Chart {
         this.chartConfig.countY = maxY;
 
         this.chartConfig.stepY =(height / maxY);
-        this.chartConfig.stepX =(width / maxX );
+        this.chartConfig.stepX = endDate ? (width * 1.1) / maxX : width / maxX ;
     }
 
     drawShort(data, startDate, endDate) {
@@ -116,19 +122,17 @@ class Chart {
 
     drawChart() {
         const { height } = this.canvasConfig;
-        const { y0, stepX, stepY, columns, view } = this.chartConfig;
+        const { y0, stepX, stepY, columns, view, position, dates } = this.chartConfig;
 
         const { ctx } = this;
-
-        columns.forEach((column, index) => {
+        const draw = (column, index) => {
             ctx.beginPath();
 
             const { data, color } = column;
-
             data.forEach((point, idx) => {
-                const x = idx * stepX;
-                const y = y0 + (height - point * stepY);
-                // console.log(idx, x,y);
+                let x = position === 'rightSide' ? idx * stepX : idx * stepX - stepX/2;
+                let y = y0 + (height - point * stepY);
+
                 if (idx === 0)
                     ctx.moveTo(x, y);
                 else
@@ -136,14 +140,19 @@ class Chart {
 
                 //remember xPosition for every point
                 if (view === 'short' && index === 0) {
-                    this.chartConfig.xPositions.push(x);
+                    this.chartConfig.xPositions.push({
+                        date: dates[idx],
+                        xPosition: x,
+                    });
                 }
             });
 
             ctx.strokeStyle = color;
             ctx.lineWidth = 2;
             ctx.stroke();
-        });
+        };
+
+        columns.forEach(draw);
     }
 
     drawHorizontalLines() {
@@ -179,18 +188,25 @@ class Chart {
     }
 
     drawDateCoords() {
-        const { dates, xPositions } = this.chartConfig;
+        const { xPositions } = this.chartConfig;
+        const { ctx } = this;
 
-        xPositions.forEach((position, idx) => {
-            const { ctx } = this;
-            const color = '#9aa6ae';
-            const date = dates[idx];
+        let cuttingCount = Math.round(xPositions.length / 8);
+
+        const datesPositions = xPositions.filter((i,idx)=>{
+            return !(idx % cuttingCount);
+        });
+
+        datesPositions.forEach((position, idx) => {
+
+            const color = '#000';
 
             ctx.beginPath();
             ctx.fillStyle = color;
+            ctx.font = "100 20px sans-serif";
 
-            ctx.font = "200 20px sans-serif";
-            ctx.fillText(date, position, 500);
+            ctx.fillText(position.date, position.xPosition, 500);
+
             ctx.strokeStyle = color;
             ctx.lineWidth = 1;
             ctx.stroke();

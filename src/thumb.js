@@ -25,19 +25,19 @@ class Thumb {
         this.setConfig(config);
         this.setStyle();
         this.makeDraggable();
-        this.thumb.style.left = this.getCoords(this.parent).right - this.getCoords(this.thumb).width - this.getCoords(this.parent).left + 'px';//move thumb to right side of its parent
+        this.thumb.style.left = Thumb.getCoords(this.parent).right - Thumb.getCoords(this.thumb).width - Thumb.getCoords(this.parent).left + 'px';//move thumb to right side of its parent
     }
 
     onMouseDown(event) {
         event.preventDefault();
-        const thumbCoords = this.getCoords(this.thumb);
+        const thumbCoords = Thumb.getCoords(this.thumb);
 
         //Click on pseudo elements are not processed
         if (event.pageX < thumbCoords.left || event.pageX >= thumbCoords.right) {
             return;
         }
 
-        const parentCoords = this.getCoords(this.parent);
+        const parentCoords = Thumb.getCoords(this.parent);
         const shiftX = event.pageX - thumbCoords.left;
 
         let handlerFunction = () => {};
@@ -87,7 +87,7 @@ class Thumb {
                 this.thumbConfig.width = width + diffWidth;
             }
 
-            const { left: l, right } = this.getCoords(this.thumb);
+            const { left: l, right } = Thumb.getCoords(this.thumb);
             const from = Math.floor(( l / parentCoords.width ) * this.data.length);
             const to = Math.ceil(( right / parentCoords.width ) * this.data.length);
             this.renderMethod(from <= 0 ? 1 : from, to) //TODO calc 0
@@ -125,7 +125,7 @@ class Thumb {
     }
 
     setConfig({ longChart }) {
-        const parentCoords = this.getCoords(this.parent);
+        const parentCoords = Thumb.getCoords(this.parent);
         const dayWidth = parentCoords.width / this.data.length < 15 ? 15 : parentCoords.width / this.data.length;
         const thumbWidth =  9 * dayWidth;
 
@@ -137,7 +137,7 @@ class Thumb {
         };
     }
 
-    getCoords(elem) {
+    static getCoords(elem) {
         const box = elem.getBoundingClientRect();
         return {
             top: box.top,
