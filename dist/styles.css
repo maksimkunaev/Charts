@@ -38,7 +38,7 @@
 }
 
 .thumb {
-    height: 146px;
+    height: 150px;
     border-top: 4px solid #8a8a8a38;
     border-bottom: 4px solid #8a8a8a38;
     border-left: 19px solid #8a8a8a38;
@@ -46,7 +46,7 @@
     box-sizing: border-box;
 
     position: relative;
-    top: -150px;
+    top: -155px;
 }
 @media screen and (max-width: 512px) {
     .thumb {
