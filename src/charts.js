@@ -2,11 +2,12 @@ class Chart {
     canvas = null;
 
     canvasConfig = {
-        width: 1800,
+        width: 600,
         height: 500,
     };
 
     chartConfig = {
+        screenWidth: null,
         columns: [],
         xPositions: [],
         x0: 30,
@@ -19,17 +20,18 @@ class Chart {
         dates: [],
         view: '',
         position: '',
+        datesPerLine: 8,
     };
 
     constructor(ref, data) {
         const { width, height } = this.canvasConfig;
 
         this.canvas = document.getElementById(ref);
-        this.canvas.width = width;
-        this.canvas.height = height + 30;
+
         this.ctx = this.canvas.getContext("2d");
 
         this.chartConfig.data = data;
+        this.setScreenOptions();
     }
 
     setConfig(data, startDate, endDate, view) {
@@ -167,7 +169,7 @@ class Chart {
 
     drawHorizontalLines() {
         const { ctx } = this;
-        const { countY, stepY, y0, columns } = this.chartConfig;
+        const { countY, stepY, y0, font } = this.chartConfig;
         const { width, height } = this.canvasConfig;
         const color = '#9aa6ae';
         const linesCount = 5;
@@ -189,7 +191,7 @@ class Chart {
             ctx.moveTo(0, yPosition);
             ctx.lineTo(width, yPosition);
 
-            ctx.font = "200 20px sans-serif";
+            ctx.font = font;
             ctx.fillText(Math.round(step), 3, yPosition - 10);
             ctx.strokeStyle = color;
             ctx.lineWidth = 1;
@@ -198,12 +200,10 @@ class Chart {
     }
 
     drawDateCoords() {
-        const { xPositions, y0   } = this.chartConfig;
+        const { xPositions, datesPerLine, font  } = this.chartConfig;
         const { height } = this.canvas;
         const { ctx } = this;
-
-        let cuttingCount = Math.round(xPositions.length / 8);
-
+        let cuttingCount = Math.round(xPositions.length / datesPerLine);
         const datesPositions = xPositions.filter((i,idx)=>{
             return !(idx % cuttingCount);
         });
@@ -214,7 +214,8 @@ class Chart {
 
             ctx.beginPath();
             ctx.fillStyle = color;
-            ctx.font = "100 20px sans-serif";
+
+            ctx.font = font;
 
             ctx.fillText(position.date, position.xPosition, height);
 
@@ -227,6 +228,23 @@ class Chart {
     clearChart() {
         this.ctx.clearRect(0, 0, this.canvas.width, this. canvas.height);
         this.chartConfig.xPositions = [];
+    }
+
+    setScreenOptions() {
+        this.chartConfig.screenWidth = screen.width;
+        this.chartConfig.isMobile = screen.width <= 520;
+        const { isMobile } = this.chartConfig;
+        this.chartConfig.font = isMobile ? "300 25px sans-serif" : "100 20px sans-serif";
+        this.chartConfig.datesPerLine = isMobile ? 6 : 8;
+
+        this.canvasConfig = {
+            width: isMobile ? 600 : 1800,
+            height: isMobile ? 500 : 500,
+        };
+
+        this.canvas.width = this.canvasConfig.width;
+        this.canvas.height = this.canvasConfig.height + 30;
+        document.addEventListener('resize', this.setScreenOptions);
     }
 }
 

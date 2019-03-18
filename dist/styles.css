@@ -29,7 +29,7 @@
 
 @media screen and (max-width: 512px) {
     .lineChart {
-        height: 100px;
+        height: 70px;
     }
 }
 #timeLine {
@@ -50,8 +50,8 @@
 }
 @media screen and (max-width: 512px) {
     .thumb {
-        height: 100px;
-        top: -102px;
+        height: 70px;
+        top: -74px;
     }
 }
 .thumb:after {
