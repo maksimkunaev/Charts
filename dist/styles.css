@@ -1,3 +1,8 @@
+body, html  {
+    height: 100%;
+    position: relative;
+}
+
 .viewChart {
     width: 100%;
     height: 500px;
@@ -78,4 +83,61 @@
     left: 100%;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.thumb-nightTheme{
+    width: 100%;
+    height: 100%;
+}
+
+.thumb-nightTheme:after {
+    content: '';
+    position: absolute;
+
+    display: block;
+    width: 10000px;
+    height: 107%;
+    background: rgba(31, 42, 56, 0.5);
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.thumb-nightTheme:before {
+    content: '';
+    position: absolute;
+
+    display: block;
+    width: 10000px;
+    height: 107%;
+    background: rgba(31, 42, 56, 0.5);
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.swithLabel {
+    width: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /*border: 1px solid;*/
+    position: absolute;
+    bottom: 0;
+    margin: 50px auto;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-size: 22px;
+}
+
+@media screen and (max-width: 512px) {
+    .swithLabel {
+        margin: 25px auto;
+    }
+}
+
+.swither {
+    display: none;
 }
