@@ -31,20 +31,21 @@ switcher.addEventListener('change', onChange);
 
 function onChange({target}) {
     const { checked } = target;
-    changeTheme(checked);
+    const theme = checked ? 'night' : 'day';
+    switchTheme(theme);
 }
-function changeTheme(checked) {
-    if (checked) {
+function switchTheme(theme) {
+    if (theme === 'night') {
         document.body.style.backgroundColor = '#242f3e';
-        thumb.classList.toggle('thumb-nightTheme');
+        thumb.classList.add('thumb-nightTheme');
         labelText.innerText = 'Switch to Day mode';
         labelText.style.color = '#35a8f1'
-    } else {
+    } else if (theme === 'day') {
         document.body.style.backgroundColor = 'transparent';
-        thumb.classList.toggle('thumb-nightTheme');
+        thumb.classList.remove('thumb-nightTheme');
         labelText.innerText = 'Switch to Night mode'
         labelText.style.color = '#000'
     }
 }
 
-changeTheme(true);
+switchTheme('day');

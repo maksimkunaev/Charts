@@ -52,6 +52,7 @@ body, html  {
 
     position: relative;
     top: -155px;
+    cursor: pointer;
 }
 @media screen and (max-width: 512px) {
     .thumb {
@@ -70,6 +71,7 @@ body, html  {
     right: 100%;
     top: 50%;
     transform: translateY(-50%);
+    cursor: auto;
 }
 
 .thumb:before {
@@ -83,6 +85,7 @@ body, html  {
     left: 100%;
     top: 50%;
     transform: translateY(-50%);
+    cursor: auto;
 }
 
 .thumb-nightTheme{
@@ -130,8 +133,16 @@ body, html  {
     transform: translateX(-50%);
 
     font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
 }
 
+.swithLabel label {
+    cursor: pointer;
+}
 @media screen and (max-width: 512px) {
     .swithLabel {
         margin: 25px auto;
