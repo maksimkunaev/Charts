@@ -355,7 +355,7 @@ class Chart {
             }
         });
 
-        const y0 = 150;
+        const y0 = 100;
         const height = 500;
 
         ctx.beginPath();

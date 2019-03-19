@@ -55,7 +55,7 @@ function switchTheme(theme) {
     }
 }
 
-function switchData(data, drawShort) {
+function switchData(data) {
     const checkboxes = document.createElement('div');
     checkboxes.classList.add('checkboxes');
 
