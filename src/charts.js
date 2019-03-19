@@ -27,6 +27,7 @@ class Chart {
         position: '',
         datesPerLine: 8,
         tooltipInfo: {},
+        isVisible: [],
     };
 
     constructor(ref, data) {
@@ -46,14 +47,31 @@ class Chart {
         const { columns, colors } = data;
 
         const { width, height } = this.canvasConfig;
-        const { y0 } = this.chartConfig;
+        const { isVisible } = this.chartConfig;
         let maxX = 0;
         let maxY = 0;
         this.chartConfig.view = view;
 
         this.chartConfig.columns = [];
-        columns.forEach((column, idx) => {
 
+
+        let newColumns = columns.slice();
+
+        if (isVisible.length > 1) {
+            isVisible.forEach((item, index) => {
+                const newIndex = isVisible.length - index - 1;
+                console.log(`newIndex`, newIndex);
+                console.log(`isVisible`, isVisible);
+
+                if (isVisible[newIndex].isVisible === false) {
+                    if (newColumns.length > 2) {
+                        newColumns.splice(newIndex + 1, 1);
+                        console.log(`newColumns`,newColumns)
+                    }
+                }
+            })
+        };
+        newColumns.forEach((column, idx) => {
             if (idx === 0) return;
 
             const start = startDate ? startDate : -11;
@@ -157,6 +175,11 @@ class Chart {
         };
 
         columns.forEach(draw);
+    }
+
+    swithcData(isVisible) {
+        this.chartConfig.isVisible = isVisible;
+        this.drawShort(this.chartConfig.data, this.chartConfig.columns[0].start,  --this.chartConfig.columns[0].end);//TODO fix
     }
 
     drawHorizontalLines() {

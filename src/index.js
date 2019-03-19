@@ -2,7 +2,7 @@ const Chart = require('./charts');
 const Thumb = require('./thumb');
 
 const chart_data = require('./chart_data');
-const data = chart_data[4];
+const data = chart_data[1];
 
 const shortChart = new Chart('view', data);
 const longChart = new Chart('timeLine', data);
@@ -59,25 +59,25 @@ function switchData(data, drawShort) {
     const checkboxes = document.createElement('div');
     checkboxes.classList.add('checkboxes');
 
-    const newData = copyObject(data);
-
-    newData.columns.map((col, idx) => {
+    const isVisible = [];
+    data.columns.map((col, idx) => {
         if (idx === 0) return;
         const name = col[0];
         const checkbox = document.createElement('input');
         const div = document.createElement('div');
         checkbox.type = 'checkbox';
         checkbox.classList = 'checkbox';
+        checkbox.checked = true;
 
         const changeData = (name, idx, e)=> {
 
-            const cuttedNames = e.target.checked && [name];
-            const cuttedData = copyObject(newData, cuttedNames, idx);
-            drawShort(cuttedData, 0)
+            isVisible[idx].isVisible = e.target.checked;
+
+            shortChart.swithcData(isVisible);
         };
 
         checkbox.style.display = 'none';
-        checkbox.addEventListener('change', changeData.bind(window, name, idx));
+        checkbox.addEventListener('change', changeData.bind(window, name, idx - 1));
         const label = document.createElement('label');
         const text = document.createTextNode(name);
 
@@ -86,36 +86,14 @@ function switchData(data, drawShort) {
         label.appendChild(div);
         label.appendChild(text);
         checkboxes.appendChild(label);
+
+        isVisible.push({
+            isVisible: true,
+            idx: idx - 1,
+        });
     });
 
     document.body.appendChild(checkboxes)
-}
-
-
-
-function copyObject(data, names, idx) {
-    let newData = {};
-
-    for (const key in data) {
-        if (typeof data[key] === 'object') {
-            newData[key] = {
-                ...data[key],
-            }
-        }
-
-        if (data[key].slice) {
-            newData[key] = data[key].slice();
-        }
-    }
-
-    if (names && names.length) {
-        names.forEach(() => {
-            newData.columns.splice(idx,1);
-        });
-    }
-
-
-    return newData;
 }
 
 switchData(data, drawShort.bind(shortChart));

@@ -226,12 +226,12 @@ body, html  {
     border-radius: 50%;
 
     width: 20px;
-    background: rebeccapurple;
+    /*background: rebeccapurple;*/
     height: 20px;
     margin-right: 5px;
 }
 
 .checkbox:checked + .custom-checkbox {
-    background: white;
+    background: green;
 }
 
