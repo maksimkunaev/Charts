@@ -41,10 +41,30 @@ function getTooltipInfo(colors, columns, stepY, y0, height) {
         resultInfo[key] = {
             name: key,
             yPosition: point,
+            color: pointsArray[0].color,
         };
     }
 
     return resultInfo;
 }
+
+function formatDate(date) {
+    const monthNames = [
+        "Jan", "Feb", "Mar",
+        "Apr", "May", "Jun", "Jul",
+        "Aug", "Sep", "Oct",
+        "Nov", "Dec"
+    ];
+
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+
+    return {
+        short: monthNames[monthIndex] + ' ' +  day,
+        ms: date,
+    };
+}
+
 module.exports.getTooltipInfo = getTooltipInfo;
 module.exports.hexToRgb = hexToRgb;
+module.exports.formatDate = formatDate;

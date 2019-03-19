@@ -1,6 +1,7 @@
 const utils = require('./utils');
 const hexToRgb = utils.hexToRgb;
 const getTooltipInfo = utils.getTooltipInfo;
+const formatDate = utils.formatDate;
 
 class Chart {
     canvas = null;
@@ -99,23 +100,7 @@ class Chart {
             //set array of dates for X coordinate
             if (idx !== 1) return; //only for one column is enough
             this.chartConfig.dates = this.chartConfig.data.columns[0].slice(start, end).map(ms => {
-
-                function formatDate(date) {
-                    const monthNames = [
-                        "Jan", "Feb", "Mar",
-                        "Apr", "May", "Jun", "Jul",
-                        "Aug", "Sep", "Oct",
-                        "Nov", "Dec"
-                    ];
-
-                    const day = date.getDate();
-                    const monthIndex = date.getMonth();
-
-                    return monthNames[monthIndex] + ' ' +  day;
-                }
-
                 return formatDate(new Date(ms))
-
             });
         });
 
@@ -127,11 +112,6 @@ class Chart {
     }
 
     drawShort(data, startDate, endDate) {
-        console.log(`data`,data)
-        console.log(`startDate`,startDate)
-        console.log(`endDate`,endDate)
-        console.log(`this`,this)
-
         this.setConfig(data, startDate, endDate, 'short');
         this.clearChart();
         this.drawChart();
@@ -165,7 +145,7 @@ class Chart {
                 //remember xPosition for every point
                 if (view === 'short' && index === 0) {
                     this.chartConfig.xPositions.push({
-                        date: dates[idx],
+                        date: dates[idx].short,
                         xPosition: x,
                     });
                 }
@@ -336,13 +316,25 @@ class Chart {
         }
     }
 
-
     drawTooltip(pageX) {
         const { ctx } = this;
-        const { x0 } = this.chartConfig.tooltipInfo;
+        const { tooltipInfo, xPositions, dates } = this.chartConfig;
+        const { x0, yPoints } = tooltipInfo;
+
+        let formatDate = '';
+
+        xPositions.map((xPos, idx) => {
+            if (xPos.xPosition <= x0 && xPositions[idx + 1].xPosition >= x0) {
+                const date = new Date(dates[idx].ms);
+                const options = { weekday: 'short', month: 'short', day: 'numeric' };
+
+                formatDate = date.toLocaleDateString('en-US', options);;
+            }
+        });
 
         const y0 = 150;
         const height = 500;
+
         ctx.beginPath();
         ctx.moveTo(x0, y0);
 
@@ -352,9 +344,30 @@ class Chart {
         ctx.stroke();
 
         const tooltip = document.querySelector('.tooltip');
+        const columns = tooltip.querySelector('.columns');
         this.chartConfig.tooltipInfo.node = tooltip;
+        this.chartConfig.tooltipInfo.date = formatDate;
         tooltip.style.display = 'flex';
         tooltip.style.left = pageX + 'px';
+        tooltip.querySelector('.date').textContent = formatDate;
+
+        columns.innerHTML = null;
+        for (const key in yPoints) {
+            const column = document.createElement('div');
+            const spanValue = document.createElement('span');
+            const spanName = document.createElement('span');
+            spanValue.textContent = yPoints[key].yPosition;
+            spanName.textContent = yPoints[key].name;
+            column.classList.add('column');
+            column.style.color = yPoints[key].color;
+            column.appendChild(spanValue);
+            column.appendChild(spanName);
+            console.log(`column`,column);
+
+            columns.appendChild(column);
+        }
+
+        // tooltip.appendChild()
     }
 }
 
