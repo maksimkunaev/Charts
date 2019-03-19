@@ -28,7 +28,7 @@ const thumb = document.querySelector('.thumb');
 const swithLabel = document.querySelector('.swithLabel');
 const labelText = swithLabel.querySelector('span');
 switcher.addEventListener('change', onChange);
-switchTheme('night');
+// switchTheme('night');
 function onChange({target}) {
     const { checked } = target;
     const theme = checked ? 'night' : 'day';
