@@ -1,4 +1,7 @@
-const hexToRgb = require('./utils');
+const utils = require('./utils');
+const hexToRgb = utils.hexToRgb;
+const getTooltipInfo = utils.getTooltipInfo;
+
 class Chart {
     canvas = null;
 
@@ -22,6 +25,7 @@ class Chart {
         view: '',
         position: '',
         datesPerLine: 8,
+        tooltipInfo: {},
     };
 
     constructor(ref, data) {
@@ -32,6 +36,7 @@ class Chart {
         this.ctx = this.canvas.getContext("2d");
 
         this.chartConfig.data = data;
+        this.canvasConfig.ref = ref;
         this.setScreenOptions();
         this.canvas.addEventListener('click', this.onCanvasClick.bind(this));
     }
@@ -251,13 +256,13 @@ class Chart {
 
     onCanvasClick(e) {
         const { pageX } = e;
-        const { ctx } = this;
         const { left, width } = this.canvas.getBoundingClientRect();
 
-        const resolution = this.canvas.width / width;
-        const x0 = (pageX - left) * resolution;
         const y0 = 0;
         const height = 500;
+        const resolution = this.canvas.width / width;
+        const x0 = (pageX - left) * resolution;
+
         const lineData = this.ctx.getImageData(x0, y0, 1, height)
         let colors = [];
 
@@ -305,62 +310,55 @@ class Chart {
             }
         });
 
-        const coefficient = this.canvasConfig.width / this.canvas.getBoundingClientRect().width;
+        const tooltipInfo = getTooltipInfo(colors, columns, stepY, y0, height);
 
-        function getTooltipInfo(colors, columns, stepY) {
-            const tooltipInfo = {};
+        this.chartConfig.tooltipInfo = {
+            yPoints: tooltipInfo,
+            x0,
+        };
 
-            colors.forEach(color=>{
-                columns.forEach((col, idx) => {
-                    if (!tooltipInfo[col.name]) {
-                        tooltipInfo[col.name] = [];
-                    }
-                    if (col.name === color.name) {
-                        tooltipInfo[col.name].push(color);
-                    }
-                })
-            });
+        // this.clearChart();
+        // this.drawShort(this.chartConfig.data, this.chartConfig.start, this.chartConfig.end);
+        this.drawTooltip(pageX);
+        document.addEventListener('mousedown', this.clickOutside.bind(this));
 
-            const resultInfo = {};
+    }
 
-            for (const key in tooltipInfo) {
-                const pointsArray = tooltipInfo[key];
-                if (!pointsArray.length) continue;
-                const result = tooltipInfo[key].reduce((sum, current) => {
-                    return sum + current.yPosition;
-                },0);
-
-                //Y position arithmetic average of all points crossing the vertical line
-                const yPos = result / pointsArray.length;
-
-                let y = y0 + (height - y0 - yPos);
-
-                const point = Math.round(y/stepY);
+    clickOutside(event) {
+        if (event.target !== this.canvas) {
+            this.chartConfig.tooltipInfo.node.style.display = 'none';
+            this.drawShort(this.chartConfig.data, this.chartConfig.start, this.chartConfig.end);
+       }
+    }
 
 
-                resultInfo[key] = {
-                    name: key,
-                    // yPosition: Math.round(y * (1/stepY)),
-                    yPosition: point,
-                };
-                console.log(`point`,point);
+    drawTooltip(pageX) {
+        const { ctx } = this;
+        const { x0 } = this.chartConfig.tooltipInfo;
 
-            }
-
-            console.log(`\n`);
-
-            return resultInfo;
-        }
-
-
-        getTooltipInfo(colors, columns, stepY);
-
+        const y0 = 0;
+        const height = 500;
         ctx.beginPath();
         ctx.moveTo(x0, y0);
+
         ctx.lineTo(x0, height);
-        ctx.strokeStyle = 'rgba(100,100,100,0.5)';
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#dfe6eb';
+        ctx.lineWidth = 3;
         ctx.stroke();
+
+        const tooltip = document.querySelector('.tooltip');
+        this.chartConfig.tooltipInfo.node = tooltip;
+        tooltip.style.display = 'block';
+        tooltip.style.left = pageX + 'px';
+        // tooltip.style.left = x0 + 'px';
+
+        // tooltip.innerText = 'dfjjjjjendjenfd' +
+        //     'oewndfoenfoeknfoeknfoekfnoekfmnke' +
+        //     'fnekfmekfmekfmefkemfklm'
+        // const viewChart = document.querySelector('.viewChart');
+        // viewChart.appendChild(tooltip);
+
+        console.log(`this.chartConfig.tooltipInfo`,this.chartConfig.tooltipInfo);
     }
 }
 

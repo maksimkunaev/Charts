@@ -152,3 +152,24 @@ body, html  {
 .swither {
     display: none;
 }
+
+.tooltip {
+    position: absolute;
+    top: 100px;
+    flex-direction: column;
+    padding: 8px 15px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 5px 0 #ccc;
+    font-size: 34px;
+    display: none;
+    background: #fff;
+}
+
+.columns {
+    display: flex;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}

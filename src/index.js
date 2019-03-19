@@ -2,7 +2,7 @@ const Chart = require('./charts');
 const Thumb = require('./thumb');
 
 const chart_data = require('./chart_data');
-const data = chart_data[2];
+const data = chart_data[3];
 
 const shortChart = new Chart('view', data);
 const longChart = new Chart('timeLine', data);
@@ -43,7 +43,7 @@ function switchTheme(theme) {
     } else if (theme === 'day') {
         document.body.style.backgroundColor = 'transparent';
         thumb.classList.remove('thumb-nightTheme');
-        labelText.innerText = 'Switch to Night mode'
+        labelText.innerText = 'Switch to Night mode';
         labelText.style.color = '#000'
     }
 }
