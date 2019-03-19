@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98dc55a7-eeb9-4ed8-a8bb-c3dc22234538" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/charts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/charts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
@@ -19,8 +20,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/charts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="55">
-              <caret line="309" column="47" selection-start-line="309" selection-start-column="47" selection-end-line="309" selection-end-column="47" />
+            <state relative-caret-position="349">
+              <caret line="292" column="39" selection-start-line="292" selection-start-column="39" selection-end-line="292" selection-end-column="39" />
               <folding>
                 <element signature="e#53#101#0" />
                 <element signature="e#122#411#0" />
@@ -191,7 +192,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552980973257" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552994253340" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -238,12 +239,12 @@
       <workItem from="1552653940305" duration="3249000" />
       <workItem from="1552659684349" duration="38615000" />
       <workItem from="1552884816454" duration="10862000" />
-      <workItem from="1552967044070" duration="10680000" />
+      <workItem from="1552967044070" duration="12626000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98988000" />
+    <option name="totallyTimeSpent" value="100934000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="947" extended-state="0" />
@@ -367,13 +368,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="55" column="24" selection-start-line="55" selection-start-column="24" selection-end-line="55" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -404,10 +398,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dist/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="55" column="24" selection-start-line="55" selection-start-column="24" selection-end-line="55" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/charts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="309" column="47" selection-start-line="309" selection-start-column="47" selection-end-line="309" selection-end-column="47" />
+        <state relative-caret-position="349">
+          <caret line="292" column="39" selection-start-line="292" selection-start-column="39" selection-end-line="292" selection-end-column="39" />
           <folding>
             <element signature="e#53#101#0" />
             <element signature="e#122#411#0" />

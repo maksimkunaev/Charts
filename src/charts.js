@@ -290,7 +290,7 @@ class Chart {
                     const { rgbColor } = column;
                     for (const key in rgbColor) {
                         const diff = Math.abs(rgbColor[key]  - rgb[key]);
-                        if (diff > 0.01 * rgbColor[key]) {
+                        if (diff > 0.03 * rgbColor[key]) {
                             return;
                         }
                     }
@@ -324,24 +324,36 @@ class Chart {
             const resultInfo = {};
 
             for (const key in tooltipInfo) {
+                const pointsArray = tooltipInfo[key];
+                if (!pointsArray.length) continue;
                 const result = tooltipInfo[key].reduce((sum, current) => {
                     return sum + current.yPosition;
                 },0);
 
-                const yPos = result / tooltipInfo[key].length;
+                //Y position arithmetic average of all points crossing the vertical line
+                const yPos = result / pointsArray.length;
 
                 let y = y0 + (height - y0 - yPos);
 
+                const point = Math.round(y/stepY);
+
+
                 resultInfo[key] = {
                     name: key,
-                    yPosition: Math.round(y * (1/stepY)),
+                    // yPosition: Math.round(y * (1/stepY)),
+                    yPosition: point,
                 };
+                console.log(`point`,point);
 
             }
+
+            console.log(`\n`);
+
             return resultInfo;
         }
 
-        console.log(`getTooltipInfo`, getTooltipInfo(colors, columns, coefficient, stepY))
+
+        getTooltipInfo(colors, columns, stepY);
 
         ctx.beginPath();
         ctx.moveTo(x0, y0);
