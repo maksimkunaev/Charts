@@ -1,3 +1,4 @@
+const hexToRgb = require('./utils');
 class Chart {
     canvas = null;
 
@@ -32,6 +33,7 @@ class Chart {
 
         this.chartConfig.data = data;
         this.setScreenOptions();
+        this.canvas.addEventListener('click', this.onCanvasClick.bind(this));
     }
 
     setConfig(data, startDate, endDate, view) {
@@ -245,6 +247,126 @@ class Chart {
         this.canvas.width = this.canvasConfig.width;
         this.canvas.height = this.canvasConfig.height + 30;
         document.addEventListener('resize', this.setScreenOptions);
+    }
+
+    onCanvasClick(e) {
+        const { pageX } = e;
+        const { ctx } = this;
+        const { left, width } = this.canvas.getBoundingClientRect();
+
+        const resolution = this.canvas.width / width;
+        const x0 = (pageX - left) * resolution;
+        const y0 = 0;
+        const height = 500;
+        const lineData = this.ctx.getImageData(x0, y0, 1, height)
+        let colors = [];
+
+        const { columns } = this.chartConfig;
+
+        const originalColorsInRgb = columns.map((column, idx) => {
+            const rgbColor = hexToRgb(column.color);
+            return {
+                ...column,
+                rgbColor,
+            }
+        });
+
+        console.log(originalColorsInRgb)
+        lineData.data.map((color, idx)=>{
+            if (color) {
+                let colorPosition = idx % 4;
+                let startColorPoint = idx - colorPosition;
+                // switch (colorPosition) {
+                //     case 0:
+                //     startColorPoint = idx;
+                //         break;
+                //     case 1:
+                //         startColorPoint = idx - 1;
+                //         break;
+                //     case 2:
+                //         startColorPoint = idx - 2;
+                //         break;
+                //     case 3:
+                //         startColorPoint = idx - 3;
+                //         break;
+                // }
+
+                let endColorPoint = startColorPoint + 4;
+                const rgbaArray = lineData.data.slice(startColorPoint, endColorPoint);
+
+                const rgb = {
+                    r: rgbaArray[0],
+                    g: rgbaArray[1],
+                    b: rgbaArray[2],
+                    yPosition: startColorPoint / 4,
+                };
+
+                const rgbColor = 'rgb(' + rgb.r + ', ' + rgb.g +
+                    ', ' + rgb.b + ')';
+
+                const style = ['padding: 1px 10px;',
+                    `background: ${rgbColor};`,
+                    'font: 12px Georgia;',
+                    'color: white;'].join('');
+
+
+
+                // console.log(`rgb`, rgb);
+
+                // columns.forEach((column, idx) => {
+                //     const rgbColor = hexToRgb(column.color);
+                //     // let foundColor = false;
+                //     console.log(`rgbColor`, rgbColor);
+                //     for (const key in rgbColor) {
+                //         console.log(`rgbColor[key]`, rgbColor[key]);
+                //         // if ()
+                //     }
+                //
+                // });
+
+                console.log(`myRgb`,rgb);
+
+                originalColorsInRgb.forEach((column, idx) => {
+                    const { rgbColor } = column;
+                    console.log(`originalRgb`,rgbColor);
+                    // const diff = rgbColor.r  - rgb.r;
+                    for (const key in rgbColor) {
+                        const diff = Math.abs(rgbColor[key]  - rgb[key]);
+                        console.log(`diff`,diff);
+                        if (diff > 0.05 * rgbColor[key]) {
+                            console.log(`not that column`, column);
+                            return;
+                        }
+                    }
+                    console.log(`Found column`, column);
+
+                    const dotColor = {
+                      yPosition: rgb.yPosition,
+                      name: column.name,
+                      color: column.color,
+                    };
+                    colors.push(dotColor)
+                    // if ((rgbColor.r / rgb.r) < rgb.r * 0.1) {
+                    //     console.log(`rgbColor.r / rgb.r---`,rgbColor.r / rgb.r)
+                    // }
+                });
+
+                console.log ( '%c%s', style, '----' );
+                // console.log(`rgb`,rgb);
+                console.log(`\n \n`);
+            }
+        });
+
+        console.log(`colors`, colors)
+
+        ctx.beginPath();
+
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(x0, height);
+        ctx.strokeStyle = 'rgba(100,100,100,0.5)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
     }
 }
 

@@ -2,7 +2,7 @@ const Chart = require('./charts');
 const Thumb = require('./thumb');
 
 const chart_data = require('./chart_data');
-const data = chart_data[1];
+const data = chart_data[4];
 
 const shortChart = new Chart('view', data);
 const longChart = new Chart('timeLine', data);
@@ -28,7 +28,7 @@ const thumb = document.querySelector('.thumb');
 const swithLabel = document.querySelector('.swithLabel');
 const labelText = swithLabel.querySelector('span');
 switcher.addEventListener('change', onChange);
-
+switchTheme('night');
 function onChange({target}) {
     const { checked } = target;
     const theme = checked ? 'night' : 'day';
@@ -48,4 +48,3 @@ function switchTheme(theme) {
     }
 }
 
-switchTheme('day');
