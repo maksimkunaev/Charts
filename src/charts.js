@@ -127,6 +127,11 @@ class Chart {
     }
 
     drawShort(data, startDate, endDate) {
+        console.log(`data`,data)
+        console.log(`startDate`,startDate)
+        console.log(`endDate`,endDate)
+        console.log(`this`,this)
+
         this.setConfig(data, startDate, endDate, 'short');
         this.clearChart();
         this.drawChart();
@@ -317,18 +322,18 @@ class Chart {
             x0,
         };
 
-        // this.clearChart();
-        // this.drawShort(this.chartConfig.data, this.chartConfig.start, this.chartConfig.end);
+        this.clearChart();
+        this.drawShort(this.chartConfig.data, this.chartConfig.columns[0].start,  --this.chartConfig.columns[0].end);//TODO fix
         this.drawTooltip(pageX);
         document.addEventListener('mousedown', this.clickOutside.bind(this));
-
     }
 
     clickOutside(event) {
         if (event.target !== this.canvas) {
             this.chartConfig.tooltipInfo.node.style.display = 'none';
-            this.drawShort(this.chartConfig.data, this.chartConfig.start, this.chartConfig.end);
-       }
+            this.drawShort(this.chartConfig.data, this.chartConfig.columns[0].start,  --this.chartConfig.columns[0].end); //TODO fix
+
+        }
     }
 
 
@@ -336,29 +341,20 @@ class Chart {
         const { ctx } = this;
         const { x0 } = this.chartConfig.tooltipInfo;
 
-        const y0 = 0;
+        const y0 = 150;
         const height = 500;
         ctx.beginPath();
         ctx.moveTo(x0, y0);
 
         ctx.lineTo(x0, height);
-        ctx.strokeStyle = '#dfe6eb';
+        ctx.strokeStyle = 'rgba(223, 230, 235, 0.5)';
         ctx.lineWidth = 3;
         ctx.stroke();
 
         const tooltip = document.querySelector('.tooltip');
         this.chartConfig.tooltipInfo.node = tooltip;
-        tooltip.style.display = 'block';
+        tooltip.style.display = 'flex';
         tooltip.style.left = pageX + 'px';
-        // tooltip.style.left = x0 + 'px';
-
-        // tooltip.innerText = 'dfjjjjjendjenfd' +
-        //     'oewndfoenfoeknfoeknfoekfnoekfmnke' +
-        //     'fnekfmekfmekfmefkemfklm'
-        // const viewChart = document.querySelector('.viewChart');
-        // viewChart.appendChild(tooltip);
-
-        console.log(`this.chartConfig.tooltipInfo`,this.chartConfig.tooltipInfo);
     }
 }
 

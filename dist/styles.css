@@ -155,21 +155,65 @@ body, html  {
 
 .tooltip {
     position: absolute;
-    top: 100px;
+    top: 60px;
     flex-direction: column;
     padding: 8px 15px;
     border-radius: 6px;
     box-shadow: 1px 1px 5px 0 #ccc;
-    font-size: 34px;
+    font-size: 28px;
     display: none;
     background: #fff;
+    transform: translateX(-50%);
+}
+
+.tooltip-nightTheme {
+    background: #253241;
+    box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.7);
+}
+
+.date {
+    margin-bottom: 5px;
 }
 
 .columns {
     display: flex;
+    justify-content: space-between;
+    font-size: 20px;
 }
 
 .column {
     display: flex;
     flex-direction: column;
 }
+
+@media screen and (max-width: 512px) {
+    .tooltip {
+        /*position: absolute;*/
+        /*top: 60px;*/
+        /*flex-direction: column;*/
+        /*border-radius: 6px;*/
+        /*box-shadow: 1px 1px 5px 0 #ccc;*/
+        /*display: none;*/
+        /*background: #fff;*/
+        /*transform: translateX(-50%);*/
+
+        padding: 8px 10px;
+        font-size: 21px;
+    }
+
+    .date {
+        font-size: 19px;
+    }
+
+    .columns {
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+    }
+
+    .column {
+        display: flex;
+        flex-direction: column;
+    }
+}
+

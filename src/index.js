@@ -24,9 +24,10 @@ function drawCharts(data) {
 drawCharts(data);
 
 const switcher = document.querySelector('.swither');
-const thumb = document.querySelector('.thumb');
+const thumbElem = document.querySelector('.thumb');
 const swithLabel = document.querySelector('.swithLabel');
 const labelText = swithLabel.querySelector('span');
+const tooltip = document.querySelector('.tooltip');
 switcher.addEventListener('change', onChange);
 // switchTheme('night');
 function onChange({target}) {
@@ -37,14 +38,18 @@ function onChange({target}) {
 function switchTheme(theme) {
     if (theme === 'night') {
         document.body.style.backgroundColor = '#242f3e';
-        thumb.classList.add('thumb-nightTheme');
+        thumbElem.classList.add('thumb-nightTheme');
         labelText.innerText = 'Switch to Day mode';
-        labelText.style.color = '#35a8f1'
+        labelText.style.color = '#35a8f1';
+        tooltip.classList.add('tooltip-nightTheme');
+
     } else if (theme === 'day') {
         document.body.style.backgroundColor = 'transparent';
-        thumb.classList.remove('thumb-nightTheme');
+        thumbElem.classList.remove('thumb-nightTheme');
         labelText.innerText = 'Switch to Night mode';
-        labelText.style.color = '#000'
+        labelText.style.color = '#000';
+        tooltip.classList.remove('tooltip-nightTheme');
+
     }
 }
 
