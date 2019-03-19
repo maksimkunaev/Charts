@@ -2,15 +2,17 @@ const Chart = require('./charts');
 const Thumb = require('./thumb');
 
 const chart_data = require('./chart_data');
-const data = chart_data[3];
+const data = chart_data[4];
 
 const shortChart = new Chart('view', data);
 const longChart = new Chart('timeLine', data);
 
+const drawShort = shortChart.drawShort;
+
 const configThumb = {
     thumb: '.thumb',
     parent: '.lineChart',
-    method: shortChart.drawShort.bind(shortChart, data),
+    method: drawShort.bind(shortChart, data),
     longChart: longChart,
 };
 
@@ -29,7 +31,7 @@ const swithLabel = document.querySelector('.swithLabel');
 const labelText = swithLabel.querySelector('span');
 const tooltip = document.querySelector('.tooltip');
 switcher.addEventListener('change', onChange);
-// switchTheme('night');
+
 function onChange({target}) {
     const { checked } = target;
     const theme = checked ? 'night' : 'day';
@@ -53,3 +55,67 @@ function switchTheme(theme) {
     }
 }
 
+function switchData(data, drawShort) {
+    const checkboxes = document.createElement('div');
+    checkboxes.classList.add('checkboxes');
+
+    const newData = copyObject(data);
+
+    newData.columns.map((col, idx) => {
+        if (idx === 0) return;
+        const name = col[0];
+        const checkbox = document.createElement('input');
+        const div = document.createElement('div');
+        checkbox.type = 'checkbox';
+        checkbox.classList = 'checkbox';
+
+        const changeData = (name, idx, e)=> {
+
+            const cuttedNames = e.target.checked && [name];
+            const cuttedData = copyObject(newData, cuttedNames, idx);
+            drawShort(cuttedData, 0)
+        };
+
+        checkbox.style.display = 'none';
+        checkbox.addEventListener('change', changeData.bind(window, name, idx));
+        const label = document.createElement('label');
+        const text = document.createTextNode(name);
+
+        div.classList = 'custom-checkbox';
+        label.appendChild(checkbox);
+        label.appendChild(div);
+        label.appendChild(text);
+        checkboxes.appendChild(label);
+    });
+
+    document.body.appendChild(checkboxes)
+}
+
+
+
+function copyObject(data, names, idx) {
+    let newData = {};
+
+    for (const key in data) {
+        if (typeof data[key] === 'object') {
+            newData[key] = {
+                ...data[key],
+            }
+        }
+
+        if (data[key].slice) {
+            newData[key] = data[key].slice();
+        }
+    }
+
+    if (names && names.length) {
+        names.forEach(() => {
+            newData.columns.splice(idx,1);
+        });
+    }
+
+
+    return newData;
+}
+
+switchData(data, drawShort.bind(shortChart));

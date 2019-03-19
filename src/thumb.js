@@ -11,6 +11,7 @@ class Thumb {
         stepY: 0,
     };
 
+
     renderMethod = () => {};
 
     constructor(config, data) {

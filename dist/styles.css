@@ -119,12 +119,11 @@ body, html  {
 }
 
 .swithLabel {
-    width: 240px;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    position: absolute;
+    position: relative;
     bottom: 0;
     margin: 50px auto;
     left: 50%;
@@ -206,5 +205,33 @@ body, html  {
         display: flex;
         flex-direction: column;
     }
+}
+
+
+.checkboxes label {
+    padding: 3px 5px;
+    border: 1px solid #34455678;
+    flex-direction: row;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 13px;
+    margin-right: 4px;
+}
+
+.checkboxes div {
+    border: 1px solid #34455678;
+    border-radius: 50%;
+
+    width: 20px;
+    background: rebeccapurple;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.checkbox:checked + .custom-checkbox {
+    background: white;
 }
 
