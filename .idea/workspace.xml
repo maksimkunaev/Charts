@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98dc55a7-eeb9-4ed8-a8bb-c3dc22234538" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/charts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/charts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
@@ -17,32 +16,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/charts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="330" lean-forward="true" selection-start-line="330" selection-end-line="330" />
+            <state relative-caret-position="55">
+              <caret line="309" column="47" selection-start-line="309" selection-start-column="47" selection-end-line="309" selection-end-column="47" />
               <folding>
                 <element signature="e#53#101#0" />
                 <element signature="e#122#411#0" />
                 <element signature="n#!!block;n#constructor#0;n#Chart#0" />
-                <element signature="n#!!block;n#setConfig#0;n#Chart#0" />
-                <element signature="e#1104#3064#0" />
                 <element signature="e#1310#1382#0" />
                 <element signature="e#1388#1457#0" />
                 <element signature="e#1499#1827#0" />
                 <element signature="e#1530#1619#0" />
                 <element signature="e#1637#1716#0" />
                 <element signature="e#1734#1813#0" />
-                <element signature="e#2113#2239#0" />
                 <element signature="e#2511#3052#0" />
                 <element signature="e#2556#2988#0" />
                 <element signature="e#2597#2799#0" />
                 <element signature="n#!!block;n#drawShort#0;n#Chart#0" />
                 <element signature="n#!!block;n#drawLong#0;n#Chart#0" />
-                <element signature="n#!!block;n#drawChart#0;n#Chart#0" />
-                <element signature="e#3865#4667#0" />
-                <element signature="e#3982#4560#0" />
                 <element signature="e#4368#4546#0" />
                 <element signature="e#4423#4526#0" />
                 <element signature="n#!!block;n#drawHorizontalLines#0;n#Chart#0" />
@@ -57,9 +50,6 @@
                 <element signature="e#7733#8110#0" />
                 <element signature="e#7792#7859#0" />
                 <element signature="e#8616#8798#0" />
-                <element signature="e#10090#10138#0" />
-                <element signature="e#10277#10333#0" />
-                <element signature="e#10524#10637#0" />
               </folding>
             </state>
           </provider>
@@ -86,7 +76,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/thumb.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
+            <state relative-caret-position="31">
               <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
               <folding>
                 <element signature="e#2481#2834#0" />
@@ -101,10 +91,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
+            <state relative-caret-position="28">
               <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
             </state>
           </provider>
@@ -134,8 +124,8 @@
     <findStrings>
       <find>h3</find>
       <find>max</find>
-      <find>height</find>
       <find>addEv</find>
+      <find>height</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -157,8 +147,8 @@
         <option value="$PROJECT_DIR$/dist/styles.css" />
         <option value="$PROJECT_DIR$/dist/index.html" />
         <option value="$PROJECT_DIR$/src/utils.js" />
-        <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/charts.js" />
+        <option value="$PROJECT_DIR$/src/index.js" />
       </list>
     </option>
   </component>
@@ -201,7 +191,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552979763928" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552980973257" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -248,18 +238,18 @@
       <workItem from="1552653940305" duration="3249000" />
       <workItem from="1552659684349" duration="38615000" />
       <workItem from="1552884816454" duration="10862000" />
-      <workItem from="1552967044070" duration="9439000" />
+      <workItem from="1552967044070" duration="10680000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97747000" />
+    <option name="totallyTimeSpent" value="98988000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="947" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49707603" visible="true" weight="0.21550672" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49707603" weight="0.21550672" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -370,22 +360,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/thumb.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
-          <folding>
-            <element signature="e#2481#2834#0" />
-            <element signature="e#2867#2975#0" />
-            <element signature="n#!!block;n#getCoords#0;n#Thumb#0" />
-            <element signature="e#4837#4962#0" />
-            <element signature="n#!!block;n#initTouchEvents#0;n#Thumb#0" />
-            <element signature="n#!!block;n#touchHandler#0;n#!!block;n#initTouchEvents#0;n#Thumb#0" />
-            <element signature="e#5517#5665#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/styles.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1305">
@@ -414,38 +388,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
+    <entry file="file://$PROJECT_DIR$/src/thumb.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+        <state relative-caret-position="31">
+          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
+          <folding>
+            <element signature="e#2481#2834#0" />
+            <element signature="e#2867#2975#0" />
+            <element signature="n#!!block;n#getCoords#0;n#Thumb#0" />
+            <element signature="e#4837#4962#0" />
+            <element signature="n#!!block;n#initTouchEvents#0;n#Thumb#0" />
+            <element signature="n#!!block;n#touchHandler#0;n#!!block;n#initTouchEvents#0;n#Thumb#0" />
+            <element signature="e#5517#5665#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/charts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="330" lean-forward="true" selection-start-line="330" selection-end-line="330" />
+        <state relative-caret-position="55">
+          <caret line="309" column="47" selection-start-line="309" selection-start-column="47" selection-end-line="309" selection-end-column="47" />
           <folding>
             <element signature="e#53#101#0" />
             <element signature="e#122#411#0" />
             <element signature="n#!!block;n#constructor#0;n#Chart#0" />
-            <element signature="n#!!block;n#setConfig#0;n#Chart#0" />
-            <element signature="e#1104#3064#0" />
             <element signature="e#1310#1382#0" />
             <element signature="e#1388#1457#0" />
             <element signature="e#1499#1827#0" />
             <element signature="e#1530#1619#0" />
             <element signature="e#1637#1716#0" />
             <element signature="e#1734#1813#0" />
-            <element signature="e#2113#2239#0" />
             <element signature="e#2511#3052#0" />
             <element signature="e#2556#2988#0" />
             <element signature="e#2597#2799#0" />
             <element signature="n#!!block;n#drawShort#0;n#Chart#0" />
             <element signature="n#!!block;n#drawLong#0;n#Chart#0" />
-            <element signature="n#!!block;n#drawChart#0;n#Chart#0" />
-            <element signature="e#3865#4667#0" />
-            <element signature="e#3982#4560#0" />
             <element signature="e#4368#4546#0" />
             <element signature="e#4423#4526#0" />
             <element signature="n#!!block;n#drawHorizontalLines#0;n#Chart#0" />
@@ -460,10 +437,14 @@
             <element signature="e#7733#8110#0" />
             <element signature="e#7792#7859#0" />
             <element signature="e#8616#8798#0" />
-            <element signature="e#10090#10138#0" />
-            <element signature="e#10277#10333#0" />
-            <element signature="e#10524#10637#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
         </state>
       </provider>
     </entry>

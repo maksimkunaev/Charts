@@ -261,7 +261,7 @@ class Chart {
         const lineData = this.ctx.getImageData(x0, y0, 1, height)
         let colors = [];
 
-        const { columns } = this.chartConfig;
+        const { columns, stepY } = this.chartConfig;
 
         const originalColorsInRgb = columns.map((column, idx) => {
             const rgbColor = hexToRgb(column.color);
@@ -305,35 +305,43 @@ class Chart {
             }
         });
 
-        const tooltipInfo = {};
+        const coefficient = this.canvasConfig.width / this.canvas.getBoundingClientRect().width;
 
-        colors.forEach(color=>{
-            columns.forEach((col, idx) => {
-                if (!tooltipInfo[col.name]) {
-                    tooltipInfo[col.name] = [];
-                }
-                if (col.name === color.name) {
-                    tooltipInfo[col.name].push(color);
-                }
-            })
-        });
+        function getTooltipInfo(colors, columns, stepY) {
+            const tooltipInfo = {};
 
-        const resultInfo = {};
+            colors.forEach(color=>{
+                columns.forEach((col, idx) => {
+                    if (!tooltipInfo[col.name]) {
+                        tooltipInfo[col.name] = [];
+                    }
+                    if (col.name === color.name) {
+                        tooltipInfo[col.name].push(color);
+                    }
+                })
+            });
 
-        for (const key in tooltipInfo) {
-            const result = tooltipInfo[key].reduce((sum, current) => {
-                return sum + current.yPosition;
-            },0);
+            const resultInfo = {};
 
-            const yPos = result / tooltipInfo[key].length;
+            for (const key in tooltipInfo) {
+                const result = tooltipInfo[key].reduce((sum, current) => {
+                    return sum + current.yPosition;
+                },0);
 
-            resultInfo[key] = {
-                name: key,
-                yPosition: yPos,
+                const yPos = result / tooltipInfo[key].length;
+
+                let y = y0 + (height - y0 - yPos);
+
+                resultInfo[key] = {
+                    name: key,
+                    yPosition: Math.round(y * (1/stepY)),
+                };
+
             }
+            return resultInfo;
         }
 
-        console.log(`resultInfo`, resultInfo)
+        console.log(`getTooltipInfo`, getTooltipInfo(colors, columns, coefficient, stepY))
 
         ctx.beginPath();
         ctx.moveTo(x0, y0);
