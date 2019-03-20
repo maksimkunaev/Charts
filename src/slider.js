@@ -26,6 +26,17 @@ class Slider {
         this.makeDraggable();
         this.initTouchEvents();
         this.slider.style.left = Slider.getCoords(this.parent).right - Slider.getCoords(this.slider).width - Slider.getCoords(this.parent).left + 'px';//move slider to right side of its parent
+        this.callChartRender();
+    }
+
+    callChartRender() {
+        const parentCoords = Slider.getCoords(this.parent);
+
+        const { left: l, right } = Slider.getCoords(this.slider);
+        const from = Math.floor(( l / parentCoords.width ) * this.data.length);
+        const to = Math.ceil(( right / parentCoords.width ) * this.data.length);
+        this.renderMethod(from <= 0 ? 1 : from, to) //TODO calc 0
+        console.log(`from to`, from, to)
     }
 
     onMouseDown(event) {
@@ -63,11 +74,7 @@ class Slider {
             this.sliderConfig.right = right;
             this.setStyle();
 
-            const sliderLeft = event.pageX - shiftX;
-
-            const from = Math.floor(( sliderLeft / parentCoords.width ) * this.data.length);
-            const to = Math.ceil(( right / parentCoords.width ) * this.data.length);
-            this.renderMethod(from <= 0 ? 1 : from, to) //TODO calc 0
+            this.callChartRender();
         };
 
         let resize = event => {
@@ -87,10 +94,7 @@ class Slider {
                 this.sliderConfig.width = width + diffWidth;
             }
 
-            const { left: l, right } = Slider.getCoords(this.slider);
-            const from = Math.floor(( l / parentCoords.width ) * this.data.length);
-            const to = Math.ceil(( right / parentCoords.width ) * this.data.length);
-            this.renderMethod(from <= 0 ? 1 : from, to) //TODO calc 0
+            this.callChartRender();
         };
 
         const border =  (this.slider.offsetWidth - this.slider.clientWidth) / 2;
@@ -110,6 +114,10 @@ class Slider {
         const onMouseMove = event => {
             event.preventDefault();
             handlerFunction(event);
+
+            requestAnimationFrame(() => {
+                handlerFunction(event);
+            })
         };
 
         const onMouseUp = event => {
@@ -119,11 +127,7 @@ class Slider {
             this.slider.removeEventListener('mouseup',onMouseUp);
         };
 
-        this.slider.addEventListener('mousemove',(e) => {
-            requestAnimationFrame(() => {
-                onMouseMove.call(this, e);
-            })
-        });
+        this.slider.addEventListener('mousemove',onMouseMove);
         this.slider.addEventListener('mouseup',onMouseUp)
     }
 

@@ -2,7 +2,7 @@ const Chart = require('./charts');
 const Slider = require('./slider');
 
 const chart_data = require('./chart_data');
-const data = chart_data[3];
+const data = chart_data[1];
 
 const shortChart = new Chart('view', data);
 const longChart = new Chart('timeLine', data);
@@ -20,7 +20,7 @@ const configSlider = {
 new Slider(configSlider, data);
 
 function drawCharts(data) {
-    shortChart.drawShort(data,0);
+    // shortChart.drawShort(data,0);
     longChart.drawLong(data,0);
 }
 
