@@ -177,7 +177,7 @@ class Chart {
         columns.forEach(draw);
     }
 
-    swithcData(isVisible) {
+    switchData(isVisible) {
         this.chartConfig.isVisible = isVisible;
         this.drawShort(this.chartConfig.data, this.chartConfig.columns[0].start,  --this.chartConfig.columns[0].end);//TODO fix
     }

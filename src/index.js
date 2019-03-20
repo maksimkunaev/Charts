@@ -30,6 +30,8 @@ const thumbElem = document.querySelector('.thumb');
 const swithLabel = document.querySelector('.swithLabel');
 const labelText = swithLabel.querySelector('span');
 const tooltip = document.querySelector('.tooltip');
+const checkboxes = document.querySelector('.checkboxes');
+
 switcher.addEventListener('change', onChange);
 
 function onChange({target}) {
@@ -56,44 +58,42 @@ function switchTheme(theme) {
 }
 
 function switchData(data) {
-    const checkboxes = document.createElement('div');
-    checkboxes.classList.add('checkboxes');
 
-    const isVisible = [];
+    const changeData = (name, idx, e)=> {
+        config[idx].isVisible = e.target.checked;
+        shortChart.switchData(config);
+    };
+
+    const config = [];
     data.columns.map((col, idx) => {
         if (idx === 0) return;
         const name = col[0];
-        const checkbox = document.createElement('input');
-        const div = document.createElement('div');
-        checkbox.type = 'checkbox';
-        checkbox.classList = 'checkbox';
-        checkbox.checked = true;
 
-        const changeData = (name, idx, e)=> {
-
-            isVisible[idx].isVisible = e.target.checked;
-
-            shortChart.swithcData(isVisible);
-        };
-
-        checkbox.style.display = 'none';
-        checkbox.addEventListener('change', changeData.bind(window, name, idx - 1));
-        const label = document.createElement('label');
-        const text = document.createTextNode(name);
-
-        div.classList = 'custom-checkbox';
-        label.appendChild(checkbox);
-        label.appendChild(div);
-        label.appendChild(text);
-        checkboxes.appendChild(label);
-
-        isVisible.push({
-            isVisible: true,
-            idx: idx - 1,
-        });
+        createCheckbox(name, idx, config, changeData, checkboxes);
     });
-
-    document.body.appendChild(checkboxes)
 }
 
 switchData(data, drawShort.bind(shortChart));
+
+function createCheckbox(name, idx, config, onChange, parent) {
+    const checkbox = document.createElement('input');
+    const div = document.createElement('div');
+    checkbox.type = 'checkbox';
+    checkbox.classList = 'checkbox';
+    checkbox.checked = true;
+    checkbox.style.display = 'none';
+    checkbox.addEventListener('change', onChange.bind(window, name, idx - 1));
+    const label = document.createElement('label');
+    const text = document.createTextNode(name);
+
+    div.classList = 'custom-checkbox';
+    label.appendChild(checkbox);
+    label.appendChild(div);
+    label.appendChild(text);
+    parent.appendChild(label);
+
+    config.push({
+        isVisible: true,
+        idx: idx - 1,
+    });
+}
