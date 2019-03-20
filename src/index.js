@@ -2,7 +2,7 @@ const Chart = require('./charts');
 const Slider = require('./slider');
 
 const chart_data = require('./chart_data');
-const data = chart_data[1];
+const data = chart_data[4];
 
 const shortChart = new Chart('view', data);
 const longChart = new Chart('timeLine', data);
@@ -72,14 +72,18 @@ function switchTheme(mode) {
     } else if (mode === 'day') {
         sliderElem.classList.remove(nightTheme.sliderElem);
         tooltip.classList.remove(nightTheme.tooltip);
-
     }
 }
 
 function switchData(data) {
 
-    const changeData = (name, idx, e)=> {
-        config[idx].isVisible = e.target.checked;
+    const changeData = (name, idx, color, e)=> {
+        const { checked } = e.target;
+        const parent = e.target.parentNode;
+        const customCheckbox = parent.querySelector('.custom-checkbox');
+
+        config[idx].isVisible = checked;
+        customCheckbox.style.background = checked ? color : 'transparent';
         shortChart.switchData(config);
     };
 
@@ -87,25 +91,29 @@ function switchData(data) {
     data.columns.map((col, idx) => {
         if (idx === 0) return;
         const name = col[0];
+        const color = data.colors[name];
 
-        createCheckbox(name, idx, config, changeData, checkboxes);
+        createCheckbox(name, idx, config, changeData, checkboxes, color);
     });
 }
 
 switchData(data, drawShort.bind(shortChart));
 
-function createCheckbox(name, idx, config, onChange, parent) {
+function createCheckbox(name, idx, config, onChange, parent, color) {
     const checkbox = document.createElement('input');
     const div = document.createElement('div');
+    const label = document.createElement('label');
+    const text = document.createTextNode(name);
+
     checkbox.type = 'checkbox';
     checkbox.className = 'checkbox';
     checkbox.checked = true;
     checkbox.style.display = 'none';
-    checkbox.addEventListener('change', onChange.bind(window, name, idx - 1));
-    const label = document.createElement('label');
-    const text = document.createTextNode(name);
+    checkbox.addEventListener('change', onChange.bind(window, name, idx - 1, color));
 
     div.className = 'custom-checkbox';
+    div.style.backgroundColor = color;
+
     label.appendChild(checkbox);
     label.appendChild(div);
     label.appendChild(text);
