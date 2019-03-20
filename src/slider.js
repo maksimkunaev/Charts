@@ -113,8 +113,6 @@ class Slider {
 
         const onMouseMove = event => {
             event.preventDefault();
-            handlerFunction(event);
-
             requestAnimationFrame(() => {
                 handlerFunction(event);
             })
@@ -181,7 +179,6 @@ class Slider {
                 false, false, false, 0, null);
 
             touch.target.dispatchEvent(simulatedEvent);
-            // event.preventDefault();
         }
 
         document.addEventListener("touchstart", touchHandler, true);

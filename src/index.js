@@ -2,7 +2,7 @@ const Chart = require('./charts');
 const Slider = require('./slider');
 
 const chart_data = require('./chart_data');
-const data = chart_data[1];
+const data = chart_data[0];
 
 const shortChart = new Chart('view', data);
 const longChart = new Chart('timeLine', data);
@@ -20,7 +20,6 @@ const configSlider = {
 new Slider(configSlider, data);
 
 function drawCharts(data) {
-    // shortChart.drawShort(data,0);
     longChart.drawLong(data,0);
 }
 
@@ -39,16 +38,16 @@ const theme = {
     day: {
         body: 'transparent',
         sliderElem: 'slider',
-        labelText: 'Switch to Night mode',
-        label: '#000',
+        labelText: 'Switch to Night Mode',
         tooltip: 'tooltip',
+        checkboxes: '#000',
     },
     night: {
         body: '#242f3e',
         sliderElem: 'slider-nightTheme',
-        labelText: 'Switch to Day mode',
-        label: '#35a8f1',
+        labelText: 'Switch to Day Mode',
         tooltip: 'tooltip-nightTheme',
+        checkboxes: '#fff',
     }
 };
 
@@ -63,7 +62,7 @@ function switchTheme(mode) {
 
     document.body.style.backgroundColor = newTheme.body;
     labelText.innerText = newTheme.labelText;
-    labelText.style.color = newTheme.label;
+    checkboxes.style.color = newTheme.checkboxes;
 
     if (mode === 'night') {
         sliderElem.classList.add(nightTheme.sliderElem);

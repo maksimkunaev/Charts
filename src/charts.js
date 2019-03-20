@@ -386,6 +386,7 @@ class Chart {
         const spanName = document.createElement('span');
         spanValue.textContent = data.yPosition;
         spanName.textContent = data.name;
+        spanName.style.textTransform = 'uppercase';
         column.classList.add('column');
         column.style.color = data.color;
         column.appendChild(spanValue);
