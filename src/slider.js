@@ -1,23 +1,21 @@
-class Thumb {
-    thumb = null;
+class Slider {
+    slider = null;
     parent = null;
-
     data = [];
 
-    thumbConfig = {
+    sliderConfig = {
         width: 15,
         left: 0,
         right: 15,
         stepY: 0,
     };
 
-
     renderMethod = () => {};
 
     constructor(config, data) {
-        const { thumb, parent, method } = config;
+        const { slider, parent, method } = config;
 
-        this.thumb = document.querySelector(thumb);
+        this.slider = document.querySelector(slider);
         this.parent = document.querySelector(parent);
         this.data = data.columns[0];
 
@@ -27,24 +25,24 @@ class Thumb {
         this.setStyle();
         this.makeDraggable();
         this.initTouchEvents();
-        this.thumb.style.left = Thumb.getCoords(this.parent).right - Thumb.getCoords(this.thumb).width - Thumb.getCoords(this.parent).left + 'px';//move thumb to right side of its parent
+        this.slider.style.left = Slider.getCoords(this.parent).right - Slider.getCoords(this.slider).width - Slider.getCoords(this.parent).left + 'px';//move slider to right side of its parent
     }
 
     onMouseDown(event) {
         event.preventDefault();
-        const thumbCoords = Thumb.getCoords(this.thumb);
+        const sliderCoords = Slider.getCoords(this.slider);
 
         //Click on pseudo elements are not processed
-        if (event.pageX < thumbCoords.left || event.pageX >= thumbCoords.right) {
+        if (event.pageX < sliderCoords.left || event.pageX >= sliderCoords.right) {
             return;
         }
 
-        const parentCoords = Thumb.getCoords(this.parent);
-        const shiftX = event.pageX - thumbCoords.left;
+        const parentCoords = Slider.getCoords(this.parent);
+        const shiftX = event.pageX - sliderCoords.left;
 
         let handlerFunction = () => {};
         let direction = '';
-        let width = thumbCoords.width;
+        let width = sliderCoords.width;
 
         const moveAt = event => {
 
@@ -53,21 +51,21 @@ class Thumb {
                 newLeft = 0;
             }
 
-            const rightEdge = this.parent.offsetWidth - this.thumb.offsetWidth;
+            const rightEdge = this.parent.offsetWidth - this.slider.offsetWidth;
             if (newLeft > rightEdge) {
                 newLeft = rightEdge;
             }
-            this.thumb.style.left = newLeft + 'px';
+            this.slider.style.left = newLeft + 'px';
 
-            const left = this.thumb.style.left.split('px')[0];
-            const right = newLeft + this.thumb.offsetWidth;
-            this.thumbConfig.left = left;
-            this.thumbConfig.right = right;
+            const left = this.slider.style.left.split('px')[0];
+            const right = newLeft + this.slider.offsetWidth;
+            this.sliderConfig.left = left;
+            this.sliderConfig.right = right;
             this.setStyle();
 
-            const thumbLeft = event.pageX - shiftX;
+            const sliderLeft = event.pageX - shiftX;
 
-            const from = Math.floor(( thumbLeft / parentCoords.width ) * this.data.length);
+            const from = Math.floor(( sliderLeft / parentCoords.width ) * this.data.length);
             const to = Math.ceil(( right / parentCoords.width ) * this.data.length);
             this.renderMethod(from <= 0 ? 1 : from, to) //TODO calc 0
         };
@@ -75,31 +73,31 @@ class Thumb {
         let resize = event => {
             let newLeft = event.pageX - shiftX - parentCoords.left;
 
-            const left = this.thumb.style.left.split('px')[0];
+            const left = this.slider.style.left.split('px')[0];
 
             const diffWidth = newLeft - left;
             if (direction === 'left') {
-                const left = this.thumb.style.left.split('px')[0];
-                const width = this.thumb.style.width.split('px')[0];
-                this.thumbConfig.width = +width - diffWidth + 'px';
-                this.thumb.style.width = +width - diffWidth + 'px';
-                this.thumb.style.left = +left + diffWidth + 'px';
+                const left = this.slider.style.left.split('px')[0];
+                const width = this.slider.style.width.split('px')[0];
+                this.sliderConfig.width = +width - diffWidth + 'px';
+                this.slider.style.width = +width - diffWidth + 'px';
+                this.slider.style.left = +left + diffWidth + 'px';
             } else if (direction === 'right') {
                 this.setStyle();
-                this.thumbConfig.width = width + diffWidth;
+                this.sliderConfig.width = width + diffWidth;
             }
 
-            const { left: l, right } = Thumb.getCoords(this.thumb);
+            const { left: l, right } = Slider.getCoords(this.slider);
             const from = Math.floor(( l / parentCoords.width ) * this.data.length);
             const to = Math.ceil(( right / parentCoords.width ) * this.data.length);
             this.renderMethod(from <= 0 ? 1 : from, to) //TODO calc 0
         };
 
-        const border =  (this.thumb.offsetWidth - this.thumb.clientWidth) / 2;
-        if (event.pageX >=thumbCoords.left && event.pageX <= (thumbCoords.left + border)) {
+        const border =  (this.slider.offsetWidth - this.slider.clientWidth) / 2;
+        if (event.pageX >=sliderCoords.left && event.pageX <= (sliderCoords.left + border)) {
             handlerFunction = resize;
             direction = 'left';
-        } else if (event.pageX >=thumbCoords.right - border && event.pageX <=thumbCoords.right) {
+        } else if (event.pageX >=sliderCoords.right - border && event.pageX <=sliderCoords.right) {
             handlerFunction = resize;
             direction = 'right';
         } else {
@@ -107,7 +105,7 @@ class Thumb {
         }
 
         handlerFunction(event);
-        this.thumb.style.zIndex = '1000';
+        this.slider.style.zIndex = '1000';
 
         const onMouseMove = event => {
             event.preventDefault();
@@ -118,23 +116,23 @@ class Thumb {
         const onMouseUp = event => {
             event.preventDefault();
 
-            this.thumb.removeEventListener('mousemove',onMouseMove);
-            this.thumb.removeEventListener('mouseup',onMouseUp);
+            this.slider.removeEventListener('mousemove',onMouseMove);
+            this.slider.removeEventListener('mouseup',onMouseUp);
         };
 
-        this.thumb.addEventListener('mousemove',onMouseMove);
-        this.thumb.addEventListener('mouseup',onMouseUp)
+        this.slider.addEventListener('mousemove',onMouseMove);
+        this.slider.addEventListener('mouseup',onMouseUp)
     }
 
     setConfig({ longChart }) {
-        const parentCoords = Thumb.getCoords(this.parent);
+        const parentCoords = Slider.getCoords(this.parent);
         const dayWidth = parentCoords.width / this.data.length < 15 ? 15 : parentCoords.width / this.data.length;
-        const thumbWidth =  10 * dayWidth;
+        const sliderWidth =  10 * dayWidth;
 
-        this.thumbConfig = {
-            width: thumbWidth,
+        this.sliderConfig = {
+            width: sliderWidth,
             left: 0,
-            right: thumbWidth,
+            right: sliderWidth,
             stepY: longChart.chartConfig.stepY,
         };
     }
@@ -150,15 +148,15 @@ class Thumb {
     }
 
     setStyle() {
-        const { width, left, right } = this.thumbConfig;
-        this.thumb.style.width = width + 'px';
+        const { width } = this.sliderConfig;
+        this.slider.style.width = width + 'px';
     }
 
     makeDraggable() {
-        this.thumb.ondragstart = function() {
+        this.slider.ondragstart = function() {
             return false;
         };
-        this.thumb.addEventListener('mousedown',this.onMouseDown.bind(this));
+        this.slider.addEventListener('mousedown',this.onMouseDown.bind(this));
     }
 
     initTouchEvents() {
@@ -186,4 +184,4 @@ class Thumb {
     }
 }
 
-module.exports = Thumb;
+module.exports = Slider;

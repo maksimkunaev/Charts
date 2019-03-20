@@ -1,5 +1,5 @@
 const Chart = require('./charts');
-const Thumb = require('./thumb');
+const Slider = require('./slider');
 
 const chart_data = require('./chart_data');
 const data = chart_data[1];
@@ -9,14 +9,15 @@ const longChart = new Chart('timeLine', data);
 
 const drawShort = shortChart.drawShort;
 
-const configThumb = {
-    thumb: '.thumb',
+const configSlider = {
+    slider: '.slider',
     parent: '.lineChart',
     method: drawShort.bind(shortChart, data),
     longChart: longChart,
 };
 
-const thumb = new Thumb(configThumb, data);
+//init draggable slider
+new Slider(configSlider, data);
 
 function drawCharts(data) {
     shortChart.drawShort(data,0);
@@ -25,34 +26,52 @@ function drawCharts(data) {
 
 drawCharts(data);
 
-const switcher = document.querySelector('.swither');
-const thumbElem = document.querySelector('.thumb');
-const swithLabel = document.querySelector('.swithLabel');
-const labelText = swithLabel.querySelector('span');
+const switcher = document.querySelector('.switcher');
+const sliderElem = document.querySelector('.slider');
+const switchLabel = document.querySelector('.switchLabel');
+const labelText = switchLabel.querySelector('span');
 const tooltip = document.querySelector('.tooltip');
 const checkboxes = document.querySelector('.checkboxes');
 
 switcher.addEventListener('change', onChange);
+
+const theme = {
+    day: {
+        body: 'transparent',
+        sliderElem: 'slider',
+        labelText: 'Switch to Night mode',
+        label: '#000',
+        tooltip: 'tooltip',
+    },
+    night: {
+        body: '#242f3e',
+        sliderElem: 'slider-nightTheme',
+        labelText: 'Switch to Day mode',
+        label: '#35a8f1',
+        tooltip: 'tooltip-nightTheme',
+    }
+};
 
 function onChange({target}) {
     const { checked } = target;
     const theme = checked ? 'night' : 'day';
     switchTheme(theme);
 }
-function switchTheme(theme) {
-    if (theme === 'night') {
-        document.body.style.backgroundColor = '#242f3e';
-        thumbElem.classList.add('thumb-nightTheme');
-        labelText.innerText = 'Switch to Day mode';
-        labelText.style.color = '#35a8f1';
-        tooltip.classList.add('tooltip-nightTheme');
+function switchTheme(mode) {
+    let newTheme = theme[mode];
+    let nightTheme = theme.night;
 
-    } else if (theme === 'day') {
-        document.body.style.backgroundColor = 'transparent';
-        thumbElem.classList.remove('thumb-nightTheme');
-        labelText.innerText = 'Switch to Night mode';
-        labelText.style.color = '#000';
-        tooltip.classList.remove('tooltip-nightTheme');
+    document.body.style.backgroundColor = newTheme.body;
+    labelText.innerText = newTheme.labelText;
+    labelText.style.color = newTheme.label;
+
+    if (mode === 'night') {
+        sliderElem.classList.add(nightTheme.sliderElem);
+        tooltip.classList.add(nightTheme.tooltip);
+
+    } else if (mode === 'day') {
+        sliderElem.classList.remove(nightTheme.sliderElem);
+        tooltip.classList.remove(nightTheme.tooltip);
 
     }
 }
@@ -79,14 +98,14 @@ function createCheckbox(name, idx, config, onChange, parent) {
     const checkbox = document.createElement('input');
     const div = document.createElement('div');
     checkbox.type = 'checkbox';
-    checkbox.classList = 'checkbox';
+    checkbox.className = 'checkbox';
     checkbox.checked = true;
     checkbox.style.display = 'none';
     checkbox.addEventListener('change', onChange.bind(window, name, idx - 1));
     const label = document.createElement('label');
     const text = document.createTextNode(name);
 
-    div.classList = 'custom-checkbox';
+    div.className = 'custom-checkbox';
     label.appendChild(checkbox);
     label.appendChild(div);
     label.appendChild(text);
