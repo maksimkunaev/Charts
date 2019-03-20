@@ -142,7 +142,7 @@ body, html  {
 }
 @media screen and (max-width: 512px) {
     .switchLabel {
-        margin: 15px auto;
+        margin: 10px auto 5px;
     }
 }
 
