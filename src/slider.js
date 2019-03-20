@@ -109,7 +109,6 @@ class Slider {
 
         const onMouseMove = event => {
             event.preventDefault();
-
             handlerFunction(event);
         };
 
@@ -120,7 +119,11 @@ class Slider {
             this.slider.removeEventListener('mouseup',onMouseUp);
         };
 
-        this.slider.addEventListener('mousemove',onMouseMove);
+        this.slider.addEventListener('mousemove',(e) => {
+            requestAnimationFrame(() => {
+                onMouseMove.call(this, e);
+            })
+        });
         this.slider.addEventListener('mouseup',onMouseUp)
     }
 
