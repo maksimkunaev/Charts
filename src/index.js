@@ -2,7 +2,7 @@ const Chart = require('./charts');
 const Slider = require('./slider');
 
 const chart_data = require('./chart_data');
-const data = chart_data[4];
+const data = chart_data[3];
 
 const shortChart = new Chart('view', data);
 const longChart = new Chart('timeLine', data);
@@ -83,7 +83,7 @@ function switchData(data) {
         const customCheckbox = parent.querySelector('.custom-checkbox');
 
         config[idx].isVisible = checked;
-        customCheckbox.style.background = checked ? color : 'transparent';
+        customCheckbox.style.backgroundColor = checked ? color : 'transparent';
         shortChart.switchData(config);
     };
 
@@ -104,7 +104,6 @@ function createCheckbox(name, idx, config, onChange, parent, color) {
     const div = document.createElement('div');
     const label = document.createElement('label');
     const text = document.createTextNode(name);
-
     checkbox.type = 'checkbox';
     checkbox.className = 'checkbox';
     checkbox.checked = true;
