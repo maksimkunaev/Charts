@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98dc55a7-eeb9-4ed8-a8bb-c3dc22234538" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/charts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/charts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,24 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/charts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="178" selection-start-line="178" selection-end-line="178" />
-              <folding>
-                <element signature="n#!!block;n#constructor#0;n#Chart#0" />
-                <element signature="n#!!block;n#setConfig#0;n#Chart#0" />
-                <element signature="n#!!block;n#drawShort#0;n#Chart#0" />
-                <element signature="n#!!block;n#drawLong#0;n#Chart#0" />
-                <element signature="n#!!block;n#drawChart#0;n#Chart#0" />
-                <element signature="n#!!block;n#drawHorizontalLines#0;n#Chart#0" />
-                <element signature="n#!!block;n#drawDateCoords#0;n#Chart#0" />
-                <element signature="n#!!block;n#clearChart#0;n#Chart#0" />
-                <element signature="n#!!block;n#setScreenOptions#0;n#Chart#0" />
-                <element signature="n#!!block;n#onCanvasClick#0;n#Chart#0" />
-                <element signature="n#!!block;n#clickOutside#0;n#Chart#0" />
-              </folding>
+            <state relative-caret-position="628">
+              <caret line="405" column="24" selection-start-line="405" selection-start-column="24" selection-end-line="405" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -63,7 +47,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="795">
@@ -72,6 +56,15 @@
                 <element signature="n#!!block;n#onChange#0" />
                 <element signature="n#!!block;n#switchTheme#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/chart_data.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="36" selection-start-column="36" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -126,9 +119,9 @@
         <option value="$PROJECT_DIR$/src/utils.js" />
         <option value="$PROJECT_DIR$/src/thumb.js" />
         <option value="$PROJECT_DIR$/dist/styles.css" />
-        <option value="$PROJECT_DIR$/src/charts.js" />
         <option value="$PROJECT_DIR$/dist/index.html" />
         <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/src/charts.js" />
       </list>
     </option>
   </component>
@@ -142,12 +135,36 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="charts" type="b2602c69:ProjectViewProjectNode" />
+              <item name="charts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="charts" type="b2602c69:ProjectViewProjectNode" />
+              <item name="charts" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="charts" type="b2602c69:ProjectViewProjectNode" />
+              <item name="charts" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553030968849" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553067816309" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -195,18 +212,18 @@
       <workItem from="1552659684349" duration="38615000" />
       <workItem from="1552884816454" duration="10862000" />
       <workItem from="1552967044070" duration="20555000" />
-      <workItem from="1553063450147" duration="846000" />
+      <workItem from="1553063450147" duration="4118000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119300000" />
+    <option name="totallyTimeSpent" value="122572000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="947" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49590644" weight="0.21550672" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49590644" visible="true" weight="0.21550672" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -303,13 +320,6 @@
     <entry file="file://$PROJECT_DIR$/dist/bundle.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/chart_data.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="36" selection-start-column="36" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -318,26 +328,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dist/script.js" />
-    <entry file="file://$PROJECT_DIR$/src/charts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="178" selection-start-line="178" selection-end-line="178" />
-          <folding>
-            <element signature="n#!!block;n#constructor#0;n#Chart#0" />
-            <element signature="n#!!block;n#setConfig#0;n#Chart#0" />
-            <element signature="n#!!block;n#drawShort#0;n#Chart#0" />
-            <element signature="n#!!block;n#drawLong#0;n#Chart#0" />
-            <element signature="n#!!block;n#drawChart#0;n#Chart#0" />
-            <element signature="n#!!block;n#drawHorizontalLines#0;n#Chart#0" />
-            <element signature="n#!!block;n#drawDateCoords#0;n#Chart#0" />
-            <element signature="n#!!block;n#clearChart#0;n#Chart#0" />
-            <element signature="n#!!block;n#setScreenOptions#0;n#Chart#0" />
-            <element signature="n#!!block;n#onCanvasClick#0;n#Chart#0" />
-            <element signature="n#!!block;n#clickOutside#0;n#Chart#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utils.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="945">
@@ -379,6 +369,20 @@
             <element signature="n#!!block;n#onChange#0" />
             <element signature="n#!!block;n#switchTheme#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chart_data.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="36" selection-start-column="36" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="628">
+          <caret line="405" column="24" selection-start-line="405" selection-start-column="24" selection-end-line="405" selection-end-column="24" />
         </state>
       </provider>
     </entry>

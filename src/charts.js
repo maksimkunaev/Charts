@@ -9,6 +9,7 @@ class Chart {
     canvasConfig = {
         width: 600,
         height: 500,
+        ref: null,
     };
 
     chartConfig = {
@@ -31,8 +32,6 @@ class Chart {
     };
 
     constructor(ref, data) {
-        const { width, height } = this.canvasConfig;
-
         this.canvas = document.getElementById(ref);
 
         this.ctx = this.canvas.getContext("2d");
@@ -57,25 +56,25 @@ class Chart {
 
         let newColumns = columns.slice();
 
+        //switch on and off different graphics
         if (isVisible.length > 1) {
             isVisible.forEach((item, index) => {
                 const newIndex = isVisible.length - index - 1;
-                console.log(`newIndex`, newIndex);
-                console.log(`isVisible`, isVisible);
 
                 if (isVisible[newIndex].isVisible === false) {
                     if (newColumns.length > 2) {
                         newColumns.splice(newIndex + 1, 1);
-                        console.log(`newColumns`,newColumns)
                     }
                 }
             })
         };
+
         newColumns.forEach((column, idx) => {
-            if (idx === 0) return;
+            if (idx === 0) return;//newColumns[0] is X columns, do not process
 
             const start = startDate ? startDate : -11;
             const end = endDate ? endDate + 1: column.length;
+
             if (!endDate || end >= column.length) {
                 this.chartConfig.position = 'rightSide';
             } else {
@@ -134,7 +133,7 @@ class Chart {
         this.clearChart();
         this.drawChart();
         this.drawHorizontalLines();
-        this.drawDateCoords();
+        this.drawDates();
     }
 
     drawLong(data, startDate, endDate) {
@@ -183,13 +182,11 @@ class Chart {
     }
 
     drawHorizontalLines() {
-        const { ctx } = this;
-        const { countY, stepY, y0, font } = this.chartConfig;
-        const { width, height } = this.canvasConfig;
-        const color = '#9aa6ae';
+        const { countY } = this.chartConfig;
         const linesCount = 5;
         const step = Math.ceil( countY / linesCount);
-
+        const { width, height } = this.canvasConfig;
+        const { stepY, y0 } = this.chartConfig;
         //initialize horizontal lines array
         let lines = new Array(linesCount).fill(step);
 
@@ -198,45 +195,52 @@ class Chart {
             lines[idx] = step * idx
         });
 
-        lines.forEach((step, idx) => {
-            ctx.beginPath();
-            ctx.fillStyle = color;
+        lines.forEach(lineStep => {
+            const yPosition = y0 + (height - stepY * lineStep - y0);
+            const text = String(Math.round(lineStep));
 
-            const yPosition = y0 + (height - stepY * step - y0);
-            ctx.moveTo(0, yPosition);
-            ctx.lineTo(width, yPosition);
-
-            ctx.font = font;
-            ctx.fillText(Math.round(step), 3, yPosition - 10);
-            ctx.strokeStyle = color;
-            ctx.lineWidth = 1;
-            ctx.stroke();
+            this.drawLine(0, yPosition, width, yPosition, '#9aa6ae');
+            this.drawText(text, 3, yPosition - 10);
         });
     }
 
-    drawDateCoords() {
+    drawLine(x0, y0, x, y, color = '#9aa6ae', width = 1) {
+        const { ctx } = this;
+
+        ctx.beginPath();
+        ctx.fillStyle = color;
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(x, y);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        ctx.stroke();
+    }
+
+    drawText(text, x, y, color = '#9aa6ae', width = 1) {
+        const { ctx } = this;
+        const { font } = this.chartConfig;
+
+        ctx.beginPath();
+        ctx.fillStyle = color;
+        ctx.font = font;
+        ctx.fillText(text, x, y);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        ctx.stroke();
+    }
+
+    drawDates() {
         const { xPositions, datesPerLine, font  } = this.chartConfig;
         const { height } = this.canvas;
-        const { ctx } = this;
-        let cuttingCount = Math.round(xPositions.length / datesPerLine);
+
+        let textSpace = Math.round(xPositions.length / datesPerLine);
         const datesPositions = xPositions.filter((i,idx)=>{
-            return !(idx % cuttingCount);
+            return !(idx % textSpace);
         });
 
-        datesPositions.forEach((position, idx) => {
-
+        datesPositions.forEach(position => {
             const color = '#9da8af';
-
-            ctx.beginPath();
-            ctx.fillStyle = color;
-
-            ctx.font = font;
-
-            ctx.fillText(position.date, position.xPosition, height);
-
-            ctx.strokeStyle = color;
-            ctx.lineWidth = 1;
-            ctx.stroke();
+            this.drawText(position.date, position.xPosition, height, color);
         });
     }
 
@@ -271,12 +275,14 @@ class Chart {
         const resolution = this.canvas.width / width;
         const x0 = (pageX - left) * resolution;
 
-        const lineData = this.ctx.getImageData(x0, y0, 1, height)
+        // we need to know where we draw horizontal line and what graphics we across
+        // we get Image Line Data (where horizontal line will be drawn)
+        const lineData = this.ctx.getImageData(x0, y0, 1, height);
         let colors = [];
 
         const { columns, stepY } = this.chartConfig;
 
-        const originalColorsInRgb = columns.map((column, idx) => {
+        const originalColorsInRgb = columns.map(column => {
             const rgbColor = hexToRgb(column.color);
             return {
                 ...column,
@@ -284,6 +290,7 @@ class Chart {
             }
         });
 
+        // and will see what color we across
         lineData.data.map((color, idx)=>{
             if (color) {
                 let colorPosition = idx % 4;
@@ -351,20 +358,13 @@ class Chart {
                 const date = new Date(dates[idx].ms);
                 const options = { weekday: 'short', month: 'short', day: 'numeric' };
 
-                formatDate = date.toLocaleDateString('en-US', options);;
+                formatDate = date.toLocaleDateString('en-US', options);
             }
         });
 
         const y0 = 100;
         const height = 500;
-
-        ctx.beginPath();
-        ctx.moveTo(x0, y0);
-
-        ctx.lineTo(x0, height);
-        ctx.strokeStyle = 'rgba(223, 230, 235, 0.5)';
-        ctx.lineWidth = 3;
-        ctx.stroke();
+        this.drawLine(x0, y0, x0, height, 'rgba(223, 230, 235, 0.5)', 3);
 
         const tooltip = document.querySelector('.tooltip');
         const columns = tooltip.querySelector('.columns');
@@ -376,21 +376,22 @@ class Chart {
 
         columns.innerHTML = null;
         for (const key in yPoints) {
-            const column = document.createElement('div');
-            const spanValue = document.createElement('span');
-            const spanName = document.createElement('span');
-            spanValue.textContent = yPoints[key].yPosition;
-            spanName.textContent = yPoints[key].name;
-            column.classList.add('column');
-            column.style.color = yPoints[key].color;
-            column.appendChild(spanValue);
-            column.appendChild(spanName);
-            console.log(`column`,column);
-
-            columns.appendChild(column);
+            Chart.drawTooltipName(yPoints[key], columns)
         }
+    }
 
-        // tooltip.appendChild()
+    static drawTooltipName(data, parents) {
+        const column = document.createElement('div');
+        const spanValue = document.createElement('span');
+        const spanName = document.createElement('span');
+        spanValue.textContent = data.yPosition;
+        spanName.textContent = data.name;
+        column.classList.add('column');
+        column.style.color = data.color;
+        column.appendChild(spanValue);
+        column.appendChild(spanName);
+
+        parents.appendChild(column);
     }
 }
 
