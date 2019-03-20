@@ -218,6 +218,7 @@ body, html  {
 
     border-radius: 13px;
     margin-right: 4px;
+    cursor: pointer;
 }
 
 .checkboxes div {

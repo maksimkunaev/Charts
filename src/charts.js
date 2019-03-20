@@ -129,15 +129,11 @@ class Chart {
     }
 
     drawShort(data, startDate, endDate) {
-        const start = () => {
-            this.setConfig(data, startDate, endDate, 'short');
-            this.clearChart();
-            this.drawChart();
-            this.drawHorizontalLines();
-            this.drawDates();
-        };
-
-        requestAnimationFrame(start);
+        this.setConfig(data, startDate, endDate, 'short');
+        this.clearChart();
+        this.drawChart();
+        this.drawHorizontalLines();
+        this.drawDates();
     }
 
     drawLong(data, startDate, endDate) {
