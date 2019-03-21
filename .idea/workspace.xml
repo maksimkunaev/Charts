@@ -33,17 +33,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1056">
-              <caret line="31" column="8" lean-forward="true" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+            <state relative-caret-position="175">
+              <caret line="46" column="27" lean-forward="true" selection-start-line="46" selection-start-column="27" selection-end-line="46" selection-end-column="27" />
               <folding>
+                <element signature="e#308#590#0" />
+                <element signature="e#611#912#0" />
+                <element signature="e#1078#1222#0" />
+                <element signature="e#1248#1398#0" />
+                <element signature="e#585#747#0" />
+                <element signature="e#782#818#0" />
+                <element signature="e#1536#1717#0" />
                 <element signature="e#2255#2888#0" />
                 <element signature="e#2274#2556#0" />
                 <element signature="e#2577#2878#0" />
-                <element signature="n#!!block;n#onChange#0;n#!!block;n#init#0;n#Init#0" />
-                <element signature="n#!!block;n#switchTheme#0;n#!!block;n#init#0;n#Init#0" />
-                <element signature="e#3481#3625#0" />
-                <element signature="e#3651#3801#0" />
-                <element signature="e#3844#3895#0" />
+                <element signature="e#3604#3748#0" />
+                <element signature="e#3774#3924#0" />
+                <element signature="e#3967#4018#0" />
                 <element signature="n#!!block;n#switchData#0;n#!!block;n#init#0;n#Init#0" />
                 <element signature="e#3993#4425#0" />
                 <element signature="e#4351#4409#0" />
@@ -267,7 +272,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553199849132" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553200877381" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -318,12 +323,12 @@
       <workItem from="1553063450147" duration="7075000" />
       <workItem from="1553139886813" duration="8263000" />
       <workItem from="1553164830403" duration="6218000" />
-      <workItem from="1553197627724" duration="2011000" />
+      <workItem from="1553197627724" duration="3127000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="157006000" />
+    <option name="totallyTimeSpent" value="158122000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="947" extended-state="0" />
@@ -585,17 +590,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1056">
-          <caret line="31" column="8" lean-forward="true" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+        <state relative-caret-position="175">
+          <caret line="46" column="27" lean-forward="true" selection-start-line="46" selection-start-column="27" selection-end-line="46" selection-end-column="27" />
           <folding>
+            <element signature="e#308#590#0" />
+            <element signature="e#611#912#0" />
+            <element signature="e#1078#1222#0" />
+            <element signature="e#1248#1398#0" />
+            <element signature="e#585#747#0" />
+            <element signature="e#782#818#0" />
+            <element signature="e#1536#1717#0" />
             <element signature="e#2255#2888#0" />
             <element signature="e#2274#2556#0" />
             <element signature="e#2577#2878#0" />
-            <element signature="n#!!block;n#onChange#0;n#!!block;n#init#0;n#Init#0" />
-            <element signature="n#!!block;n#switchTheme#0;n#!!block;n#init#0;n#Init#0" />
-            <element signature="e#3481#3625#0" />
-            <element signature="e#3651#3801#0" />
-            <element signature="e#3844#3895#0" />
+            <element signature="e#3604#3748#0" />
+            <element signature="e#3774#3924#0" />
+            <element signature="e#3967#4018#0" />
             <element signature="n#!!block;n#switchData#0;n#!!block;n#init#0;n#Init#0" />
             <element signature="e#3993#4425#0" />
             <element signature="e#4351#4409#0" />

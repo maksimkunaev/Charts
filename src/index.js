@@ -8,15 +8,81 @@ const chart_data = require('./chart_data');
 
 class Init {
     template = {};
+    theme = {
+        day: {
+            wrap: 'transparent',
+            sliderElem: 'slider',
+            labelText: 'Switch to Night Mode',
+            tooltip: 'tooltip',
+            checkboxes: '#000',
+            mainColor: '#000',
+            subColor: '#fff',
+        },
+        night: {
+            wrap: '#242f3e',
+            sliderElem: 'slider-nightTheme',
+            labelText: 'Switch to Day Mode',
+            tooltip: 'tooltip-nightTheme',
+            checkboxes: '#fff',
+            mainColor: '#fff',
+            subColor: '#222f3f',
+        }
+    };
 
     constructor(id, data) {
-
         this.data = data;
 
         this.createTemplate(id);
         this.initChart();
-
         this.init(id, data);
+        this.initSlider();
+
+
+        const {
+            switcher,
+        } = this.template;
+
+        switcher.addEventListener('change', this.onChangeTheme);
+        this.switchTheme.call(this, 'day');
+    }
+
+    onChangeTheme = ({target}) => {
+        const { checked } = target;
+        const theme = checked ? 'night' : 'day';
+        this.switchTheme(theme);
+    };
+
+    switchTheme(mode) {
+        const { shortChart, theme } = this;
+
+        const {
+            wrap,
+            sliderElem,
+            tooltipElem,
+            checkboxes,
+            labelText,
+        } = this.template;
+
+        const { renderChart } = this;
+        let newTheme = theme[mode];
+        let nightTheme = theme.night;
+
+        wrap.style.backgroundColor = newTheme.wrap;
+        labelText.innerText = newTheme.labelText;
+        checkboxes.style.color = newTheme.checkboxes;
+
+        if (mode === 'night') {
+            sliderElem.classList.add(nightTheme.sliderElem);
+            tooltipElem.classList.add(nightTheme.tooltip);
+
+        } else if (mode === 'day') {
+            sliderElem.classList.remove(nightTheme.sliderElem);
+            tooltipElem.classList.remove(nightTheme.tooltip);
+        }
+
+        renderChart.call(shortChart, {
+            theme: theme[mode],
+        })
     }
 
     createTemplate(id) {
@@ -39,15 +105,10 @@ class Init {
 
         const {
             wrap,
-            lineChart,
-            sliderElem,
             dateElem,
             columnsElem,
             tooltipElem,
-            checkboxes,
             labelText,
-            switcher,
-            wrapBlock,
         } = this.template;
 
         const configShortChart = {
@@ -67,9 +128,27 @@ class Init {
         this.longChart = new Chart(configLongChart, data, 'long');
         const { renderChart } = this.shortChart;
         this.renderChart = renderChart;
-
     }
 
+    initSlider() {
+        const { id1, shortChart, longChart, renderChart, data } = this;
+
+        const {
+            lineChart,
+            sliderElem,
+        } = this.template;
+
+        const configSlider = {
+            main: id1,
+            slider: sliderElem,
+            parent: lineChart,
+            method: renderChart.bind(shortChart),
+            longChart: longChart,
+        };
+
+        //init draggable slider
+        new Slider(configSlider, data);
+    }
 
     init(id, data) {
         const { id1, id2, shortChart, longChart } = this;
@@ -88,17 +167,6 @@ class Init {
         } = this.template;
 
         const { renderChart } = this;
-
-        const configSlider = {
-            main: id1,
-            slider: sliderElem,
-            parent: lineChart,
-            method: renderChart.bind(shortChart),
-            longChart: longChart,
-        };
-
-        //init draggable slider
-        new Slider(configSlider, data);
 
         const theme = {
             day: {
@@ -121,12 +189,12 @@ class Init {
             }
         };
 
-        switcher.addEventListener('change', onChange);
-        switchTheme.call(this, 'day');
+        // switcher.addEventListener('change', onChange);
+        // switchTheme.call(this, 'day');
         function onChange({target}) {
-            const { checked } = target;
-            const theme = checked ? 'night' : 'day';
-            switchTheme(theme);
+            // const { checked } = target;
+            // const theme = checked ? 'night' : 'day';
+            // switchTheme(theme);
         }
         function switchTheme(mode) {
             let newTheme = theme[mode];
