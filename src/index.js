@@ -10,18 +10,32 @@ class Init {
     template = {};
 
     constructor(id, data) {
+
+        this.data = data;
+
+        this.createTemplate(id);
+        this.initChart();
+
+        this.init(id, data);
+    }
+
+    createTemplate(id) {
         const id1 = `view_${id}`;
         const id2 = `timeLine_${id}`;
 
         this.template = createTemplate(id1, id2);
         this.id1 = id1;
         this.id2 = id2;
-        this.init(id, data);
 
+        const {
+            wrapBlock,
+        } = this.template;
+
+        document.body.appendChild(wrapBlock);
     }
 
-    init(id, data) {
-        const { id1, id2 } = this;
+    initChart() {
+        const { id1, id2, data } = this;
 
         const {
             wrap,
@@ -36,8 +50,6 @@ class Init {
             wrapBlock,
         } = this.template;
 
-        document.body.appendChild(wrapBlock);
-
         const configShortChart = {
             wrap,
             canvas: id1,
@@ -50,10 +62,32 @@ class Init {
         const configLongChart = {
             canvas: id2,
         };
-        const shortChart = new Chart(configShortChart, data, 'short');
-        const longChart = new Chart(configLongChart, data, 'long');
 
-        const { renderChart } = shortChart;
+        this.shortChart = new Chart(configShortChart, data, 'short');
+        this.longChart = new Chart(configLongChart, data, 'long');
+        const { renderChart } = this.shortChart;
+        this.renderChart = renderChart;
+
+    }
+
+
+    init(id, data) {
+        const { id1, id2, shortChart, longChart } = this;
+
+        const {
+            wrap,
+            lineChart,
+            sliderElem,
+            dateElem,
+            columnsElem,
+            tooltipElem,
+            checkboxes,
+            labelText,
+            switcher,
+            wrapBlock,
+        } = this.template;
+
+        const { renderChart } = this;
 
         const configSlider = {
             main: id1,
