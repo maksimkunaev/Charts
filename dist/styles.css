@@ -184,13 +184,13 @@ body, html  {
     font-size: 28px;
     display: none;
     background: #fff;
-    transform: translateX(-50%);
+    /*transform: translateX(-50%);*/
     color: #000;
 }
 
 .tooltip-nightTheme {
     background: #253241;
-    box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.7);
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.18);
     color: #fff;
 }
 
@@ -202,6 +202,9 @@ body, html  {
     display: flex;
     justify-content: space-between;
     font-size: 20px;
+
+    flex-wrap: wrap;
+    max-width: 160px;
 }
 
 .column {

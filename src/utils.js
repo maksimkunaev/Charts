@@ -9,7 +9,6 @@ function hexToRgb(hex) {
 
 function getTooltipInfo(colors, columns, stepY, y0, height) {
     const tooltipInfo = {};
-
     colors.forEach(color=>{
         columns.forEach(col => {
             if (!tooltipInfo[col.name]) {

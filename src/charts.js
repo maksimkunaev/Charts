@@ -81,35 +81,37 @@ class Chart {
                 this.chartConfig.position = '??????';
             }
 
-            let data = [];
+            let newData = [];
 
             switch(view) {
                 case 'short':
-                data = column.slice(start, end);
+                newData = column.slice(start, end);
                     break;
 
                 case 'long':
-                data = column.slice(1);
+                newData = column.slice(1);
                     break;
 
                 default:
-                    data = column.slice(1);
+                    newData = column.slice(1);
                     break;
             }
 
             // set stepY
-            maxY = Math.max(...data.slice(1)) > maxY ? Math.max(...data.slice(1)) : maxY;
+            maxY = Math.max(...newData.slice(1)) > maxY ? Math.max(...newData.slice(1)) : maxY;
 
             // set stepX
-            maxX = data.length - 1;
+            maxX = newData.length - 1;
 
-            const name = column[0];
-            const color = colors[name];
+            const fieldName = column[0];
+            const name = data.names[fieldName];
+
+            const color = colors[fieldName];
             const newColumn = {
                 start,
                 end,
                 name,
-                data,
+                data: newData,
                 color,
             };
             this.chartConfig.columns.push(newColumn);
@@ -371,7 +373,8 @@ class Chart {
         this.chartConfig.tooltipInfo.node = tooltip;
         this.chartConfig.tooltipInfo.date = formatDate;
         tooltip.style.display = 'flex';
-        tooltip.style.left = pageX + 'px';
+        const tooltipCenter = tooltip.getBoundingClientRect().width / 2;
+        tooltip.style.transform = `translateX(${pageX - tooltipCenter}px)`;
         tooltip.querySelector('.date').textContent = formatDate;
 
         columns.innerHTML = null;
