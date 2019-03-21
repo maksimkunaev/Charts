@@ -257,8 +257,8 @@ class Chart {
         this.chartConfig.datesPerLine = isMobile ? 6 : 8;
 
         this.canvasConfig = {
-            width: isMobile ? 600 : 1800,
-            height: isMobile ? 500 : 500,
+            width: isMobile ? 500 : 1800,
+            height: isMobile ? 400 : 500,
         };
 
         this.canvas.width = this.canvasConfig.width;
@@ -350,8 +350,7 @@ class Chart {
         this.chartConfig.pageX = pageX;
 
         this.renderChart();
-
-        document.addEventListener('mousedown', this.clickOutside.bind(this));
+        this.domElems.wrap.addEventListener('mousedown', this.clickOutside.bind(this));
     }
 
     clickOutside({target}) {
