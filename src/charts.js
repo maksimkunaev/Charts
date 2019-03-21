@@ -347,11 +347,10 @@ class Chart {
         document.addEventListener('mousedown', this.clickOutside.bind(this));
     }
 
-    clickOutside(event) {
-        if (event.target !== this.canvas) {
+    clickOutside({target}) {
+        if (target !== this.canvas && target !== this.domElems.switchLabel) {
             this.chartConfig.tooltipInfo.node.style.display = 'none';
             this.drawShort(this.chartConfig.data, this.chartConfig.columns[0].start,  --this.chartConfig.columns[0].end); //TODO fix
-
         }
     }
 
@@ -401,6 +400,9 @@ class Chart {
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.arc(x, y, 5, 0, 2 * Math.PI);
+
+        ctx.fillStyle = '#fff';
+        ctx.fill();
         ctx.stroke();
     }
     static drawTooltipName(data, parents) {

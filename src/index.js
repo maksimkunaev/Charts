@@ -21,6 +21,7 @@ const configShortChart = {
     tooltipElem,
     columnsElem,
     dateElem,
+    switchLabel: labelText,
 };
 
 const configLongChart = {
