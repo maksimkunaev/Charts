@@ -133,7 +133,33 @@ function createTemplate(id1, id2) {
     };
 }
 
+function createCheckbox(name, idx, config, onChange, parent, color) {
+    const checkbox = document.createElement('input');
+    const div = document.createElement('div');
+    const label = document.createElement('label');
+    const text = document.createTextNode(name);
+    checkbox.type = 'checkbox';
+    checkbox.className = 'checkbox';
+    checkbox.checked = true;
+    checkbox.style.display = 'none';
+    checkbox.addEventListener('change', onChange.bind(window, idx - 1, color));
+
+    div.className = 'custom-checkbox';
+    div.style.backgroundColor = color;
+
+    label.appendChild(checkbox);
+    label.appendChild(div);
+    label.appendChild(text);
+    parent.appendChild(label);
+
+    config.push({
+        isVisible: true,
+        idx: idx - 1,
+    });
+}
+
 module.exports.getTooltipInfo = getTooltipInfo;
 module.exports.hexToRgb = hexToRgb;
 module.exports.formatDate = formatDate;
 module.exports.createTemplate = createTemplate;
+module.exports.createCheckbox = createCheckbox;

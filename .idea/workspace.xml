@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98dc55a7-eeb9-4ed8-a8bb-c3dc22234538" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,14 +34,24 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="145" selection-start-line="145" selection-end-line="145" />
+            <state relative-caret-position="399">
+              <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
               <folding>
-                <element signature="e#199#439#0" />
-                <element signature="e#8002#8122#0" />
-                <element signature="e#8154#8803#0" />
-                <element signature="e#8835#9616#0" />
-                <element signature="e#9743#10516#0" />
+                <element signature="e#1527#1689#0" />
+                <element signature="e#1724#1760#0" />
+                <element signature="e#1976#2157#0" />
+                <element signature="e#2255#2888#0" />
+                <element signature="e#2274#2556#0" />
+                <element signature="e#2577#2878#0" />
+                <element signature="n#!!block;n#onChange#0;n#!!block;n#init#0;n#Init#0" />
+                <element signature="n#!!block;n#switchTheme#0;n#!!block;n#init#0;n#Init#0" />
+                <element signature="e#3481#3625#0" />
+                <element signature="e#3651#3801#0" />
+                <element signature="e#3844#3895#0" />
+                <element signature="n#!!block;n#switchData#0;n#!!block;n#init#0;n#Init#0" />
+                <element signature="e#3993#4425#0" />
+                <element signature="e#4351#4409#0" />
+                <element signature="e#4502#4787#0" />
               </folding>
             </state>
           </provider>
@@ -50,8 +60,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/charts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="43">
-              <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+            <state relative-caret-position="15">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
               <folding>
                 <element signature="e#222#289#0" />
                 <element signature="e#310#646#0" />
@@ -144,8 +154,25 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/utils.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+            <state relative-caret-position="555">
+              <caret line="164" column="46" selection-start-line="164" selection-start-column="46" selection-end-line="164" selection-end-column="46" />
+              <folding>
+                <element signature="n#!!block;n#hexToRgb#0" />
+                <element signature="e#119#233#0" />
+                <element signature="n#!!block;n#getTooltipInfo#0" />
+                <element signature="e#361#620#0" />
+                <element signature="e#394#613#0" />
+                <element signature="e#436#495#0" />
+                <element signature="e#537#603#0" />
+                <element signature="e#687#1260#0" />
+                <element signature="e#843#898#0" />
+                <element signature="e#1148#1253#0" />
+                <element signature="n#!!block;n#formatDate#0" />
+                <element signature="e#1338#1460#0" />
+                <element signature="e#1547#1624#0" />
+                <element signature="n#!!block;n#createTemplate#0" />
+                <element signature="n#!!block;n#createElem#0;n#!!block;n#createTemplate#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -201,11 +228,11 @@
         <option value="$PROJECT_DIR$/src/image/check.js" />
         <option value="$PROJECT_DIR$/src/image/ok.js" />
         <option value="$PROJECT_DIR$/dist/image/check.svg" />
-        <option value="$PROJECT_DIR$/src/utils.js" />
         <option value="$PROJECT_DIR$/src/slider.js" />
-        <option value="$PROJECT_DIR$/src/charts.js" />
         <option value="$PROJECT_DIR$/dist/styles.css" />
         <option value="$PROJECT_DIR$/dist/index.html" />
+        <option value="$PROJECT_DIR$/src/charts.js" />
+        <option value="$PROJECT_DIR$/src/utils.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
       </list>
     </option>
@@ -295,16 +322,15 @@
       <workItem from="1553063450147" duration="7075000" />
       <workItem from="1553139886813" duration="8263000" />
       <workItem from="1553164830403" duration="6218000" />
-      <workItem from="1553197627724" duration="394000" />
+      <workItem from="1553197627724" duration="1304000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155389000" />
+    <option name="totallyTimeSpent" value="156299000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="947" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49590644" weight="0.22039072" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -442,13 +468,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/styles.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="543">
@@ -481,8 +500,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/charts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
           <folding>
             <element signature="e#222#289#0" />
             <element signature="e#310#646#0" />
@@ -543,16 +562,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="164" column="46" selection-start-line="164" selection-start-column="46" selection-end-line="164" selection-end-column="46" />
+          <folding>
+            <element signature="n#!!block;n#hexToRgb#0" />
+            <element signature="e#119#233#0" />
+            <element signature="n#!!block;n#getTooltipInfo#0" />
+            <element signature="e#361#620#0" />
+            <element signature="e#394#613#0" />
+            <element signature="e#436#495#0" />
+            <element signature="e#537#603#0" />
+            <element signature="e#687#1260#0" />
+            <element signature="e#843#898#0" />
+            <element signature="e#1148#1253#0" />
+            <element signature="n#!!block;n#formatDate#0" />
+            <element signature="e#1338#1460#0" />
+            <element signature="e#1547#1624#0" />
+            <element signature="n#!!block;n#createTemplate#0" />
+            <element signature="n#!!block;n#createElem#0;n#!!block;n#createTemplate#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="145" selection-start-line="145" selection-end-line="145" />
+        <state relative-caret-position="399">
+          <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
           <folding>
-            <element signature="e#199#439#0" />
-            <element signature="e#8002#8122#0" />
-            <element signature="e#8154#8803#0" />
-            <element signature="e#8835#9616#0" />
-            <element signature="e#9743#10516#0" />
+            <element signature="e#1527#1689#0" />
+            <element signature="e#1724#1760#0" />
+            <element signature="e#1976#2157#0" />
+            <element signature="e#2255#2888#0" />
+            <element signature="e#2274#2556#0" />
+            <element signature="e#2577#2878#0" />
+            <element signature="n#!!block;n#onChange#0;n#!!block;n#init#0;n#Init#0" />
+            <element signature="n#!!block;n#switchTheme#0;n#!!block;n#init#0;n#Init#0" />
+            <element signature="e#3481#3625#0" />
+            <element signature="e#3651#3801#0" />
+            <element signature="e#3844#3895#0" />
+            <element signature="n#!!block;n#switchData#0;n#!!block;n#init#0;n#Init#0" />
+            <element signature="e#3993#4425#0" />
+            <element signature="e#4351#4409#0" />
+            <element signature="e#4502#4787#0" />
           </folding>
         </state>
       </provider>
