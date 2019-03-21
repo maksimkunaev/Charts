@@ -35,7 +35,11 @@ class Slider {
         const { left: l, right } = Slider.getCoords(this.slider);
         const from = Math.floor(( l / parentCoords.width ) * this.data.length);
         const to = Math.ceil(( right / parentCoords.width ) * this.data.length);
-        this.renderMethod(from <= 0 ? 1 : from, to);//TODO calc 0
+        this.renderMethod({
+            startDate: from <= 0 ? 1 : from,
+            endDate: to,
+        });
+
     }
 
     setConfig({ longChart }) {

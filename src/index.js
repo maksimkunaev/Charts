@@ -31,13 +31,13 @@ const configLongChart = {
 const shortChart = new Chart(configShortChart, data, 'short');
 const longChart = new Chart(configLongChart, data, 'long');
 
-const drawShort = shortChart.drawShort;
+const { renderChart } = shortChart;
 
 const configSlider = {
     main: 'view',
     slider: slider,
     parent: lineChart,
-    method: drawShort.bind(shortChart, data),
+    method: renderChart.bind(shortChart),
     longChart: longChart,
 };
 
@@ -51,6 +51,8 @@ const theme = {
         labelText: 'Switch to Night Mode',
         tooltip: 'tooltip',
         checkboxes: '#000',
+        mainColor: '#000',
+        subColor: '#fff',
     },
     night: {
         wrap: '#242f3e',
@@ -58,8 +60,11 @@ const theme = {
         labelText: 'Switch to Day Mode',
         tooltip: 'tooltip-nightTheme',
         checkboxes: '#fff',
+        mainColor: '#fff',
+        subColor: '#222f3f',
     }
 };
+
 switcher.addEventListener('change', onChange);
 switchTheme.call(this, 'day');
 function onChange({target}) {
@@ -82,7 +87,12 @@ function switchTheme(mode) {
     } else if (mode === 'day') {
         sliderElem.classList.remove(nightTheme.sliderElem);
         tooltipElem.classList.remove(nightTheme.tooltip);
+
     }
+
+    renderChart.call(shortChart, {
+        theme: theme[mode],
+    })
 }
 
 function switchData(data) {
@@ -93,7 +103,9 @@ function switchData(data) {
 
         config[idx].isVisible = checked;
         customCheckbox.style.backgroundColor = checked ? color : 'transparent';
-        shortChart.switchData(config);
+        shortChart.renderChart({
+            isVisible: config,
+        });
     };
 
     const config = [];
@@ -107,7 +119,7 @@ function switchData(data) {
     });
 }
 
-switchData(data, drawShort.bind(shortChart));
+switchData(data, renderChart.bind(shortChart));
 
 function createCheckbox(name, idx, config, onChange, parent, color) {
     const checkbox = document.createElement('input');

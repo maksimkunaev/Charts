@@ -26,7 +26,6 @@ class Chart {
         data: [],
         dates: [],
         view: '',
-        position: '',
         datesPerLine: 8,
         tooltipInfo: {},
         isVisible: [],
@@ -44,12 +43,15 @@ class Chart {
         this.canvasConfig.ref = canvas;
         this.setScreenOptions();
         this.canvas.addEventListener('click', this.onCanvasClick.bind(this));
-        view === 'short' && this.drawShort(data, 0);
+        view === 'short' && this.drawShort({
+            startDate: 0,
+        });
         view === 'long' && this.drawLong(data, 0);
     }
 
-    setConfig(data, startDate, endDate, view) {
-        const { columns, colors } = data;
+    setConfig(startDate, endDate, view) {
+        const { data } = this.chartConfig;
+        const { columns, colors } = this.chartConfig.data;
 
         const { width, height } = this.canvasConfig;
         const { isVisible } = this.chartConfig;
@@ -80,12 +82,6 @@ class Chart {
 
             const start = startDate ? startDate : -11;
             const end = endDate ? endDate + 1: column.length;
-
-            if (!endDate || end >= column.length) {
-                this.chartConfig.position = 'rightSide';
-            } else {
-                this.chartConfig.position = '??????';
-            }
 
             let newData = [];
 
@@ -136,8 +132,9 @@ class Chart {
         this.chartConfig.stepX = endDate ? (width * 1.1) / maxX : width / maxX ;
     }
 
-    drawShort(data, startDate, endDate) {
-        this.setConfig(data, startDate, endDate, 'short');
+    drawShort(config) {
+        const { startDate, endDate } = config;
+        this.setConfig(startDate, endDate, 'short');
         this.clearChart();
         this.drawChart();
         this.drawHorizontalLines();
@@ -146,7 +143,7 @@ class Chart {
     }
 
     drawLong(data, startDate, endDate) {
-        this.setConfig(data, startDate, endDate, 'long');
+        this.setConfig(startDate, endDate, 'long');
         this.drawChart()
     }
 
@@ -160,7 +157,7 @@ class Chart {
 
             const { data, color } = column;
             data.forEach((point, idx) => {
-                let x = position === 'rightSide' ? idx * stepX : idx * stepX - stepX/2;
+                let x = idx * stepX;
                 let y = y0 + (height - y0 - point * stepY);
                 if (idx === 0)
                     ctx.moveTo(x, y);
@@ -182,11 +179,6 @@ class Chart {
         };
 
         columns.forEach(draw);
-    }
-
-    switchData(isVisible) {
-        this.chartConfig.isVisible = isVisible;
-        this.rerenderChart()
     }
 
     drawHorizontalLines() {
@@ -274,8 +266,15 @@ class Chart {
         document.addEventListener('resize', this.setScreenOptions);
     }
 
-    rerenderChart() {
-        this.drawShort(this.chartConfig.data, this.chartConfig.columns[0].start,  --this.chartConfig.columns[0].end);//TODO fix
+    renderChart(config) {
+
+        this.chartConfig = {
+            ...this.chartConfig, ...config
+        };
+        this.drawShort({
+            startDate: this.chartConfig.startDate,
+            endDate: this.chartConfig.endDate, //TODO fix
+        });
     }
 
     onCanvasClick(e) {
@@ -350,7 +349,7 @@ class Chart {
 
         this.chartConfig.pageX = pageX;
 
-        this.rerenderChart();
+        this.renderChart();
 
         document.addEventListener('mousedown', this.clickOutside.bind(this));
     }
@@ -358,15 +357,15 @@ class Chart {
     clickOutside({target}) {
         if (target !== this.canvas && target !== this.domElems.switchLabel) {
             this.deleteTooltip();
-            this.rerenderChart();
+            this.renderChart();
         }
     }
 
     drawTooltip() {
         const { tooltipInfo, xPositions, dates, stepY, pageX } = this.chartConfig;
         const { x0, yPoints, clicked } = tooltipInfo;
-
         if (!clicked) return;
+
         let formatDate = '';
 
         xPositions.map((xPos, idx) => {
@@ -380,7 +379,9 @@ class Chart {
 
         const y0 = 100;
         const height = 500;
-        this.drawLine(x0, y0, x0, height, 'rgba(223, 230, 235, 0.5)', 2);
+        if (clicked) {
+            this.drawLine(x0, y0, x0, height, 'rgba(223, 230, 235, 0.5)', 2);
+        }
 
         const { tooltipElem, columnsElem, dateElem } = this.domElems;
         this.chartConfig.tooltipInfo.node = tooltipElem;
@@ -393,12 +394,11 @@ class Chart {
         columnsElem.innerHTML = null;
         for (const key in yPoints) {
             const point = yPoints[key];
-            Chart.drawTooltipName(point, columnsElem);
 
             let y = height - point.yPosition * stepY;
             let color = point.color;
             this.drawCircle(x0, y, color);
-
+            Chart.drawTooltipName(point, columnsElem);
         }
     }
 
@@ -409,13 +409,15 @@ class Chart {
 
     drawCircle(x, y, color) {
         const { ctx } = this;
+        const { theme } = this.chartConfig;
+        const { subColor } = theme;
 
         ctx.strokeStyle = color;
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.arc(x, y, 5, 0, 2 * Math.PI);
 
-        ctx.fillStyle = '#fff';
+        ctx.fillStyle = subColor;
         ctx.fill();
         ctx.stroke();
     }
