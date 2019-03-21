@@ -5,6 +5,7 @@ const formatDate = utils.formatDate;
 
 class Chart {
     canvas = null;
+    domElems = {};
 
     canvasConfig = {
         width: 600,
@@ -31,15 +32,19 @@ class Chart {
         isVisible: [],
     };
 
-    constructor(ref, data) {
-        this.canvas = document.getElementById(ref);
+    constructor(domElems, data, view) {
+        const { canvas } = domElems;
+         this.canvas = document.getElementById(canvas);
+         this.domElems = domElems;
 
         this.ctx = this.canvas.getContext("2d");
 
         this.chartConfig.data = data;
-        this.canvasConfig.ref = ref;
+        this.canvasConfig.ref = canvas;
         this.setScreenOptions();
         this.canvas.addEventListener('click', this.onCanvasClick.bind(this));
+        view === 'short' && this.drawShort(data, 0);
+        view === 'long' && this.drawLong(data, 0);
     }
 
     setConfig(data, startDate, endDate, view) {
@@ -232,7 +237,7 @@ class Chart {
     }
 
     drawDates() {
-        const { xPositions, datesPerLine, font  } = this.chartConfig;
+        const { xPositions, datesPerLine  } = this.chartConfig;
         const { height } = this.canvas;
 
         let textSpace = Math.round(xPositions.length / datesPerLine);
@@ -330,7 +335,7 @@ class Chart {
         const config = getTooltipInfo(colors, columns, stepY, y0, height);
         if (tooltipInfo.x0 === x0) {
             return;
-        }   
+        }
 
         this.chartConfig.tooltipInfo = {
             yPoints: config,
@@ -370,18 +375,17 @@ class Chart {
         const height = 500;
         this.drawLine(x0, y0, x0, height, 'rgba(223, 230, 235, 0.5)', 3);
 
-        const tooltip = document.querySelector('.tooltip');
-        const columns = tooltip.querySelector('.columns');
-        this.chartConfig.tooltipInfo.node = tooltip;
+        const { tooltipElem, columnsElem, dateElem } = this.domElems;
+        this.chartConfig.tooltipInfo.node = tooltipElem;
         this.chartConfig.tooltipInfo.date = formatDate;
-        tooltip.style.display = 'flex';
-        const tooltipCenter = tooltip.getBoundingClientRect().width / 2;
-        tooltip.style.transform = `translateX(${pageX - tooltipCenter}px)`;
-        tooltip.querySelector('.date').textContent = formatDate;
+        tooltipElem.style.display = 'flex';
+        const tooltipCenter = tooltipElem.getBoundingClientRect().width / 2;
+        tooltipElem.style.transform = `translateX(${pageX - tooltipCenter}px)`;
+        dateElem.textContent = formatDate;
 
-        columns.innerHTML = null;
+        columnsElem.innerHTML = null;
         for (const key in yPoints) {
-            Chart.drawTooltipName(yPoints[key], columns)
+            Chart.drawTooltipName(yPoints[key], columnsElem)
         }
     }
 

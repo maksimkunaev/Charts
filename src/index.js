@@ -2,16 +2,39 @@ const Chart = require('./charts');
 const Slider = require('./slider');
 
 const chart_data = require('./chart_data');
-const data = chart_data[4];
+const data = chart_data[1];
 
-const shortChart = new Chart('view', data);
-const longChart = new Chart('timeLine', data);
+const wrap = document.querySelector('.wrap');
+const switcher = document.querySelector('.switcher');
+const sliderElem = document.querySelector('.slider');
+const switchLabel = document.querySelector('.switchLabel');
+const checkboxes = document.querySelector('.checkboxes');
+const labelText = switchLabel.querySelector('span');
+const tooltipElem = document.querySelector('.tooltip');
+const columnsElem = tooltipElem.querySelector('.columns');
+const dateElem = tooltipElem.querySelector('.date');
+const slider = document.querySelector('.slider');
+const lineChart = document.querySelector('.lineChart');
+
+const configShortChart = {
+    canvas: 'view',
+    tooltipElem,
+    columnsElem,
+    dateElem,
+};
+
+const configLongChart = {
+    canvas: 'timeLine',
+};
+const shortChart = new Chart(configShortChart, data, 'short');
+const longChart = new Chart(configLongChart, data, 'long');
 
 const drawShort = shortChart.drawShort;
 
 const configSlider = {
-    slider: '.slider',
-    parent: '.lineChart',
+    main: 'view',
+    slider: slider,
+    parent: lineChart,
     method: drawShort.bind(shortChart, data),
     longChart: longChart,
 };
@@ -19,38 +42,24 @@ const configSlider = {
 //init draggable slider
 new Slider(configSlider, data);
 
-function drawCharts(data) {
-    longChart.drawLong(data,0);
-}
-
-drawCharts(data);
-
-const switcher = document.querySelector('.switcher');
-const sliderElem = document.querySelector('.slider');
-const switchLabel = document.querySelector('.switchLabel');
-const labelText = switchLabel.querySelector('span');
-const tooltip = document.querySelector('.tooltip');
-const checkboxes = document.querySelector('.checkboxes');
-
-switcher.addEventListener('change', onChange);
-
 const theme = {
     day: {
-        body: 'transparent',
+        wrap: 'transparent',
         sliderElem: 'slider',
         labelText: 'Switch to Night Mode',
         tooltip: 'tooltip',
         checkboxes: '#000',
     },
     night: {
-        body: '#242f3e',
+        wrap: '#242f3e',
         sliderElem: 'slider-nightTheme',
         labelText: 'Switch to Day Mode',
         tooltip: 'tooltip-nightTheme',
         checkboxes: '#fff',
     }
 };
-
+switcher.addEventListener('change', onChange);
+switchTheme.call(this, 'day');
 function onChange({target}) {
     const { checked } = target;
     const theme = checked ? 'night' : 'day';
@@ -60,22 +69,21 @@ function switchTheme(mode) {
     let newTheme = theme[mode];
     let nightTheme = theme.night;
 
-    document.body.style.backgroundColor = newTheme.body;
+    wrap.style.backgroundColor = newTheme.wrap;
     labelText.innerText = newTheme.labelText;
     checkboxes.style.color = newTheme.checkboxes;
 
     if (mode === 'night') {
         sliderElem.classList.add(nightTheme.sliderElem);
-        tooltip.classList.add(nightTheme.tooltip);
+        tooltipElem.classList.add(nightTheme.tooltip);
 
     } else if (mode === 'day') {
         sliderElem.classList.remove(nightTheme.sliderElem);
-        tooltip.classList.remove(nightTheme.tooltip);
+        tooltipElem.classList.remove(nightTheme.tooltip);
     }
 }
 
 function switchData(data) {
-
     const changeData = (idx, color, e)=> {
         const { checked } = e.target;
         const parent = e.target.parentNode;

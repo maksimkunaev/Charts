@@ -15,8 +15,8 @@ class Slider {
     constructor(config, data) {
         const { slider, parent, method } = config;
 
-        this.slider = document.querySelector(slider);
-        this.parent = document.querySelector(parent);
+        this.slider = slider;
+        this.parent = parent;
         this.data = data.columns[0];
 
         this.renderMethod = method;
@@ -35,8 +35,42 @@ class Slider {
         const { left: l, right } = Slider.getCoords(this.slider);
         const from = Math.floor(( l / parentCoords.width ) * this.data.length);
         const to = Math.ceil(( right / parentCoords.width ) * this.data.length);
-        this.renderMethod(from <= 0 ? 1 : from, to) //TODO calc 0
-        console.log(`from to`, from, to)
+        this.renderMethod(from <= 0 ? 1 : from, to);//TODO calc 0
+    }
+
+    setConfig({ longChart }) {
+        const parentCoords = Slider.getCoords(this.parent);
+        const dayWidth = parentCoords.width / this.data.length < 15 ? 15 : parentCoords.width / this.data.length;
+        const sliderWidth =  10 * dayWidth;
+
+        this.sliderConfig = {
+            width: sliderWidth,
+            left: 0,
+            right: sliderWidth,
+            stepY: longChart.chartConfig.stepY,
+        };
+    }
+
+    static getCoords(elem) {
+        const box = elem.getBoundingClientRect();
+        return {
+            top: box.top,
+            left: box.left,
+            right: box.right,
+            width: box.width,
+        };
+    }
+
+    setStyle() {
+        const { width } = this.sliderConfig;
+        this.slider.style.width = width + 'px';
+    }
+
+    makeDraggable() {
+        this.slider.ondragstart = function() {
+            return false;
+        };
+        this.slider.addEventListener('mousedown',this.onMouseDown.bind(this));
     }
 
     onMouseDown(event) {
@@ -128,42 +162,6 @@ class Slider {
         this.slider.addEventListener('mousemove',onMouseMove);
         this.slider.addEventListener('mouseup',onMouseUp)
     }
-
-    setConfig({ longChart }) {
-        const parentCoords = Slider.getCoords(this.parent);
-        const dayWidth = parentCoords.width / this.data.length < 15 ? 15 : parentCoords.width / this.data.length;
-        const sliderWidth =  10 * dayWidth;
-
-        this.sliderConfig = {
-            width: sliderWidth,
-            left: 0,
-            right: sliderWidth,
-            stepY: longChart.chartConfig.stepY,
-        };
-    }
-
-    static getCoords(elem) {
-        const box = elem.getBoundingClientRect();
-        return {
-            top: box.top,
-            left: box.left,
-            right: box.right,
-            width: box.width,
-        };
-    }
-
-    setStyle() {
-        const { width } = this.sliderConfig;
-        this.slider.style.width = width + 'px';
-    }
-
-    makeDraggable() {
-        this.slider.ondragstart = function() {
-            return false;
-        };
-        this.slider.addEventListener('mousedown',this.onMouseDown.bind(this));
-    }
-
     initTouchEvents() {
         function touchHandler(event) {
             const touch = event.changedTouches[0];
