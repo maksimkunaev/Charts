@@ -15,6 +15,7 @@ const columnsElem = tooltipElem.querySelector('.columns');
 const dateElem = tooltipElem.querySelector('.date');
 const slider = document.querySelector('.slider');
 const lineChart = document.querySelector('.lineChart');
+const loadWrap = document.querySelector('.loadWrap');
 
 const configShortChart = {
     canvas: 'view',
@@ -132,3 +133,7 @@ function createCheckbox(name, idx, config, onChange, parent, color) {
         idx: idx - 1,
     });
 }
+
+window.onload = function() {
+    loadWrap.style.display = 'none';
+};

@@ -1,6 +1,5 @@
 body, html  {
     height: 100%;
-    position: relative;
     padding: 0;
     margin: 0;
 }
@@ -12,10 +11,12 @@ body, html  {
     align-items: center;
     height: 100%;
     padding: 8px;
+    position: relative;
 }
 .content {
     flex: 1;
 }
+
 .viewChart {
     width: 100%;
     height: 500px;
@@ -23,15 +24,15 @@ body, html  {
     margin-bottom: 15px;
 }
 
-@media screen and (max-width: 912px) {
+@media screen and (max-height: 512px) {
     .viewChart {
-        height: 200px;
+        height: 300px;
     }
 }
 
-@media screen and (max-width: 512px) {
+@media screen and (max-height: 312px) {
     .viewChart {
-        height: 300px;
+        height: 200px;
     }
 }
 
@@ -158,7 +159,6 @@ body, html  {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-
 }
 
 .switchLabel label {
@@ -186,7 +186,6 @@ body, html  {
     font-size: 28px;
     display: none;
     background: #fff;
-    /*transform: translateX(-50%);*/
     color: #000;
 }
 
@@ -267,3 +266,70 @@ body, html  {
     background-position: center;
 }
 
+/*preloader*/
+.loadWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: #fff;
+}
+.preloader {
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+.preloader div {
+    position: absolute;
+    top: 27px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #cef;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.preloader div:nth-child(1) {
+    left: 6px;
+    animation: preloader1 0.6s infinite;
+}
+.preloader div:nth-child(2) {
+    left: 6px;
+    animation: preloader2 0.6s infinite;
+}
+.preloader div:nth-child(3) {
+    left: 26px;
+    animation: preloader2 0.6s infinite;
+}
+.preloader div:nth-child(4) {
+    left: 45px;
+    animation: preloader3 0.6s infinite;
+}
+@keyframes preloader1 {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes preloader3 {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+@keyframes preloader2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(19px, 0);
+    }
+}
