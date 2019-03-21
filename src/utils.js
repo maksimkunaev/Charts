@@ -60,6 +60,80 @@ function formatDate(date) {
     };
 }
 
+function createTemplate(id1, id2) {
+
+    function createElem(tag, attributes, textContent) {
+        const elem = document.createElement(tag);
+
+        for (const key in attributes) {
+            elem.setAttribute(key, attributes[key]);
+        }
+        if (textContent) elem.textContent = textContent;
+
+        return elem;
+    }
+
+    function  createHtmlBlock(elems, parent) {
+        elems.forEach(elem => {
+            parent.appendChild(elem);
+        });
+
+        return parent;
+    };
+
+    const wrap = createElem('div', { class: 'wrap' });
+    const loadWrap = createElem('div', { class: 'loadWrap' });
+    const content = createElem('div', { class: 'content' });
+    const viewChart = createElem('div', { class: 'viewChart' });
+    const lineChart = createElem('div', { class: 'lineChart' });
+    const canvasView = createElem('canvas', { class: 'view', id: id1 });
+    const canvasLong = createElem('canvas', { class: 'timeLine', id: id2 });
+    const sliderElem = createElem('div', { class: 'slider' });
+    loadWrap.innerHTML = `<div class="preloader"><div></div><div></div><div></div><div></div></div>`;
+
+    const dateElem = createElem('div', { class: 'date' }, 'Sat, Feb 24');
+    const columnsElem = createElem('div', { class: 'columns' });
+    const tooltipElem = createElem('div', { class: 'tooltip' });
+    const checkboxes = createElem('div', { class: 'checkboxes' });
+
+    const switchLabel = createElem('div', { class: 'switchLabel' });
+    const label = createElem('label');
+    const labelText = createElem('span');
+    const switcher = createElem('input', { class: 'switcher', type: 'checkbox' });
+
+
+    const toolTipBlock = createHtmlBlock([dateElem, columnsElem], tooltipElem);
+    const viewChartBlock = createHtmlBlock([canvasView, toolTipBlock], viewChart);
+    const lineChartBlock = createHtmlBlock([canvasLong, sliderElem], lineChart);
+    const contentBlock = createHtmlBlock([viewChartBlock, lineChartBlock, checkboxes], content);
+    const labelBlock = createHtmlBlock([labelText, switcher], label);
+    const switchLabelBlock = createHtmlBlock([labelBlock], switchLabel);
+    const wrapBlock = createHtmlBlock([loadWrap, contentBlock, switchLabelBlock], wrap);
+
+    loadWrap.style.display = 'none';
+    return {
+        wrap,
+        loadWrap,
+        content,
+        viewChart,
+        lineChart,
+        canvasView,
+        canvasLong,
+        sliderElem,
+        dateElem,
+        columnsElem,
+        tooltipElem,
+        checkboxes,
+
+        switchLabel,
+        label,
+        labelText,
+        switcher,
+        wrapBlock,
+    };
+}
+
 module.exports.getTooltipInfo = getTooltipInfo;
 module.exports.hexToRgb = hexToRgb;
 module.exports.formatDate = formatDate;
+module.exports.createTemplate = createTemplate;
