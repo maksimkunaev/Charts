@@ -282,7 +282,7 @@ class Chart {
         const lineData = this.ctx.getImageData(x0, y0, 1, height);
         let colors = [];
 
-        const { columns, stepY } = this.chartConfig;
+        const { columns, stepY, tooltipInfo } = this.chartConfig;
 
         const originalColorsInRgb = columns.map(column => {
             const rgbColor = hexToRgb(column.color);
@@ -327,10 +327,13 @@ class Chart {
             }
         });
 
-        const tooltipInfo = getTooltipInfo(colors, columns, stepY, y0, height);
+        const config = getTooltipInfo(colors, columns, stepY, y0, height);
+        if (tooltipInfo.x0 === x0) {
+            return;
+        }   
 
         this.chartConfig.tooltipInfo = {
-            yPoints: tooltipInfo,
+            yPoints: config,
             x0,
         };
 
@@ -349,7 +352,6 @@ class Chart {
     }
 
     drawTooltip(pageX) {
-        const { ctx } = this;
         const { tooltipInfo, xPositions, dates } = this.chartConfig;
         const { x0, yPoints } = tooltipInfo;
 
