@@ -2,7 +2,7 @@ const Chart = require('./charts');
 const Slider = require('./slider');
 
 const chart_data = require('./chart_data');
-const data = chart_data[1];
+const data = chart_data[3];
 
 const wrap = document.querySelector('.wrap');
 const switcher = document.querySelector('.switcher');

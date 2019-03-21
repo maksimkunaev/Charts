@@ -160,7 +160,6 @@ class Chart {
             data.forEach((point, idx) => {
                 let x = position === 'rightSide' ? idx * stepX : idx * stepX - stepX/2;
                 let y = y0 + (height - y0 - point * stepY);
-
                 if (idx === 0)
                     ctx.moveTo(x, y);
                 else
@@ -357,7 +356,7 @@ class Chart {
     }
 
     drawTooltip(pageX) {
-        const { tooltipInfo, xPositions, dates } = this.chartConfig;
+        const { tooltipInfo, xPositions, dates, stepY } = this.chartConfig;
         const { x0, yPoints } = tooltipInfo;
 
         let formatDate = '';
@@ -385,10 +384,25 @@ class Chart {
 
         columnsElem.innerHTML = null;
         for (const key in yPoints) {
-            Chart.drawTooltipName(yPoints[key], columnsElem)
+            const point = yPoints[key];
+            Chart.drawTooltipName(point, columnsElem);
+
+            let y = height - point.yPosition * stepY;
+            let color = point.color;
+            this.drawCircle(x0, y, color);
+
         }
     }
 
+    drawCircle(x, y, color) {
+        const { ctx } = this;
+
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, 2 * Math.PI);
+        ctx.stroke();
+    }
     static drawTooltipName(data, parents) {
         const column = document.createElement('div');
         const spanValue = document.createElement('span');
