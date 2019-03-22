@@ -258,8 +258,8 @@ class Chart {
         this.chartConfig.datesPerLine = isMobile ? 6 : 8;
 
         this.canvasConfig = {
-            width: isMobile ? 500 : 1800,
-            height: isMobile ? 400 : 500,
+            width: isMobile ? 600 : 1800,
+            height: isMobile ? 500 : 500,
         };
 
         this.canvas.width = this.canvasConfig.width;
