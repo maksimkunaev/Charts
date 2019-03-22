@@ -158,8 +158,22 @@ function createCheckbox(name, idx, config, onChange, parent, color) {
     });
 }
 
+function formatNumber(num) {
+    const numOfDigits = (Math.round(num)).toString().length;
+
+    if (numOfDigits > 3 && numOfDigits < 7) {
+        const firstPart = (num / 1000).toFixed(1);
+        return `${firstPart}K`;
+    } else if (numOfDigits > 6) {
+        const firstPart = (num / 1000000).toFixed(1);
+        return `${firstPart}M`;
+    }
+    return num;
+}
+
 module.exports.getTooltipInfo = getTooltipInfo;
 module.exports.hexToRgb = hexToRgb;
 module.exports.formatDate = formatDate;
 module.exports.createTemplate = createTemplate;
 module.exports.createCheckbox = createCheckbox;
+module.exports.formatNumber = formatNumber;

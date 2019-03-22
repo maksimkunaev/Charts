@@ -2,6 +2,7 @@ const utils = require('./utils');
 const hexToRgb = utils.hexToRgb;
 const getTooltipInfo = utils.getTooltipInfo;
 const formatDate = utils.formatDate;
+const formatNumber = utils.formatNumber;
 
 class Chart {
     canvas = null;
@@ -200,7 +201,7 @@ class Chart {
             const text = String(Math.round(lineStep));
 
             this.drawLine(0, yPosition, width, yPosition, '#9aa6ae');
-            this.drawText(text, 3, yPosition - 10);
+            this.drawText(formatNumber(text), 3, yPosition - 10);
         });
     }
 

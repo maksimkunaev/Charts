@@ -42,81 +42,6 @@ class Init {
         this.createCheckboxes();
     }
 
-    createCheckboxes = () => {
-        const { shortChart, data } = this;
-
-        const {
-            checkboxes,
-        } = this.template;
-
-        const { renderChart } = this;
-
-        function switchData(data) {
-            const changeData = (idx, color, e)=> {
-                const { checked } = e.target;
-                const parent = e.target.parentNode;
-                const customCheckbox = parent.querySelector('.custom-checkbox');
-
-                config[idx].isVisible = checked;
-                customCheckbox.style.backgroundColor = checked ? color : 'transparent';
-                shortChart.renderChart({
-                    isVisible: config,
-                });
-            };
-
-            const config = [];
-            data.columns.map((col, idx) => {
-                if (idx === 0) return;
-                const fieldName = col[0];
-                const color = data.colors[fieldName];
-                const name = data.names[fieldName];
-
-                createCheckbox(name, idx, config, changeData, checkboxes, color);
-            });
-        }
-
-        switchData(data, renderChart.bind(shortChart));
-    };
-
-    onChangeTheme = ({target}) => {
-        const { checked } = target;
-        const theme = checked ? 'night' : 'day';
-        this.switchTheme(theme);
-    };
-
-    switchTheme(mode) {
-        const { shortChart, theme } = this;
-
-        const {
-            wrap,
-            sliderElem,
-            tooltipElem,
-            checkboxes,
-            labelText,
-        } = this.template;
-
-        const { renderChart } = this;
-        let newTheme = theme[mode];
-        let nightTheme = theme.night;
-
-        wrap.style.backgroundColor = newTheme.wrap;
-        labelText.innerText = newTheme.labelText;
-        checkboxes.style.color = newTheme.checkboxes;
-
-        if (mode === 'night') {
-            sliderElem.classList.add(nightTheme.sliderElem);
-            tooltipElem.classList.add(nightTheme.tooltip);
-
-        } else if (mode === 'day') {
-            sliderElem.classList.remove(nightTheme.sliderElem);
-            tooltipElem.classList.remove(nightTheme.tooltip);
-        }
-
-        renderChart.call(shortChart, {
-            theme: theme[mode],
-        })
-    }
-
     createTemplate(id) {
         const id1 = `view_${id}`;
         const id2 = `timeLine_${id}`;
@@ -181,6 +106,81 @@ class Init {
         //init draggable slider
         new Slider(configSlider, data);
     }
+
+    onChangeTheme = ({target}) => {
+        const { checked } = target;
+        const theme = checked ? 'night' : 'day';
+        this.switchTheme(theme);
+    };
+
+    switchTheme(mode) {
+        const { shortChart, theme } = this;
+
+        const {
+            wrap,
+            sliderElem,
+            tooltipElem,
+            checkboxes,
+            labelText,
+        } = this.template;
+
+        const { renderChart } = this;
+        let newTheme = theme[mode];
+        let nightTheme = theme.night;
+
+        wrap.style.backgroundColor = newTheme.wrap;
+        labelText.innerText = newTheme.labelText;
+        checkboxes.style.color = newTheme.checkboxes;
+
+        if (mode === 'night') {
+            sliderElem.classList.add(nightTheme.sliderElem);
+            tooltipElem.classList.add(nightTheme.tooltip);
+
+        } else if (mode === 'day') {
+            sliderElem.classList.remove(nightTheme.sliderElem);
+            tooltipElem.classList.remove(nightTheme.tooltip);
+        }
+
+        renderChart.call(shortChart, {
+            theme: theme[mode],
+        })
+    }
+
+    createCheckboxes = () => {
+        const { shortChart, data } = this;
+
+        const {
+            checkboxes,
+        } = this.template;
+
+        const { renderChart } = this;
+
+        function switchData(data) {
+            const changeData = (idx, color, e)=> {
+                const { checked } = e.target;
+                const parent = e.target.parentNode;
+                const customCheckbox = parent.querySelector('.custom-checkbox');
+
+                config[idx].isVisible = checked;
+                customCheckbox.style.backgroundColor = checked ? color : 'transparent';
+                shortChart.renderChart({
+                    isVisible: config,
+                });
+            };
+
+            const config = [];
+            data.columns.map((col, idx) => {
+                if (idx === 0) return;
+                const fieldName = col[0];
+                const color = data.colors[fieldName];
+                const name = data.names[fieldName];
+
+                createCheckbox(name, idx, config, changeData, checkboxes, color);
+            });
+        }
+
+        switchData(data, renderChart.bind(shortChart));
+    };
 }
 
 new Init(1, chart_data[0]);
