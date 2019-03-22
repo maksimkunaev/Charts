@@ -6,3 +6,4 @@ build/
 yarn-error.log
 .env
 .idea/workspace.xml
+package-lock.json
