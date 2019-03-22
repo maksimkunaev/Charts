@@ -83,7 +83,6 @@ function createTemplate(id1, id2) {
     };
 
     const wrap = createElem('div', { class: 'wrap' });
-    const loadWrap = createElem('div', { class: 'loadWrap' });
     const content = createElem('div', { class: 'content' });
     const followers = createElem('div', { class: 'followers' }, 'followers');
     const viewChart = createElem('div', { class: 'viewChart' });
@@ -91,7 +90,6 @@ function createTemplate(id1, id2) {
     const canvasView = createElem('canvas', { class: 'view', id: id1 });
     const canvasLong = createElem('canvas', { class: 'timeLine', id: id2 });
     const sliderElem = createElem('div', { class: 'slider' });
-    loadWrap.innerHTML = `<div class="preloader"><div></div><div></div><div></div><div></div></div>`;
 
     const dateElem = createElem('div', { class: 'date' }, 'Sat, Feb 24');
     const columnsElem = createElem('div', { class: 'columns' });
@@ -109,12 +107,11 @@ function createTemplate(id1, id2) {
     const contentBlock = createHtmlBlock([followers, viewChartBlock, lineChartBlock, checkboxes], content);
     const labelBlock = createHtmlBlock([labelText, switcher], label);
     const switchLabelBlock = createHtmlBlock([labelBlock], switchLabel);
-    const wrapBlock = createHtmlBlock([loadWrap, contentBlock, switchLabelBlock], wrap);
+    const wrapBlock = createHtmlBlock([ contentBlock, switchLabelBlock], wrap);
 
-    loadWrap.style.display = 'none';
+    document.querySelector('.loadWrap').style.display = 'none';
     return {
         wrap,
-        loadWrap,
         content,
         viewChart,
         lineChart,
