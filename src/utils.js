@@ -103,7 +103,6 @@ function createTemplate(id1, id2) {
     const labelText = createElem('span');
     const switcher = createElem('input', { class: 'switcher', type: 'checkbox' });
 
-
     const toolTipBlock = createHtmlBlock([dateElem, columnsElem], tooltipElem);
     const viewChartBlock = createHtmlBlock([canvasView, toolTipBlock], viewChart);
     const lineChartBlock = createHtmlBlock([canvasLong, sliderElem], lineChart);

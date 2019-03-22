@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98dc55a7-eeb9-4ed8-a8bb-c3dc22234538" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/dist/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/charts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/charts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/slider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,15 +22,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-32">
               <caret line="293" lean-forward="true" selection-start-line="293" selection-end-line="293" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webpack.config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
             </state>
           </provider>
         </entry>
@@ -58,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/utils.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="568">
-              <caret line="160" lean-forward="true" selection-start-line="160" selection-end-line="160" />
+            <state relative-caret-position="264">
+              <caret line="105" selection-start-line="105" selection-end-line="105" />
               <folding>
                 <element signature="n#!!block;n#hexToRgb#0" />
                 <element signature="e#119#233#0" />
@@ -81,10 +68,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
+            <state relative-caret-position="-210">
               <caret line="130" column="45" selection-start-line="130" selection-start-column="45" selection-end-line="130" selection-end-column="45" />
               <folding>
                 <element signature="n#!!block;n#createTemplate#0;n#Init#0" />
@@ -98,69 +85,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/chart_data.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="36" selection-start-column="36" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/charts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="264" selection-start-line="264" selection-end-line="264" />
-              <folding>
-                <element signature="e#263#330#0" />
-                <element signature="e#351#687#0" />
-                <element signature="n#!!block;n#constructor#0;n#Chart#0" />
-                <element signature="e#1141#1178#0" />
-                <element signature="n#!!block;n#setConfig#0;n#Chart#0" />
-                <element signature="e#1733#2084#0" />
-                <element signature="e#1782#2073#0" />
-                <element signature="e#1909#2059#0" />
-                <element signature="e#1958#2041#0" />
-                <element signature="e#2131#3547#0" />
-                <element signature="e#2374#2711#0" />
-                <element signature="e#2405#2497#0" />
-                <element signature="e#2515#2597#0" />
-                <element signature="e#2615#2697#0" />
-                <element signature="e#3065#3200#0" />
-                <element signature="e#3472#3535#0" />
-                <element signature="n#!!block;n#drawShort#0;n#Chart#0" />
-                <element signature="n#!!block;n#drawLong#0;n#Chart#0" />
-                <element signature="n#!!block;n#drawChart#0;n#Chart#0" />
-                <element signature="e#4388#5144#0" />
-                <element signature="e#4505#5037#0" />
-                <element signature="e#4839#5023#0" />
-                <element signature="e#4894#5003#0" />
-                <element signature="n#!!block;n#drawHorizontalLines#0;n#Chart#0" />
-                <element signature="e#5602#5649#0" />
-                <element signature="e#5687#5959#0" />
-                <element signature="n#!!block;n#drawLine#0;n#Chart#0" />
-                <element signature="n#!!block;n#drawText#0;n#Chart#0" />
-                <element signature="n#!!block;n#drawDates#0;n#Chart#0" />
-                <element signature="e#6852#6902#0" />
-                <element signature="e#6949#7074#0" />
-                <element signature="n#!!block;n#clearChart#0;n#Chart#0" />
-                <element signature="e#7585#7680#0" />
-                <element signature="e#7870#7924#0" />
-                <element signature="n#!!block;n#onCanvasClick#0;n#Chart#0" />
-                <element signature="e#8362#8438#0" />
-                <element signature="e#8729#8881#0" />
-                <element signature="e#8803#8871#0" />
-                <element signature="e#8970#10119#0" />
-                <element signature="e#8995#10109#0" />
-                <element signature="e#9275#9457#0" />
-                <element signature="e#9521#10093#0" />
-                <element signature="e#9620#9838#0" />
-                <element signature="e#9753#9816#0" />
-                <element signature="e#9877#10032#0" />
-                <element signature="e#10233#10264#0" />
-                <element signature="e#10305#10388#0" />
-                <element signature="n#!!block;n#clickOutside#0;n#Chart#0" />
-                <element signature="e#10660#10737#0" />
-                <element signature="n#!!block;n#drawTooltip#0;n#Chart#0" />
-                <element signature="e#11001#11318#0" />
-                <element signature="e#11080#11308#0" />
-                <element signature="e#11395#11484#0" />
-                <element signature="e#11987#12228#0" />
-                <element signature="n#!!block;n#deleteTooltip#0;n#Chart#0" />
-                <element signature="n#!!block;n#drawCircle#0;n#Chart#0" />
-                <element signature="n#!!block;n#drawTooltipName#0;n#Chart#0" />
-              </folding>
+            <state relative-caret-position="-3120">
+              <caret line="190" selection-start-line="190" selection-end-line="190" />
             </state>
           </provider>
         </entry>
@@ -177,10 +114,9 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/slider.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="13" selection-start-column="13" selection-end-column="13" />
+            <state relative-caret-position="330">
+              <caret line="168" selection-start-line="168" selection-end-line="168" />
               <folding>
-                <element signature="n#Slider#0" />
                 <element signature="e#88#168#0" />
                 <element signature="n#!!block;n#constructor#0;n#Slider#0" />
                 <element signature="n#!!block;n#callChartRender#0;n#Slider#0" />
@@ -243,8 +179,8 @@
       <find>line</find>
       <find>document</find>
       <find>TODO</find>
-      <find>30</find>
       <find>custom-checkbox</find>
+      <find>30</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -267,14 +203,14 @@
         <option value="$PROJECT_DIR$/src/image/check.js" />
         <option value="$PROJECT_DIR$/src/image/ok.js" />
         <option value="$PROJECT_DIR$/dist/image/check.svg" />
-        <option value="$PROJECT_DIR$/src/slider.js" />
         <option value="$PROJECT_DIR$/dist/index.html" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/dist/styles.css" />
-        <option value="$PROJECT_DIR$/src/charts.js" />
-        <option value="$PROJECT_DIR$/src/utils.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/src/charts.js" />
+        <option value="$PROJECT_DIR$/src/slider.js" />
+        <option value="$PROJECT_DIR$/src/utils.js" />
       </list>
     </option>
   </component>
@@ -318,7 +254,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553271387967" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553272085333" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -375,7 +311,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="164450000" />
+    <option name="totallyTimeSpent" value="164666000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="23" width="1680" height="947" extended-state="0" />
@@ -503,13 +439,7 @@
     <entry file="file://$PROJECT_DIR$/package-lock.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/node.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="41" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/node.js" />
     <entry file="file://$PROJECT_DIR$/dist/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -526,76 +456,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/charts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="264" selection-start-line="264" selection-end-line="264" />
+        <state relative-caret-position="-3120">
+          <caret line="190" selection-start-line="190" selection-end-line="190" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-210">
+          <caret line="130" column="45" selection-start-line="130" selection-start-column="45" selection-end-line="130" selection-end-column="45" />
           <folding>
-            <element signature="e#263#330#0" />
-            <element signature="e#351#687#0" />
-            <element signature="n#!!block;n#constructor#0;n#Chart#0" />
-            <element signature="e#1141#1178#0" />
-            <element signature="n#!!block;n#setConfig#0;n#Chart#0" />
-            <element signature="e#1733#2084#0" />
-            <element signature="e#1782#2073#0" />
-            <element signature="e#1909#2059#0" />
-            <element signature="e#1958#2041#0" />
-            <element signature="e#2131#3547#0" />
-            <element signature="e#2374#2711#0" />
-            <element signature="e#2405#2497#0" />
-            <element signature="e#2515#2597#0" />
-            <element signature="e#2615#2697#0" />
-            <element signature="e#3065#3200#0" />
-            <element signature="e#3472#3535#0" />
-            <element signature="n#!!block;n#drawShort#0;n#Chart#0" />
-            <element signature="n#!!block;n#drawLong#0;n#Chart#0" />
-            <element signature="n#!!block;n#drawChart#0;n#Chart#0" />
-            <element signature="e#4388#5144#0" />
-            <element signature="e#4505#5037#0" />
-            <element signature="e#4839#5023#0" />
-            <element signature="e#4894#5003#0" />
-            <element signature="n#!!block;n#drawHorizontalLines#0;n#Chart#0" />
-            <element signature="e#5602#5649#0" />
-            <element signature="e#5687#5959#0" />
-            <element signature="n#!!block;n#drawLine#0;n#Chart#0" />
-            <element signature="n#!!block;n#drawText#0;n#Chart#0" />
-            <element signature="n#!!block;n#drawDates#0;n#Chart#0" />
-            <element signature="e#6852#6902#0" />
-            <element signature="e#6949#7074#0" />
-            <element signature="n#!!block;n#clearChart#0;n#Chart#0" />
-            <element signature="e#7585#7680#0" />
-            <element signature="e#7870#7924#0" />
-            <element signature="n#!!block;n#onCanvasClick#0;n#Chart#0" />
-            <element signature="e#8362#8438#0" />
-            <element signature="e#8729#8881#0" />
-            <element signature="e#8803#8871#0" />
-            <element signature="e#8970#10119#0" />
-            <element signature="e#8995#10109#0" />
-            <element signature="e#9275#9457#0" />
-            <element signature="e#9521#10093#0" />
-            <element signature="e#9620#9838#0" />
-            <element signature="e#9753#9816#0" />
-            <element signature="e#9877#10032#0" />
-            <element signature="e#10233#10264#0" />
-            <element signature="e#10305#10388#0" />
-            <element signature="n#!!block;n#clickOutside#0;n#Chart#0" />
-            <element signature="e#10660#10737#0" />
-            <element signature="n#!!block;n#drawTooltip#0;n#Chart#0" />
-            <element signature="e#11001#11318#0" />
-            <element signature="e#11080#11308#0" />
-            <element signature="e#11395#11484#0" />
-            <element signature="e#11987#12228#0" />
-            <element signature="n#!!block;n#deleteTooltip#0;n#Chart#0" />
-            <element signature="n#!!block;n#drawCircle#0;n#Chart#0" />
-            <element signature="n#!!block;n#drawTooltipName#0;n#Chart#0" />
+            <element signature="n#!!block;n#createTemplate#0;n#Init#0" />
+            <element signature="e#1718#1880#0" />
+            <element signature="e#1915#1951#0" />
+            <element signature="n#!!block;n#initSlider#0;n#Init#0" />
+            <element signature="e#2399#2580#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/slider.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        <state relative-caret-position="330">
+          <caret line="168" selection-start-line="168" selection-end-line="168" />
           <folding>
-            <element signature="n#Slider#0" />
             <element signature="e#88#168#0" />
             <element signature="n#!!block;n#constructor#0;n#Slider#0" />
             <element signature="n#!!block;n#callChartRender#0;n#Slider#0" />
@@ -628,17 +519,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utils.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="160" lean-forward="true" selection-start-line="160" selection-end-line="160" />
+        <state relative-caret-position="264">
+          <caret line="105" selection-start-line="105" selection-end-line="105" />
           <folding>
             <element signature="n#!!block;n#hexToRgb#0" />
             <element signature="e#119#233#0" />
@@ -652,20 +536,6 @@
             <element signature="n#!!block;n#createElem#0;n#!!block;n#createTemplate#0" />
             <element signature="n#!!block;n#createHtmlBlock#0;n#!!block;n#createTemplate#0" />
             <element signature="n#!!block;n#formatNumber#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="130" column="45" selection-start-line="130" selection-start-column="45" selection-end-line="130" selection-end-column="45" />
-          <folding>
-            <element signature="n#!!block;n#createTemplate#0;n#Init#0" />
-            <element signature="e#1718#1880#0" />
-            <element signature="e#1915#1951#0" />
-            <element signature="n#!!block;n#initSlider#0;n#Init#0" />
-            <element signature="e#2399#2580#0" />
           </folding>
         </state>
       </provider>

@@ -62,7 +62,6 @@ class Chart {
 
         this.chartConfig.columns = [];
 
-
         let newColumns = columns.slice();
 
         //switch on and off different graphics
@@ -79,7 +78,8 @@ class Chart {
         };
 
         newColumns.forEach((column, idx) => {
-            if (idx === 0) return;//newColumns[0] is X columns, do not process
+            //newColumns[0] is X columns, do not process
+            if (idx === 0) return;
 
             const start = startDate ? startDate : -11;
             const end = endDate ? endDate + 1: column.length;
@@ -150,7 +150,7 @@ class Chart {
 
     drawChart() {
         const { height } = this.canvasConfig;
-        const { y0, stepX, stepY, columns, view, position, dates } = this.chartConfig;
+        const { y0, stepX, stepY, columns, view, dates } = this.chartConfig;
 
         const { ctx } = this;
         const draw = (column, index) => {
@@ -188,6 +188,7 @@ class Chart {
         const step = Math.ceil( countY / linesCount);
         const { width, height } = this.canvasConfig;
         const { stepY, y0 } = this.chartConfig;
+
         //initialize horizontal lines array
         let lines = new Array(linesCount).fill(step);
 

@@ -166,6 +166,7 @@ class Slider {
         this.slider.addEventListener('mousemove',onMouseMove);
         this.slider.addEventListener('mouseup',onMouseUp)
     }
+
     initTouchEvents() {
         function touchHandler(event) {
             const touch = event.changedTouches[0];
