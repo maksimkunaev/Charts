@@ -85,6 +85,7 @@ function createTemplate(id1, id2) {
     const wrap = createElem('div', { class: 'wrap' });
     const loadWrap = createElem('div', { class: 'loadWrap' });
     const content = createElem('div', { class: 'content' });
+    const followers = createElem('div', { class: 'followers' }, 'followers');
     const viewChart = createElem('div', { class: 'viewChart' });
     const lineChart = createElem('div', { class: 'lineChart' });
     const canvasView = createElem('canvas', { class: 'view', id: id1 });
@@ -106,7 +107,7 @@ function createTemplate(id1, id2) {
     const toolTipBlock = createHtmlBlock([dateElem, columnsElem], tooltipElem);
     const viewChartBlock = createHtmlBlock([canvasView, toolTipBlock], viewChart);
     const lineChartBlock = createHtmlBlock([canvasLong, sliderElem], lineChart);
-    const contentBlock = createHtmlBlock([viewChartBlock, lineChartBlock, checkboxes], content);
+    const contentBlock = createHtmlBlock([followers, viewChartBlock, lineChartBlock, checkboxes], content);
     const labelBlock = createHtmlBlock([labelText, switcher], label);
     const switchLabelBlock = createHtmlBlock([labelBlock], switchLabel);
     const wrapBlock = createHtmlBlock([loadWrap, contentBlock, switchLabelBlock], wrap);

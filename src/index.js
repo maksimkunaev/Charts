@@ -128,6 +128,7 @@ class Init {
         let newTheme = theme[mode];
         let nightTheme = theme.night;
 
+        wrap.style.color = newTheme.mainColor;
         wrap.style.backgroundColor = newTheme.wrap;
         labelText.innerText = newTheme.labelText;
         checkboxes.style.color = newTheme.checkboxes;

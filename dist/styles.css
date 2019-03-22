@@ -12,6 +12,7 @@ body, html  {
     align-items: center;
     padding: 8px;
     position: relative;
+    font-family: sans-serif;
 }
 .content {
     flex: 1;
@@ -71,6 +72,8 @@ body, html  {
     position: relative;
     top: -155px;
     cursor: pointer;
+    border-color:rgba(221, 234, 243, 0.5);
+
 }
 
 @media screen and (max-width: 912px) {
@@ -92,7 +95,7 @@ body, html  {
     display: block;
     width: 10000px;
     height: 107%;
-    background-image: linear-gradient(to left, #2d1dc700 12px, rgba(245, 249, 251, 0.5) 12px, rgba(245, 249, 251, 0.5) 100%);
+    background-image: linear-gradient(to left, #2d1dc700 12px, rgba(245, 249, 251, 0.6) 12px, rgba(245, 249, 251, 0.6) 100%);
     right: 100%;
     top: 50%;
     transform: translateY(-50%);
@@ -106,7 +109,7 @@ body, html  {
     display: block;
     width: 10000px;
     height: 107%;
-    background-image: linear-gradient(to right, #2d1dc700 12px, rgba(245, 249, 251, 0.5) 12px, rgba(245, 249, 251, 0.5) 100%);
+    background-image: linear-gradient(to right, #2d1dc700 12px, rgba(245, 249, 251, 0.6) 12px, rgba(245, 249, 251, 0.6) 100%);
     left: 100%;
     top: 50%;
     transform: translateY(-50%);
@@ -116,6 +119,7 @@ body, html  {
 .slider-nightTheme{
     width: 100%;
     height: 100%;
+    border-color: rgba(64, 86, 106, 0.5);
 }
 
 .slider-nightTheme:after {
@@ -125,7 +129,7 @@ body, html  {
     display: block;
     width: 10000px;
     height: 107%;
-    background-image: linear-gradient(to left, #2d1dc700 12px, rgba(31, 42, 56, 0.5) 12px, rgba(31, 42, 56, 0.5) 100%);
+    background-image: linear-gradient(to left, #2d1dc700 12px, rgba(31, 42, 56, 0.6) 12px, rgba(31, 42, 56, 0.6) 100%);
     right: 100%;
     top: 50%;
     transform: translateY(-50%);
@@ -138,7 +142,7 @@ body, html  {
     display: block;
     width: 10000px;
     height: 107%;
-    background-image: linear-gradient(to right, #2d1dc700 12px, rgba(31, 42, 56, 0.5) 12px, rgba(31, 42, 56, 0.5) 100%);
+    background-image: linear-gradient(to right, #2d1dc700 12px, rgba(31, 42, 56, 0.6) 12px, rgba(31, 42, 56, 0.6) 100%);
 
     left: 100%;
     top: 50%;
@@ -258,6 +262,22 @@ body, html  {
     background-size: 70%;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.followers {
+    top: 13px;
+    left: 15px;
+    text-transform: capitalize;
+    font-size: 24px;
+    font-family: sans-serif;
+    font-weight: 500;
+    margin: 2px 13px;
+}
+@media screen and (max-width: 512px) {
+    .followers {
+        font-size: 19px;
+        margin: 1px 5px;
+    }
 }
 
 /*preloader*/
