@@ -4,8 +4,6 @@ const utils = require('./utils');
 const createTemplate = utils.createTemplate;
 const createCheckbox = utils.createCheckbox;
 
-const chart_data = require('./chart_data');
-
 class Init {
     template = {};
     theme = {
@@ -184,8 +182,33 @@ class Init {
     };
 }
 
-new Init(1, chart_data[0]);
-new Init(2, chart_data[1]);
-new Init(3, chart_data[2]);
-new Init(4, chart_data[3]);
-new Init(5, chart_data[4]);
+function init(chart_data) {
+    new Init(1, chart_data[0]);
+    new Init(2, chart_data[1]);
+    new Init(3, chart_data[2]);
+    new Init(4, chart_data[3]);
+    new Init(5, chart_data[4]);
+}
+
+function getData() {
+    const config = {
+        apiKey: "AIzaSyCWmc3fEYZMczckv1oa58dm5DKyxKo1mmU",
+        authDomain: "charts-17f12.firebaseapp.com",
+        databaseURL: "https://charts-17f12.firebaseio.com",
+        projectId: "charts-17f12",
+        storageBucket: "",
+        messagingSenderId: "445889936387"
+    };
+
+    firebase.initializeApp(config);
+
+    const database = firebase.database();
+
+    const starCountRef = database.ref('data');
+    starCountRef.on('value', function(snapshot) {
+        const data = JSON.parse(snapshot.val());
+        init(data);
+    });
+}
+
+getData(init);
