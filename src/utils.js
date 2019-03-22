@@ -173,10 +173,3 @@ function formatNumber(num) {
     }
     return num;
 }
-
-module.exports.getTooltipInfo = getTooltipInfo;
-module.exports.hexToRgb = hexToRgb;
-module.exports.formatDate = formatDate;
-module.exports.createTemplate = createTemplate;
-module.exports.createCheckbox = createCheckbox;
-module.exports.formatNumber = formatNumber;

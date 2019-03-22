@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="src/styles.css">
+</head>
+<script src="src/utils.js"></script>
+<script src="src/charts.js"></script>
+<script src="src/index.js"></script>
+<script src="src/slider.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+    <script>
+        const config = {
+            apiKey: "AIzaSyCWmc3fEYZMczckv1oa58dm5DKyxKo1mmU",
+            authDomain: "charts-17f12.firebaseapp.com",
+            databaseURL: "https://charts-17f12.firebaseio.com",
+            projectId: "charts-17f12",
+            storageBucket: "",
+            messagingSenderId: "445889936387"
+        };
+
+        firebase.initializeApp(config);
+
+        const database = firebase.database();
+
+        const starCountRef = database.ref('data');
+        starCountRef.on('value', function(snapshot) {
+            const data = JSON.parse(snapshot.val());
+            init(data);
+        });
+    </script>
+</html>

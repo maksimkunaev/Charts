@@ -1,11 +1,3 @@
-const Chart = require('./charts');
-const Slider = require('./slider');
-const utils = require('./utils');
-const createTemplate = utils.createTemplate;
-const createCheckbox = utils.createCheckbox;
-
-const chart_data = require('./chart_data');
-
 class Init {
     template = {};
     theme = {
@@ -184,8 +176,10 @@ class Init {
     };
 }
 
-new Init(1, chart_data[0]);
-new Init(2, chart_data[1]);
-new Init(3, chart_data[2]);
-new Init(4, chart_data[3]);
-new Init(5, chart_data[4]);
+function init(chart_data) {
+    new Init(1, chart_data[0]);
+    new Init(2, chart_data[1]);
+    new Init(3, chart_data[2]);
+    new Init(4, chart_data[3]);
+    new Init(5, chart_data[4]);
+}

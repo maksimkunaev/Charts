@@ -1,9 +1,3 @@
-const utils = require('./utils');
-const hexToRgb = utils.hexToRgb;
-const getTooltipInfo = utils.getTooltipInfo;
-const formatDate = utils.formatDate;
-const formatNumber = utils.formatNumber;
-
 class Chart {
     canvas = null;
     domElems = {};
@@ -441,5 +435,3 @@ class Chart {
         parents.appendChild(column);
     }
 }
-
-module.exports = Chart;

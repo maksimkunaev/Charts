@@ -190,5 +190,3 @@ class Slider {
         document.addEventListener("touchcancel", touchHandler, true);
     }
 }
-
-module.exports = Slider;
