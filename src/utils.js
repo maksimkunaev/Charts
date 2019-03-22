@@ -158,6 +158,8 @@ function createCheckbox(name, idx, config, onChange, parent, color) {
         isVisible: true,
         idx: idx - 1,
     });
+
+    return div;
 }
 
 function formatNumber(num) {

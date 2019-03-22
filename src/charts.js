@@ -251,6 +251,7 @@ class Chart {
     }
 
     setScreenOptions() {
+        const { y0 } = this.chartConfig;
         this.chartConfig.screenWidth = screen.width;
         this.chartConfig.isMobile = screen.width <= 520;
         const { isMobile } = this.chartConfig;
@@ -261,9 +262,8 @@ class Chart {
             width: isMobile ? 600 : 1800,
             height: isMobile ? 500 : 500,
         };
-
         this.canvas.width = this.canvasConfig.width;
-        this.canvas.height = this.canvasConfig.height + 30;
+        this.canvas.height = this.canvasConfig.height + y0;
         document.addEventListener('resize', this.setScreenOptions);
     }
 
@@ -274,7 +274,7 @@ class Chart {
         };
         this.drawShort({
             startDate: this.chartConfig.startDate,
-            endDate: this.chartConfig.endDate, //TODO fix
+            endDate: this.chartConfig.endDate,
         });
     }
 
