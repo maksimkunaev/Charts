@@ -302,6 +302,9 @@ class Chart {
             }
         });
 
+        const pixelPerDot = lineData.data.length / height;
+        const coefficient = pixelPerDot / 4; //different browsers has different resolution with method getImageData
+
         // and will see what color we across
         lineData.data.map((color, idx)=>{
             if (color) {
@@ -315,7 +318,7 @@ class Chart {
                     r: rgbaArray[0],
                     g: rgbaArray[1],
                     b: rgbaArray[2],
-                    yPosition: startColorPoint / 4,
+                    yPosition: startColorPoint / (4 * coefficient),
                 };
 
                 originalColorsInRgb.forEach((column, idx) => {
@@ -332,6 +335,7 @@ class Chart {
                       name: column.name,
                       color: column.color,
                     };
+
                     colors.push(dotColor)
                 });
             }
@@ -347,7 +351,6 @@ class Chart {
             x0,
             clicked: true,
         };
-
         this.chartConfig.pageX = pageX;
 
         this.renderChart();

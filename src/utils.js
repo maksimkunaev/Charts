@@ -32,6 +32,7 @@ function getTooltipInfo(colors, columns, stepY, y0, height) {
         //Y position arithmetic average of all points crossing the vertical line
         const yPos = result / pointsArray.length;
         let y = y0 + (height - y0 - yPos);
+
         const point = Math.round(y/stepY);
 
         resultInfo[key] = {
