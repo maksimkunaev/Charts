@@ -1,6 +1,5 @@
 # charts
 
-
 ## Insatll dependencies
 `npm install`
 

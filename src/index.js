@@ -111,7 +111,7 @@ class Card {
     const { checked } = target;
     const theme = checked ? 'night' : 'day';
 
-    this.switchTheme(theme);
+    this.switchTheme();
   };
 
   switchTheme(mode) {
@@ -166,7 +166,7 @@ class Card {
         config[idx].isVisible = checked;
         customCheckbox.style.backgroundColor = checked ? color : 'transparent';
         shortChart.renderChart({
-          isVisible: config,
+          isVisible = config,
         });
       };
 
@@ -185,15 +185,13 @@ class Card {
   };
 }
 
-function init(chart_data) {
-  new Card(1, chart_data[0]);
-  new Card(2, chart_data[1]);
-  new Card(3, chart_data[2]);
-  new Card(4, chart_data[3]);
-  new Card(5, chart_data[4]);
+function init(charts) {
+  charts.forEach((chart, index) => {
+    new Card(index, chart)
+  })
 }
 
-function getData() {
+function main() {
   const firebaseConfig = {
     apiKey: "AIzaSyCdp-7vQrEw9HtaPQ_U7BnQ_UnjT5uHrd0",
     authDomain: "charts-e38b9.firebaseapp.com",
@@ -212,8 +210,9 @@ function getData() {
 
   onValue(starCountRef, (snapshot) => {
     const data = snapshot.val();
-    init(JSON.parse(data.charts));
+    console.log(JSON.parse(data.charts))
+    init(data.charts);
   });
 }
 
-getData(init);
+main(init);

@@ -35,6 +35,7 @@ body, html  {
 .view, .lineChart {
     width: 100%;
     height: 10%;
+    opacity: .1;  
 }
 
 .view {
