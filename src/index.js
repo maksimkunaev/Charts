@@ -3,212 +3,217 @@ const Slider = require('./slider');
 const utils = require('./utils');
 const createTemplate = utils.createTemplate;
 const createCheckbox = utils.createCheckbox;
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, onValue} from "firebase/database";;
 
-class Init {
-    template = {};
-    theme = {
-        day: {
-            wrap: 'transparent',
-            sliderElem: 'slider',
-            labelText: 'Switch to Night Mode',
-            tooltip: 'tooltip',
-            checkboxes: '#000',
-            mainColor: '#000',
-            subColor: '#fff',
-        },
-        night: {
-            wrap: '#242f3e',
-            sliderElem: 'slider-nightTheme',
-            labelText: 'Switch to Day Mode',
-            tooltip: 'tooltip-nightTheme',
-            checkboxes: '#fff',
-            mainColor: '#fff',
-            subColor: '#222f3f',
-        }
+class Card {
+  template = {};
+  theme = {
+    day: {
+      wrap: 'transparent',
+      sliderElem: 'slider',
+      labelText: 'Switch to Night Mode',
+      tooltip: 'tooltip',
+      checkboxes: '#000',
+      mainColor: '#000',
+      subColor: '#fff',
+    },
+    night: {
+      wrap: '#242f3e',
+      sliderElem: 'slider-nightTheme',
+      labelText: 'Switch to Day Mode',
+      tooltip: 'tooltip-nightTheme',
+      checkboxes: '#fff',
+      mainColor: '#fff',
+      subColor: '#222f3f',
+    }
+  };
+
+  constructor(id, data) {
+    this.data = data;
+
+    this.createTemplate(id);
+    this.initChart();
+    this.initSlider();
+
+    this.template.switcher.addEventListener('change', this.onChangeTheme);
+    this.switchTheme.call(this, 'day');
+
+    this.createCheckboxes();
+  }
+
+  createTemplate(id) {
+    const id1 = `view_${id}`;
+    const id2 = `timeLine_${id}`;
+
+    this.template = createTemplate(id1, id2);
+    this.id1 = id1;
+    this.id2 = id2;
+
+    const {
+      wrapBlock,
+    } = this.template;
+
+    document.body.appendChild(wrapBlock);
+  }
+
+  initChart() {
+    const { id1, id2, data } = this;
+
+    const {
+      wrap,
+      dateElem,
+      columnsElem,
+      tooltipElem,
+      labelText,
+    } = this.template;
+
+    const configShortChart = {
+      wrap,
+      canvas: id1,
+      tooltipElem,
+      columnsElem,
+      dateElem,
+      switchLabel: labelText,
     };
 
-    constructor(id, data) {
-        this.data = data;
-
-        this.createTemplate(id);
-        this.initChart();
-        this.initSlider();
-
-        this.template.switcher.addEventListener('change', this.onChangeTheme);
-        this.switchTheme.call(this, 'day');
-
-        this.createCheckboxes();
-    }
-
-    createTemplate(id) {
-        const id1 = `view_${id}`;
-        const id2 = `timeLine_${id}`;
-
-        this.template = createTemplate(id1, id2);
-        this.id1 = id1;
-        this.id2 = id2;
-
-        const {
-            wrapBlock,
-        } = this.template;
-
-        document.body.appendChild(wrapBlock);
-    }
-
-    initChart() {
-        const { id1, id2, data } = this;
-
-        const {
-            wrap,
-            dateElem,
-            columnsElem,
-            tooltipElem,
-            labelText,
-        } = this.template;
-
-        const configShortChart = {
-            wrap,
-            canvas: id1,
-            tooltipElem,
-            columnsElem,
-            dateElem,
-            switchLabel: labelText,
-        };
-
-        const configLongChart = {
-            canvas: id2,
-        };
-
-        this.shortChart = new Chart(configShortChart, data, 'short');
-        this.longChart = new Chart(configLongChart, data, 'long');
-        const { renderChart } = this.shortChart;
-        this.renderChart = renderChart;
-    }
-
-    initSlider() {
-        const { id1, shortChart, longChart, renderChart, data } = this;
-
-        const {
-            lineChart,
-            sliderElem,
-        } = this.template;
-
-        const configSlider = {
-            main: id1,
-            slider: sliderElem,
-            parent: lineChart,
-            method: renderChart.bind(shortChart),
-            longChart: longChart,
-        };
-
-        //init draggable slider
-        new Slider(configSlider, data);
-    }
-
-    onChangeTheme = ({target}) => {
-        const { checked } = target;
-        const theme = checked ? 'night' : 'day';
-        this.switchTheme(theme);
+    const configLongChart = {
+      canvas: id2,
     };
 
-    switchTheme(mode) {
-        const { shortChart, theme } = this;
+    this.shortChart = new Chart(configShortChart, data, 'short');
+    this.longChart = new Chart(configLongChart, data, 'long');
+    const { renderChart } = this.shortChart;
+    this.renderChart = renderChart;
+  }
 
-        const {
-            wrap,
-            sliderElem,
-            tooltipElem,
-            checkboxes,
-            labelText,
-        } = this.template;
+  initSlider() {
+    const { id1, shortChart, longChart, renderChart, data } = this;
 
-        const { renderChart } = this;
-        let newTheme = theme[mode];
-        let nightTheme = theme.night;
+    const {
+      lineChart,
+      sliderElem,
+    } = this.template;
 
-        wrap.style.color = newTheme.mainColor;
-        wrap.style.backgroundColor = newTheme.wrap;
-        labelText.innerText = newTheme.labelText;
-        checkboxes.style.color = newTheme.checkboxes;
+    const configSlider = {
+      main: id1,
+      slider: sliderElem,
+      parent: lineChart,
+      method: renderChart.bind(shortChart),
+      longChart: longChart,
+    };
 
-        if (mode === 'night') {
-            sliderElem.classList.add(nightTheme.sliderElem);
-            tooltipElem.classList.add(nightTheme.tooltip);
+    //init draggable slider
+    new Slider(configSlider, data);
+  }
 
-        } else if (mode === 'day') {
-            sliderElem.classList.remove(nightTheme.sliderElem);
-            tooltipElem.classList.remove(nightTheme.tooltip);
-        }
+  onChangeTheme = ({target}) => {
+    const { checked } = target;
+    const theme = checked ? 'night' : 'day';
 
-        renderChart.call(shortChart, {
-            theme: theme[mode],
-        })
+    this.switchTheme(theme);
+  };
+
+  switchTheme(mode) {
+    const { shortChart, theme } = this;
+
+    const {
+      wrap,
+      sliderElem,
+      tooltipElem,
+      checkboxes,
+      labelText,
+    } = this.template;
+
+    const { renderChart } = this;
+    let newTheme = theme[mode];
+    let nightTheme = theme.night;
+
+    wrap.style.color = newTheme.mainColor;
+    wrap.style.backgroundColor = newTheme.wrap;
+    labelText.innerText = newTheme.labelText;
+    checkboxes.style.color = newTheme.checkboxes;
+
+    if (mode === 'night') {
+      sliderElem.classList.add(nightTheme.sliderElem);
+      tooltipElem.classList.add(nightTheme.tooltip);
+
+    } else if (mode === 'day') {
+      sliderElem.classList.remove(nightTheme.sliderElem);
+      tooltipElem.classList.remove(nightTheme.tooltip);
     }
 
-    createCheckboxes = () => {
-        const { shortChart, data } = this;
+    renderChart.call(shortChart, {
+      theme: theme[mode],
+    })
+  }
 
-        const {
-            checkboxes,
-        } = this.template;
+  createCheckboxes = () => {
+    const { shortChart, data } = this;
 
-        const { renderChart } = this;
+    const {
+      checkboxes,
+    } = this.template;
 
-        function switchData(data) {
-            const changeData = (idx, color, e)=> {
-                const { checked } = e.target;
-                const parent = e.target.parentNode;
-                const customCheckbox = parent.querySelector('.custom-checkbox');
+    const { renderChart } = this;
 
-                config[idx].isVisible = checked;
-                customCheckbox.style.backgroundColor = checked ? color : 'transparent';
-                shortChart.renderChart({
-                    isVisible: config,
-                });
-            };
+    function switchData(data) {
+      const changeData = (idx, color, e)=> {
+        const { checked } = e.target;
+        const parent = e.target.parentNode;
+        const customCheckbox = parent.querySelector('.custom-checkbox');
 
-            const config = [];
-            data.columns.map((col, idx) => {
-                if (idx === 0) return;
-                const fieldName = col[0];
-                const color = data.colors[fieldName];
-                const name = data.names[fieldName];
+        config[idx].isVisible = checked;
+        customCheckbox.style.backgroundColor = checked ? color : 'transparent';
+        shortChart.renderChart({
+          isVisible: config,
+        });
+      };
 
-                createCheckbox(name, idx, config, changeData, checkboxes, color);
-            });
-        }
+      const config = [];
+      data.columns.map((col, idx) => {
+        if (idx === 0) return;
+        const fieldName = col[0];
+        const color = data.colors[fieldName];
+        const name = data.names[fieldName];
 
-        switchData(data, renderChart.bind(shortChart));
-    };
+        createCheckbox(name, idx, config, changeData, checkboxes, color);
+      });
+    }
+
+    switchData(data, renderChart.bind(shortChart));
+  };
 }
 
 function init(chart_data) {
-    new Init(1, chart_data[0]);
-    new Init(2, chart_data[1]);
-    new Init(3, chart_data[2]);
-    new Init(4, chart_data[3]);
-    new Init(5, chart_data[4]);
+  new Card(1, chart_data[0]);
+  new Card(2, chart_data[1]);
+  new Card(3, chart_data[2]);
+  new Card(4, chart_data[3]);
+  new Card(5, chart_data[4]);
 }
 
 function getData() {
-    const config = {
-        apiKey: "AIzaSyCWmc3fEYZMczckv1oa58dm5DKyxKo1mmU",
-        authDomain: "charts-17f12.firebaseapp.com",
-        databaseURL: "https://charts-17f12.firebaseio.com",
-        projectId: "charts-17f12",
-        storageBucket: "",
-        messagingSenderId: "445889936387"
-    };
+  const firebaseConfig = {
+    apiKey: "AIzaSyCdp-7vQrEw9HtaPQ_U7BnQ_UnjT5uHrd0",
+    authDomain: "charts-e38b9.firebaseapp.com",
+    databaseURL: "https://charts-e38b9-default-rtdb.firebaseio.com",
+    projectId: "charts-e38b9",
+    storageBucket: "charts-e38b9.appspot.com",
+    messagingSenderId: "1073528811796",
+    appId: "1:1073528811796:web:bc2593236f80de39891201"
+  };
 
-    firebase.initializeApp(config);
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
 
-    const database = firebase.database();
+  const db = getDatabase();
+  const starCountRef = ref(db);
 
-    const starCountRef = database.ref('data');
-    starCountRef.on('value', function(snapshot) {
-        const data = JSON.parse(snapshot.val());
-        init(data);
-    });
+  onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val();
+    init(JSON.parse(data.charts));
+  });
 }
 
 getData(init);
